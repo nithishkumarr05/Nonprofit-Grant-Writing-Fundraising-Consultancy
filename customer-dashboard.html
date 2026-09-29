@@ -1,0 +1,1132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>FundRise - Client Dashboard</title>
+
+  <!-- Tailwind + config (order matters) -->
+  
+<script src="tailwind.js"></script>
+  <script>
+    tailwind.config = { darkMode: 'class' };
+  </script>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    html, body { overflow-x: hidden; }
+    body { background: #F0F7F4; font-family: 'Inter', sans-serif; }
+    .dark body { background: #08150F; color: #F0F7F4; }
+    .font-display { font-family: 'Playfair Display', Georgia, serif; }
+
+    .glass-card {
+      background: rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(15, 92, 78, 0.15);
+    }
+    .dark .glass-card {
+      background: rgba(14, 35, 28, 0.7);
+      border-color: rgba(255, 255, 255, 0.08);
+    }
+    .dark .bg-white { background-color: #0E231C !important; color: #F0F7F4; }
+    .dark .text-dark { color: #F0F7F4; }
+    .dark .border-secondary { border-color: rgba(255,255,255,0.1); }
+    .dark select, .dark input, .dark textarea {
+      background-color: #0E231C; color: #F0F7F4; border-color: rgba(255,255,255,0.15);
+    }
+
+    .progress-bar {
+      height: 8px;
+      border-radius: 20px;
+      background: #DCEAE4;
+    }
+    .dark .progress-bar { background: #143026; }
+    .progress-fill {
+      background: linear-gradient(90deg, #0F5C4E, #D4A22E);
+      height: 100%;
+      border-radius: 20px;
+      transition: width 0.6s ease;
+    }
+
+    .scrollbar-none::-webkit-scrollbar { display: none; }
+    .scrollbar-none { -ms-overflow-style: none; scrollbar-width: none; }
+
+    /* ===== SIDEBAR ===== */
+    #sidebar {
+      transform: translateX(-100%);
+      transition: transform 0.3s ease;
+      left: 0;
+      right: auto;
+    }
+    #sidebar.sidebar-open { transform: translateX(0); }
+
+    [dir="rtl"] #sidebar {
+      left: auto;
+      right: 0;
+      transform: translateX(100%);
+    }
+    [dir="rtl"] #sidebar.sidebar-open { transform: translateX(0); }
+
+    /* Desktop: sidebar always visible */
+    @media (min-width: 1024px) {
+      #sidebar {
+        transform: translateX(0) !important;
+        left: 0;
+        right: auto;
+      }
+      [dir="rtl"] #sidebar {
+        transform: translateX(0) !important;
+        left: auto;
+        right: 0;
+      }
+    }
+
+    /* Main content offset */
+    @media (min-width: 1024px) {
+      main.main-content {
+        margin-left: 18rem;
+        margin-right: 0;
+      }
+      [dir="rtl"] main.main-content {
+        margin-left: 0;
+        margin-right: 18rem;
+      }
+    }
+
+    /* Toast RTL positioning */
+    [dir="rtl"] .toast-container { right: auto; left: 1.5rem; }
+
+    /* Tab buttons */
+    .tab-btn.active {
+      background: #0F5C4E !important;
+      color: #fff !important;
+      box-shadow: 0 4px 12px rgba(15, 92, 78, 0.3) !important;
+    }
+    .dark .tab-btn.active {
+      background: #D4A22E !important;
+      color: #0F2E2A !important;
+    }
+    .tab-btn { transition: all 0.2s; }
+
+    /* Status badges */
+    .status-badge {
+      font-size: 10px;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 9999px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      display: inline-block;
+      white-space: nowrap;
+    }
+    .status-approved { background: rgba(15,139,111,0.15); color: #0F8B6F; }
+    .status-review { background: rgba(212,162,46,0.18); color: #A87915; }
+    .status-draft { background: rgba(75,101,96,0.15); color: #4B6560; }
+    .status-submitted { background: rgba(15,92,78,0.15); color: #0F5C4E; }
+    .status-rejected { background: rgba(180,59,46,0.15); color: #B43B2E; }
+    .dark .status-approved { background: rgba(15,139,111,0.25); color: #4ADE80; }
+    .dark .status-review { background: rgba(212,162,46,0.25); color: #F0C95A; }
+    .dark .status-draft { background: rgba(168,192,184,0.15); color: #A8C0B8; }
+    .dark .status-submitted { background: rgba(26,122,103,0.3); color: #38BDF8; }
+    .dark .status-rejected { background: rgba(214,79,58,0.25); color: #F87171; }
+
+    /* Feedback item uses logical border for RTL */
+    .feedback-item {
+      border-inline-start: 3px solid #D4A22E;
+      padding-inline-start: 16px;
+    }
+
+    /* Calendar day */
+    .calendar-day {
+      aspect-ratio: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      border-radius: 12px;
+      font-size: 12px;
+      font-weight: 600;
+      border: 1px solid transparent;
+      transition: all 0.2s;
+      cursor: pointer;
+      position: relative;
+    }
+    .calendar-day:hover {
+      background: rgba(15,92,78,0.08);
+      border-color: rgba(15,92,78,0.25);
+    }
+    .dark .calendar-day:hover {
+      background: rgba(212,162,46,0.10);
+      border-color: rgba(212,162,46,0.3);
+    }
+    .calendar-day.deadline {
+      background: rgba(212,162,46,0.18);
+      color: #A87915;
+      border-color: rgba(212,162,46,0.4);
+    }
+    .dark .calendar-day.deadline {
+      background: rgba(212,162,46,0.2);
+      color: #F0C95A;
+      border-color: rgba(212,162,46,0.5);
+    }
+    .calendar-day.today {
+      background: #0F5C4E;
+      color: #fff;
+      box-shadow: 0 4px 12px rgba(15,92,78,0.3);
+    }
+    .dark .calendar-day.today {
+      background: #D4A22E;
+      color: #0F2E2A;
+    }
+    .calendar-day .dot {
+      position: absolute;
+      bottom: 6px;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: #D4A22E;
+    }
+    .calendar-day.today .dot { background: #fff; }
+    .dark .calendar-day.today .dot { background: #0F2E2A; }
+
+    /* Metric tile */
+    .metric-tile {
+      background: rgba(255,255,255,0.8);
+      border: 1px solid rgba(15,92,78,0.12);
+      border-radius: 1rem;
+      padding: 0.75rem;
+      transition: all 0.3s;
+    }
+    .dark .metric-tile {
+      background: rgba(14,35,28,0.8);
+      border-color: rgba(255,255,255,0.06);
+    }
+    .metric-tile:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 14px 32px -16px rgba(15,92,78,0.3);
+    }
+  </style>
+
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+</head>
+<body class="antialiased">
+
+<div class="min-h-screen flex flex-col lg:flex-row bg-[#F0F7F4] dark:bg-[#08150F] transition-colors duration-300">
+
+  <!-- ====== SIDEBAR ====== -->
+  <aside id="sidebar"
+    class="fixed inset-y-0 start-0 z-50 w-72 bg-white/95 dark:bg-[#0E231C]/95 backdrop-blur-xl border-e border-[#E2EBE8] dark:border-white/10 flex flex-col py-6 px-5 shadow-xl h-screen">
+
+    <div class="flex flex-col min-h-0 flex-1">
+      <!-- Logo -->
+      <div class="flex items-center justify-between pb-6 border-b border-[#E2EBE8] dark:border-white/10 shrink-0">
+        <a href="index.html" class="text-2xl font-serif font-semibold tracking-tight flex-shrink-0">
+          <div class="flex items-center gap-2">
+            <svg class="w-8 h-8 text-[#D4A22E]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+              <path d="M2 17l10 5 10-5"></path>
+              <path d="M2 12l10 5 10-5"></path>
+            </svg>
+            <span class="text-[#D4A22E]">FundRise</span>
+          </div>
+        </a>
+        <button onclick="toggleSidebar()" class="lg:hidden text-dark dark:text-white" aria-label="Close menu">
+          <i class="fa-solid fa-xmark text-xl"></i>
+        </button>
+      </div>
+
+      <!-- User brief -->
+      <div class="flex items-center gap-3 bg-[#F0F7F4] dark:bg-[#143026]/60 p-3 rounded-2xl border border-[#E2EBE8] dark:border-white/5 mt-6 shrink-0">
+        <div class="w-10 h-10 rounded-xl flex items-center justify-center bg-gradient-to-br from-[#0F5C4E] to-[#1A7A67] text-[#D4A22E] font-bold text-sm shadow-sm border-2 border-[#D4A22E]/30 flex-shrink-0">
+          SJ
+        </div>
+        <div class="text-start min-w-0">
+          <h5 class="text-sm font-bold text-[#0F2E2A] dark:text-white truncate">Sarah Jenkins</h5>
+          <p class="text-[10px] text-[#0F5C4E] dark:text-[#D4A22E] font-black uppercase tracking-wider">Client · HealthForward</p>
+        </div>
+      </div>
+
+      <!-- Nav -->
+      <nav class="mt-8 space-y-1.5 overflow-y-auto scrollbar-none flex-1 min-h-0">
+        <p class="text-[10px] text-dark/40 dark:text-white/40 font-bold uppercase tracking-wider ps-2">Dashboard</p>
+        <button onclick="switchTab('overview')" id="tab-overview" class="tab-btn active w-full text-start px-4 py-3 rounded-xl text-xs font-bold flex items-center gap-2.5 text-dark/70 dark:text-white/70 hover:bg-[#F0F7F4] dark:hover:bg-[#143026]">
+          <i class="fa-solid fa-gauge-high text-sm w-4 text-center"></i> <span>Overview</span>
+        </button>
+        <button onclick="switchTab('applications')" id="tab-applications" class="tab-btn w-full text-start px-4 py-3 rounded-xl text-xs font-bold flex items-center gap-2.5 text-dark/70 dark:text-white/70 hover:bg-[#F0F7F4] dark:hover:bg-[#143026]">
+          <i class="fa-solid fa-file-signature text-sm w-4 text-center"></i> <span>Applications</span>
+        </button>
+        <button onclick="switchTab('proposals')" id="tab-proposals" class="tab-btn w-full text-start px-4 py-3 rounded-xl text-xs font-bold flex items-center gap-2.5 text-dark/70 dark:text-white/70 hover:bg-[#F0F7F4] dark:hover:bg-[#143026]">
+          <i class="fa-solid fa-file-lines text-sm w-4 text-center"></i> <span>Proposals</span>
+        </button>
+        <button onclick="switchTab('calendar')" id="tab-calendar" class="tab-btn w-full text-start px-4 py-3 rounded-xl text-xs font-bold flex items-center gap-2.5 text-dark/70 dark:text-white/70 hover:bg-[#F0F7F4] dark:hover:bg-[#143026]">
+          <i class="fa-solid fa-calendar-days text-sm w-4 text-center"></i> <span>Deadlines</span>
+        </button>
+        <button onclick="switchTab('billing')" id="tab-billing" class="tab-btn w-full text-start px-4 py-3 rounded-xl text-xs font-bold flex items-center gap-2.5 text-dark/70 dark:text-white/70 hover:bg-[#F0F7F4] dark:hover:bg-[#143026]">
+          <i class="fa-solid fa-credit-card text-sm w-4 text-center"></i> <span>Billing</span>
+        </button>
+        <button onclick="switchTab('consultant')" id="tab-consultant" class="tab-btn w-full text-start px-4 py-3 rounded-xl text-xs font-bold flex items-center gap-2.5 text-dark/70 dark:text-white/70 hover:bg-[#F0F7F4] dark:hover:bg-[#143026]">
+          <i class="fa-solid fa-comment-dots text-sm w-4 text-center"></i> <span>My Consultant</span>
+        </button>
+      </nav>
+    </div>
+
+    <!-- Bottom -->
+    <div class="pt-4 border-t border-[#E2EBE8] dark:border-white/10 space-y-2 shrink-0">
+      <a href="login.html" class="w-full px-4 py-3 rounded-xl text-xs font-bold flex items-center gap-2.5 text-red-500 hover:bg-red-50 dark:hover:bg-red-950/20 transition">
+        <i class="fa-solid fa-arrow-right-from-bracket text-sm w-4 text-center"></i> <span>Log Out</span>
+      </a>
+    </div>
+  </aside>
+
+  <!-- Overlay -->
+  <div id="sidebarOverlay"
+    class="fixed inset-0 bg-black/20 dark:bg-black/50 backdrop-blur-sm z-40 hidden lg:hidden transition-opacity duration-300 opacity-0"
+    onclick="toggleSidebar()"></div>
+
+  <!-- ====== MAIN CONTENT ====== -->
+  <main class="main-content flex-grow min-w-0 min-h-screen flex flex-col">
+
+    <!-- Header -->
+    <header class="h-20 bg-[#F0F7F4] dark:bg-[#08150F] border-b border-[#E2EBE8] dark:border-white/10 px-4 sm:px-6 flex items-center justify-between sticky top-0 z-30 shadow-sm transition-colors duration-300">
+      <div class="flex items-center gap-4 min-w-0">
+        <button onclick="toggleSidebar()" class="lg:hidden w-10 h-10 rounded-xl bg-[#F0F7F4] dark:bg-white/10 hover:bg-[#0F5C4E]/15 transition flex items-center justify-center shrink-0" aria-label="Open menu">
+          <i class="fa-solid fa-bars text-sm"></i>
+        </button>
+        <h2 class="text-sm font-bold text-dark/70 dark:text-white/70 truncate">
+          <span id="currentTabLabel" class="text-[#0F5C4E] dark:text-[#D4A22E]">Overview</span>
+        </h2>
+      </div>
+      <div class="flex items-center gap-2 shrink-0">
+        <button onclick="toggleDarkMode()" class="w-10 h-10 rounded-xl bg-[#F0F7F4] dark:bg-white/10 hover:bg-[#0F5C4E]/15 transition flex items-center justify-center text-dark dark:text-white" aria-label="Toggle theme">
+          <i class="fa-solid fa-moon dark:hidden text-sm"></i>
+          <i class="fa-solid fa-sun hidden dark:block text-sm"></i>
+        </button>
+        <button onclick="toggleDir()" id="dirToggle" class="w-10 h-10 rounded-xl bg-[#F0F7F4] dark:bg-white/10 hover:bg-[#0F5C4E]/15 transition flex items-center justify-center text-dark dark:text-white font-black text-xs">LTR</button>
+      </div>
+    </header>
+
+    <!-- ====== PANELS ====== -->
+
+    <!-- 1. OVERVIEW -->
+    <section id="panel-overview" class="flex-grow p-6 lg:p-10">
+      <div class="max-w-6xl mx-auto space-y-8">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+          <div>
+            <h1 class="text-3xl md:text-4xl font-display font-extrabold text-[#0F2E2A] dark:text-white">Welcome back, <span class="text-[#0F5C4E] dark:text-[#D4A22E]">Sarah</span></h1>
+            <p class="text-sm text-dark/60 dark:text-white/60 mt-1">Track your grant applications, proposals, and deadlines.</p>
+          </div>
+          <button onclick="switchTab('applications')" class="bg-[#0F5C4E] hover:bg-[#0A4A3E] dark:bg-[#D4A22E] dark:hover:bg-[#F0C95A] text-white dark:text-[#0F2E2A] px-6 py-3 rounded-2xl text-sm font-bold shadow-md flex items-center gap-2 transition">
+            <i class="fa-solid fa-plus"></i> New Application
+          </button>
+        </div>
+
+        <!-- Stats -->
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+          <div class="metric-tile text-center">
+            <p class="text-[9px] sm:text-[10px] leading-tight text-dark/50 dark:text-white/40 font-bold uppercase break-words">Active Applications</p>
+            <p class="text-3xl font-black text-[#0F5C4E] dark:text-[#D4A22E]">7</p>
+            <p class="text-[10px] text-dark/40 dark:text-white/30">3 in review</p>
+          </div>
+          <div class="metric-tile text-center">
+            <p class="text-[9px] sm:text-[10px] leading-tight text-dark/50 dark:text-white/40 font-bold uppercase break-words">Funds Secured</p>
+            <p class="text-3xl font-black text-[#0F5C4E] dark:text-[#D4A22E]">$4.2M</p>
+            <p class="text-[10px] text-dark/40 dark:text-white/30">YTD 2026</p>
+          </div>
+          <div class="metric-tile text-center">
+            <p class="text-[9px] sm:text-[10px] leading-tight text-dark/50 dark:text-white/40 font-bold uppercase break-words">Drafts in Progress</p>
+            <p class="text-3xl font-black text-[#0F5C4E] dark:text-[#D4A22E]">4</p>
+            <p class="text-[10px] text-dark/40 dark:text-white/30">2 due this week</p>
+          </div>
+          <div class="metric-tile text-center">
+            <p class="text-[9px] sm:text-[10px] leading-tight text-dark/50 dark:text-white/40 font-bold uppercase break-words">Success Rate</p>
+            <p class="text-3xl font-black text-emerald-600 dark:text-emerald-400">68%</p>
+            <p class="text-[10px] text-dark/40 dark:text-white/30">Last 12 months</p>
+          </div>
+        </div>
+
+        <!-- Progress -->
+        <div class="bg-white/80 dark:bg-[#0E231C]/80 p-6 rounded-2xl border border-[#E2EBE8] dark:border-white/5">
+          <div class="flex justify-between items-center flex-wrap gap-2">
+            <span class="text-sm font-bold text-dark dark:text-white">Annual Funding Goal Progress</span>
+            <span class="text-sm font-bold text-[#0F5C4E] dark:text-[#D4A22E]">$4.2M / $6.0M</span>
+          </div>
+          <div class="progress-bar mt-2"><div class="progress-fill" style="width:70%"></div></div>
+          <p class="text-[10px] text-dark/40 dark:text-white/30 mt-2">70% of annual goal achieved. 4 applications pending review.</p>
+        </div>
+
+        <!-- Next deadline -->
+        <div class="bg-white/80 dark:bg-[#0E231C]/80 p-6 rounded-2xl border border-[#E2EBE8] dark:border-white/5">
+          <h3 class="font-bold text-dark dark:text-white flex items-center gap-2"><i class="fa-regular fa-clock text-[#D4A22E]"></i> Next Deadline</h3>
+          <div class="mt-3 flex flex-wrap items-center gap-3 text-sm">
+            <span class="bg-[#F0F7F4] dark:bg-[#143026] px-4 py-2 rounded-xl font-semibold">📅 May 30, 2026</span>
+            <span class="bg-[#F0F7F4] dark:bg-[#143026] px-4 py-2 rounded-xl font-semibold">🏛️ HRSA Rural Health Grant</span>
+            <span class="bg-[#D4A22E]/15 text-[#A87915] dark:text-[#F0C95A] px-4 py-2 rounded-xl font-bold text-xs">5 days left</span>
+          </div>
+        </div>
+
+        <!-- Recent activity -->
+        <div class="bg-white/80 dark:bg-[#0E231C]/80 p-6 rounded-2xl border border-[#E2EBE8] dark:border-white/5">
+          <h3 class="font-bold text-dark dark:text-white flex items-center gap-2 mb-4"><i class="fa-solid fa-bolt text-[#D4A22E]"></i> Recent Activity</h3>
+          <div class="space-y-3">
+            <div class="flex items-start gap-3 text-sm">
+              <div class="w-2 h-2 rounded-full bg-emerald-500 mt-2 flex-shrink-0"></div>
+              <div>
+                <p class="text-dark/80 dark:text-white/80"><strong>Grant approved:</strong> Community Health Foundation · $185,000</p>
+                <p class="text-[10px] text-dark/40 dark:text-white/30 mt-0.5">2 days ago</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-3 text-sm">
+              <div class="w-2 h-2 rounded-full bg-[#D4A22E] mt-2 flex-shrink-0"></div>
+              <div>
+                <p class="text-dark/80 dark:text-white/80"><strong>Draft ready for review:</strong> RWJF Health Equity Proposal v2</p>
+                <p class="text-[10px] text-dark/40 dark:text-white/30 mt-0.5">4 days ago</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-3 text-sm">
+              <div class="w-2 h-2 rounded-full bg-[#0F5C4E] dark:bg-[#D4A22E] mt-2 flex-shrink-0"></div>
+              <div>
+                <p class="text-dark/80 dark:text-white/80"><strong>New funder match found:</strong> Kresge Foundation · 94% alignment</p>
+                <p class="text-[10px] text-dark/40 dark:text-white/30 mt-0.5">6 days ago</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. APPLICATIONS -->
+    <section id="panel-applications" class="flex-grow hidden p-6 lg:p-10">
+      <div class="max-w-6xl mx-auto space-y-8">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+          <div>
+            <h2 class="text-2xl md:text-3xl font-display font-extrabold text-[#0F2E2A] dark:text-white">Grant <span class="text-[#0F5C4E] dark:text-[#D4A22E]">Applications</span></h2>
+            <p class="text-sm text-dark/60 dark:text-white/60">Track status of every submission by funder.</p>
+          </div>
+          <div class="flex gap-2">
+            <select id="appFilter" onchange="filterApps()" class="bg-white dark:bg-[#0E231C] border border-[#E2EBE8] dark:border-white/15 rounded-xl px-4 py-2.5 text-xs font-semibold focus:ring-2 focus:ring-[#0F5C4E]/40 focus:outline-none text-dark dark:text-white">
+              <option value="all">All Statuses</option>
+              <option value="submitted">Submitted</option>
+              <option value="review">In Review</option>
+              <option value="approved">Approved</option>
+              <option value="draft">Draft</option>
+              <option value="rejected">Rejected</option>
+            </select>
+          </div>
+        </div>
+
+        <div id="appList" class="space-y-3">
+
+          <div class="app-row bg-white/80 dark:bg-[#0E231C]/80 p-5 rounded-2xl border border-[#E2EBE8] dark:border-white/5 hover:border-[#D4A22E] transition" data-status="review">
+            <div class="flex flex-wrap justify-between items-start gap-3">
+              <div class="flex-1 min-w-0">
+                <div class="flex items-center gap-2 flex-wrap">
+                  <h4 class="font-bold text-sm text-[#0F2E2A] dark:text-white">HRSA Rural Health Grant</h4>
+                  <span class="status-badge status-review">In Review</span>
+                </div>
+                <p class="text-xs text-dark/60 dark:text-white/60 mt-1"><i class="fa-solid fa-landmark mr-1.5"></i>Federal · HRSA</p>
+                <div class="flex flex-wrap gap-3 mt-3 text-[11px] text-dark/50 dark:text-white/40">
+                  <span><i class="fa-solid fa-dollar-sign mr-1"></i>$1,200,000 requested</span>
+                  <span><i class="fa-regular fa-calendar mr-1"></i>Submitted Apr 12, 2026</span>
+                  <span><i class="fa-regular fa-clock mr-1"></i>Decision: Jun 15, 2026</span>
+                </div>
+              </div>
+              <button onclick="viewApp('HRSA Rural Health Grant')" class="text-[#0F5C4E] dark:text-[#D4A22E] text-xs font-bold hover:underline whitespace-nowrap">
+                View Details <i class="fa-solid fa-arrow-right text-[10px]"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="app-row bg-white/80 dark:bg-[#0E231C]/80 p-5 rounded-2xl border border-[#E2EBE8] dark:border-white/5 hover:border-[#D4A22E] transition" data-status="submitted">
+            <div class="flex flex-wrap justify-between items-start gap-3">
+              <div class="flex-1 min-w-0">
+                <div class="flex items-center gap-2 flex-wrap">
+                  <h4 class="font-bold text-sm text-[#0F2E2A] dark:text-white">Robert Wood Johnson Foundation</h4>
+                  <span class="status-badge status-submitted">Submitted</span>
+                </div>
+                <p class="text-xs text-dark/60 dark:text-white/60 mt-1"><i class="fa-solid fa-building-columns mr-1.5"></i>Foundation · Health Equity</p>
+                <div class="flex flex-wrap gap-3 mt-3 text-[11px] text-dark/50 dark:text-white/40">
+                  <span><i class="fa-solid fa-dollar-sign mr-1"></i>$500,000 requested</span>
+                  <span><i class="fa-regular fa-calendar mr-1"></i>Submitted May 5, 2026</span>
+                  <span><i class="fa-regular fa-clock mr-1"></i>Decision: Jul 8, 2026</span>
+                </div>
+              </div>
+              <button onclick="viewApp('RWJF Health Equity')" class="text-[#0F5C4E] dark:text-[#D4A22E] text-xs font-bold hover:underline whitespace-nowrap">
+                View Details <i class="fa-solid fa-arrow-right text-[10px]"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="app-row bg-white/80 dark:bg-[#0E231C]/80 p-5 rounded-2xl border border-[#E2EBE8] dark:border-white/5 hover:border-[#D4A22E] transition" data-status="approved">
+            <div class="flex flex-wrap justify-between items-start gap-3">
+              <div class="flex-1 min-w-0">
+                <div class="flex items-center gap-2 flex-wrap">
+                  <h4 class="font-bold text-sm text-[#0F2E2A] dark:text-white">Community Health Foundation</h4>
+                  <span class="status-badge status-approved">Approved</span>
+                </div>
+                <p class="text-xs text-dark/60 dark:text-white/60 mt-1"><i class="fa-solid fa-hand-holding-heart mr-1.5"></i>Foundation · Community Health</p>
+                <div class="flex flex-wrap gap-3 mt-3 text-[11px] text-dark/50 dark:text-white/40">
+                  <span class="text-emerald-600 dark:text-emerald-400 font-bold"><i class="fa-solid fa-circle-check mr-1"></i>$185,000 awarded</span>
+                  <span><i class="fa-regular fa-calendar mr-1"></i>Awarded May 20, 2026</span>
+                </div>
+              </div>
+              <button onclick="viewApp('Community Health Foundation')" class="text-[#0F5C4E] dark:text-[#D4A22E] text-xs font-bold hover:underline whitespace-nowrap">
+                View Award <i class="fa-solid fa-arrow-right text-[10px]"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="app-row bg-white/80 dark:bg-[#0E231C]/80 p-5 rounded-2xl border border-[#E2EBE8] dark:border-white/5 hover:border-[#D4A22E] transition" data-status="review">
+            <div class="flex flex-wrap justify-between items-start gap-3">
+              <div class="flex-1 min-w-0">
+                <div class="flex items-center gap-2 flex-wrap">
+                  <h4 class="font-bold text-sm text-[#0F2E2A] dark:text-white">Kresge Foundation</h4>
+                  <span class="status-badge status-review">In Review</span>
+                </div>
+                <p class="text-xs text-dark/60 dark:text-white/60 mt-1"><i class="fa-solid fa-building-columns mr-1.5"></i>Foundation · Community Development</p>
+                <div class="flex flex-wrap gap-3 mt-3 text-[11px] text-dark/50 dark:text-white/40">
+                  <span><i class="fa-solid fa-dollar-sign mr-1"></i>$750,000 requested</span>
+                  <span><i class="fa-regular fa-calendar mr-1"></i>Submitted Apr 28, 2026</span>
+                  <span><i class="fa-regular fa-clock mr-1"></i>Decision: Jun 30, 2026</span>
+                </div>
+              </div>
+              <button onclick="viewApp('Kresge Foundation')" class="text-[#0F5C4E] dark:text-[#D4A22E] text-xs font-bold hover:underline whitespace-nowrap">
+                View Details <i class="fa-solid fa-arrow-right text-[10px]"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="app-row bg-white/80 dark:bg-[#0E231C]/80 p-5 rounded-2xl border border-[#E2EBE8] dark:border-white/5 hover:border-[#D4A22E] transition" data-status="draft">
+            <div class="flex flex-wrap justify-between items-start gap-3">
+              <div class="flex-1 min-w-0">
+                <div class="flex items-center gap-2 flex-wrap">
+                  <h4 class="font-bold text-sm text-[#0F2E2A] dark:text-white">CDC Health Disparities Grant</h4>
+                  <span class="status-badge status-draft">Draft</span>
+                </div>
+                <p class="text-xs text-dark/60 dark:text-white/60 mt-1"><i class="fa-solid fa-landmark mr-1.5"></i>Federal · CDC</p>
+                <div class="flex flex-wrap gap-3 mt-3 text-[11px] text-dark/50 dark:text-white/40">
+                  <span><i class="fa-solid fa-dollar-sign mr-1"></i>$900,000 target</span>
+                  <span class="text-[#D4A22E] font-bold"><i class="fa-regular fa-clock mr-1"></i>Due Jun 10, 2026</span>
+                </div>
+              </div>
+              <button onclick="viewApp('CDC Health Disparities')" class="text-[#0F5C4E] dark:text-[#D4A22E] text-xs font-bold hover:underline whitespace-nowrap">
+                Continue Draft <i class="fa-solid fa-arrow-right text-[10px]"></i>
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+        <div id="appEmpty" class="hidden text-center py-12 bg-white/60 dark:bg-[#0E231C]/60 rounded-2xl border border-dashed border-[#E2EBE8] dark:border-white/10">
+          <i class="fa-solid fa-folder-open text-3xl text-[#D4A22E]/50 mb-3"></i>
+          <p class="text-sm text-dark/60 dark:text-white/60">No applications match this filter.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. PROPOSALS -->
+    <section id="panel-proposals" class="flex-grow hidden p-6 lg:p-10">
+      <div class="max-w-6xl mx-auto space-y-8">
+        <div>
+          <h2 class="text-2xl md:text-3xl font-display font-extrabold text-[#0F2E2A] dark:text-white">Proposal <span class="text-[#0F5C4E] dark:text-[#D4A22E]">Versions</span></h2>
+          <p class="text-sm text-dark/60 dark:text-white/60">Access, review, and download draft proposal versions.</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+          <div class="lg:col-span-2 space-y-3">
+            <div class="bg-white/80 dark:bg-[#0E231C]/80 p-5 rounded-2xl border border-[#E2EBE8] dark:border-white/5 hover:border-[#D4A22E] transition">
+              <div class="flex justify-between items-start gap-3 flex-wrap">
+                <div class="flex items-start gap-3 min-w-0">
+                  <div class="w-10 h-10 rounded-xl bg-[#D4A22E]/15 flex items-center justify-center text-[#A87915] dark:text-[#F0C95A] flex-shrink-0">
+                    <i class="fa-solid fa-file-pdf"></i>
+                  </div>
+                  <div class="min-w-0">
+                    <h4 class="font-bold text-sm text-[#0F2E2A] dark:text-white truncate">RWJF Health Equity Proposal</h4>
+                    <p class="text-[11px] text-dark/60 dark:text-white/60 mt-0.5">v2.1 · 42 pages · 2.8 MB</p>
+                    <span class="status-badge status-draft mt-2">Ready for review</span>
+                  </div>
+                </div>
+                <div class="flex gap-2 flex-shrink-0">
+                  <button onclick="downloadDoc('RWJF Health Equity Proposal v2.1')" class="w-9 h-9 rounded-xl bg-[#F0F7F4] dark:bg-[#143026] flex items-center justify-center text-[#0F5C4E] dark:text-[#D4A22E] hover:bg-[#0F5C4E] hover:text-white transition" title="Download">
+                    <i class="fa-solid fa-download text-xs"></i>
+                  </button>
+                  <button onclick="previewDoc('RWJF Health Equity Proposal v2.1')" class="w-9 h-9 rounded-xl bg-[#F0F7F4] dark:bg-[#143026] flex items-center justify-center text-[#0F5C4E] dark:text-[#D4A22E] hover:bg-[#0F5C4E] hover:text-white transition" title="Preview">
+                    <i class="fa-solid fa-eye text-xs"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-white/80 dark:bg-[#0E231C]/80 p-5 rounded-2xl border border-[#E2EBE8] dark:border-white/5 hover:border-[#D4A22E] transition">
+              <div class="flex justify-between items-start gap-3 flex-wrap">
+                <div class="flex items-start gap-3 min-w-0">
+                  <div class="w-10 h-10 rounded-xl bg-[#D4A22E]/15 flex items-center justify-center text-[#A87915] dark:text-[#F0C95A] flex-shrink-0">
+                    <i class="fa-solid fa-file-word"></i>
+                  </div>
+                  <div class="min-w-0">
+                    <h4 class="font-bold text-sm text-[#0F2E2A] dark:text-white truncate">HRSA Rural Health Application</h4>
+                    <p class="text-[11px] text-dark/60 dark:text-white/60 mt-0.5">v3.0 · 56 pages · 4.1 MB</p>
+                    <span class="status-badge status-submitted mt-2">Submitted</span>
+                  </div>
+                </div>
+                <div class="flex gap-2 flex-shrink-0">
+                  <button onclick="downloadDoc('HRSA Rural Health Application v3.0')" class="w-9 h-9 rounded-xl bg-[#F0F7F4] dark:bg-[#143026] flex items-center justify-center text-[#0F5C4E] dark:text-[#D4A22E] hover:bg-[#0F5C4E] hover:text-white transition" title="Download">
+                    <i class="fa-solid fa-download text-xs"></i>
+                  </button>
+                  <button onclick="previewDoc('HRSA Rural Health Application v3.0')" class="w-9 h-9 rounded-xl bg-[#F0F7F4] dark:bg-[#143026] flex items-center justify-center text-[#0F5C4E] dark:text-[#D4A22E] hover:bg-[#0F5C4E] hover:text-white transition" title="Preview">
+                    <i class="fa-solid fa-eye text-xs"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-white/80 dark:bg-[#0E231C]/80 p-5 rounded-2xl border border-[#E2EBE8] dark:border-white/5 hover:border-[#D4A22E] transition">
+              <div class="flex justify-between items-start gap-3 flex-wrap">
+                <div class="flex items-start gap-3 min-w-0">
+                  <div class="w-10 h-10 rounded-xl bg-[#D4A22E]/15 flex items-center justify-center text-[#A87915] dark:text-[#F0C95A] flex-shrink-0">
+                    <i class="fa-solid fa-file-lines"></i>
+                  </div>
+                  <div class="min-w-0">
+                    <h4 class="font-bold text-sm text-[#0F2E2A] dark:text-white truncate">Kresge Community Development LOI</h4>
+                    <p class="text-[11px] text-dark/60 dark:text-white/60 mt-0.5">v1.2 · 6 pages · 480 KB</p>
+                    <span class="status-badge status-review mt-2">Under internal review</span>
+                  </div>
+                </div>
+                <div class="flex gap-2 flex-shrink-0">
+                  <button onclick="downloadDoc('Kresge LOI v1.2')" class="w-9 h-9 rounded-xl bg-[#F0F7F4] dark:bg-[#143026] flex items-center justify-center text-[#0F5C4E] dark:text-[#D4A22E] hover:bg-[#0F5C4E] hover:text-white transition" title="Download">
+                    <i class="fa-solid fa-download text-xs"></i>
+                  </button>
+                  <button onclick="previewDoc('Kresge LOI v1.2')" class="w-9 h-9 rounded-xl bg-[#F0F7F4] dark:bg-[#143026] flex items-center justify-center text-[#0F5C4E] dark:text-[#D4A22E] hover:bg-[#0F5C4E] hover:text-white transition" title="Preview">
+                    <i class="fa-solid fa-eye text-xs"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-white/80 dark:bg-[#0E231C]/80 p-5 rounded-2xl border border-[#E2EBE8] dark:border-white/5 hover:border-[#D4A22E] transition">
+              <div class="flex justify-between items-start gap-3 flex-wrap">
+                <div class="flex items-start gap-3 min-w-0">
+                  <div class="w-10 h-10 rounded-xl bg-[#D4A22E]/15 flex items-center justify-center text-[#A87915] dark:text-[#F0C95A] flex-shrink-0">
+                    <i class="fa-solid fa-file-word"></i>
+                  </div>
+                  <div class="min-w-0">
+                    <h4 class="font-bold text-sm text-[#0F2E2A] dark:text-white truncate">CDC Health Disparities Draft</h4>
+                    <p class="text-[11px] text-dark/60 dark:text-white/60 mt-0.5">v0.9 · 24 pages · 1.6 MB</p>
+                    <span class="status-badge status-draft mt-2">In progress</span>
+                  </div>
+                </div>
+                <div class="flex gap-2 flex-shrink-0">
+                  <button onclick="downloadDoc('CDC Health Disparities Draft v0.9')" class="w-9 h-9 rounded-xl bg-[#F0F7F4] dark:bg-[#143026] flex items-center justify-center text-[#0F5C4E] dark:text-[#D4A22E] hover:bg-[#0F5C4E] hover:text-white transition" title="Download">
+                    <i class="fa-solid fa-download text-xs"></i>
+                  </button>
+                  <button onclick="previewDoc('CDC Health Disparities Draft v0.9')" class="w-9 h-9 rounded-xl bg-[#F0F7F4] dark:bg-[#143026] flex items-center justify-center text-[#0F5C4E] dark:text-[#D4A22E] hover:bg-[#0F5C4E] hover:text-white transition" title="Preview">
+                    <i class="fa-solid fa-eye text-xs"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-4">
+            <div class="bg-white/80 dark:bg-[#0E231C]/80 p-6 rounded-3xl border border-[#E2EBE8] dark:border-white/10">
+              <h4 class="font-bold text-dark dark:text-white text-sm flex items-center gap-2"><i class="fa-regular fa-clock text-[#D4A22E]"></i> Pending Your Review</h4>
+              <div class="mt-3 space-y-2 text-sm">
+                <div class="flex justify-between p-2 bg-[#F0F7F4] dark:bg-[#143026] rounded-xl">
+                  <span class="text-xs">RWJF v2.1</span>
+                  <span class="text-[#D4A22E] font-bold text-xs">Due in 2 days</span>
+                </div>
+                <div class="flex justify-between p-2 bg-[#F0F7F4] dark:bg-[#143026] rounded-xl">
+                  <span class="text-xs">Kresge LOI</span>
+                  <span class="text-[#D4A22E] font-bold text-xs">Due in 5 days</span>
+                </div>
+              </div>
+            </div>
+            <div class="bg-[#0F5C4E]/5 dark:bg-[#D4A22E]/10 p-6 rounded-3xl border border-[#0F5C4E]/20 dark:border-[#D4A22E]/25">
+              <p class="text-xs font-semibold text-dark/80 dark:text-white/80">
+                <i class="fa-regular fa-circle-check text-[#0F5C4E] dark:text-[#D4A22E] mr-1"></i>
+                All submitted proposals have been proofed and reviewed by your consultant before submission.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. CALENDAR / DEADLINES -->
+    <section id="panel-calendar" class="flex-grow hidden p-6 lg:p-10">
+      <div class="max-w-6xl mx-auto space-y-8">
+        <div>
+          <h2 class="text-2xl md:text-3xl font-display font-extrabold text-[#0F2E2A] dark:text-white">Funding <span class="text-[#0F5C4E] dark:text-[#D4A22E]">Calendar</span></h2>
+          <p class="text-sm text-dark/60 dark:text-white/60">Track all proposal deadlines and funder decision dates.</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+          <div class="lg:col-span-2 bg-white/80 dark:bg-[#0E231C]/80 p-6 rounded-3xl border border-[#E2EBE8] dark:border-white/5">
+            <div class="flex justify-between items-center mb-5">
+              <h3 class="font-bold text-dark dark:text-white text-sm">May 2026</h3>
+              <div class="flex gap-2">
+                <button class="w-8 h-8 rounded-lg bg-[#F0F7F4] dark:bg-[#143026] flex items-center justify-center text-dark/60 dark:text-white/60 hover:bg-[#0F5C4E] hover:text-white transition text-xs"><i class="fa-solid fa-chevron-left"></i></button>
+                <button class="w-8 h-8 rounded-lg bg-[#F0F7F4] dark:bg-[#143026] flex items-center justify-center text-dark/60 dark:text-white/60 hover:bg-[#0F5C4E] hover:text-white transition text-xs"><i class="fa-solid fa-chevron-right"></i></button>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-7 gap-1.5 mb-2 text-[10px] font-bold uppercase tracking-wider text-center text-dark/40 dark:text-white/40">
+              <div>Sun</div><div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div>
+            </div>
+
+            <div class="grid grid-cols-7 gap-1.5">
+              <div class="calendar-day text-dark/30 dark:text-white/30">26</div>
+              <div class="calendar-day text-dark/30 dark:text-white/30">27</div>
+              <div class="calendar-day">28</div>
+              <div class="calendar-day">29</div>
+              <div class="calendar-day deadline">30<span class="dot"></span></div>
+              <div class="calendar-day">31</div>
+              <div class="calendar-day">1</div>
+
+              <div class="calendar-day">2</div>
+              <div class="calendar-day">3</div>
+              <div class="calendar-day">4</div>
+              <div class="calendar-day">5</div>
+              <div class="calendar-day">6</div>
+              <div class="calendar-day">7</div>
+              <div class="calendar-day">8</div>
+
+              <div class="calendar-day">9</div>
+              <div class="calendar-day deadline">10<span class="dot"></span></div>
+              <div class="calendar-day">11</div>
+              <div class="calendar-day">12</div>
+              <div class="calendar-day">13</div>
+              <div class="calendar-day">14</div>
+              <div class="calendar-day today">15<span class="dot"></span></div>
+
+              <div class="calendar-day">16</div>
+              <div class="calendar-day">17</div>
+              <div class="calendar-day">18</div>
+              <div class="calendar-day deadline">19<span class="dot"></span></div>
+              <div class="calendar-day">20</div>
+              <div class="calendar-day">21</div>
+              <div class="calendar-day">22</div>
+
+              <div class="calendar-day">23</div>
+              <div class="calendar-day">24</div>
+              <div class="calendar-day">25</div>
+              <div class="calendar-day">26</div>
+              <div class="calendar-day">27</div>
+              <div class="calendar-day">28</div>
+              <div class="calendar-day">29</div>
+
+              <div class="calendar-day deadline">30<span class="dot"></span></div>
+              <div class="calendar-day">31</div>
+              <div class="calendar-day text-dark/30 dark:text-white/30">1</div>
+              <div class="calendar-day text-dark/30 dark:text-white/30">2</div>
+              <div class="calendar-day text-dark/30 dark:text-white/30">3</div>
+              <div class="calendar-day text-dark/30 dark:text-white/30">4</div>
+              <div class="calendar-day text-dark/30 dark:text-white/30">5</div>
+            </div>
+          </div>
+
+          <div class="space-y-4">
+            <div class="bg-white/80 dark:bg-[#0E231C]/80 p-6 rounded-3xl border border-[#E2EBE8] dark:border-white/10">
+              <h4 class="font-bold text-dark dark:text-white text-sm flex items-center gap-2"><i class="fa-regular fa-clock text-[#D4A22E]"></i> Upcoming Deadlines</h4>
+              <div class="mt-3 space-y-3 text-sm">
+                <div class="p-3 bg-[#D4A22E]/10 rounded-xl border border-[#D4A22E]/25">
+                  <p class="font-bold text-xs text-[#0F2E2A] dark:text-white">May 30 · HRSA Rural Health</p>
+                  <p class="text-[10px] text-dark/60 dark:text-white/60 mt-0.5">Final submission window closes</p>
+                </div>
+                <div class="p-3 bg-[#F0F7F4] dark:bg-[#143026] rounded-xl">
+                  <p class="font-bold text-xs text-[#0F2E2A] dark:text-white">Jun 10 · CDC Health Disparities</p>
+                  <p class="text-[10px] text-dark/60 dark:text-white/60 mt-0.5">Draft must be finalized</p>
+                </div>
+                <div class="p-3 bg-[#F0F7F4] dark:bg-[#143026] rounded-xl">
+                  <p class="font-bold text-xs text-[#0F2E2A] dark:text-white">Jun 19 · Kresge Foundation</p>
+                  <p class="text-[10px] text-dark/60 dark:text-white/60 mt-0.5">Full proposal due</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-white/80 dark:bg-[#0E231C]/80 p-6 rounded-3xl border border-[#E2EBE8] dark:border-white/10">
+              <h4 class="font-bold text-dark dark:text-white text-sm flex items-center gap-2"><i class="fa-solid fa-gavel text-[#D4A22E]"></i> Decision Dates</h4>
+              <div class="mt-3 space-y-2 text-xs">
+                <p class="flex justify-between"><span>HRSA</span><span class="font-bold">Jun 15, 2026</span></p>
+                <p class="flex justify-between"><span>RWJF</span><span class="font-bold">Jul 8, 2026</span></p>
+                <p class="flex justify-between"><span>Kresge</span><span class="font-bold">Jun 30, 2026</span></p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. BILLING -->
+    <section id="panel-billing" class="flex-grow hidden p-6 lg:p-10">
+      <div class="max-w-6xl mx-auto space-y-8">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+          <div>
+            <h2 class="text-2xl md:text-3xl font-display font-extrabold text-[#0F2E2A] dark:text-white">Billing & <span class="text-[#0F5C4E] dark:text-[#D4A22E]">Consultation</span></h2>
+            <p class="text-sm text-dark/60 dark:text-white/60">Manage invoices, retainer, and consultation hours.</p>
+          </div>
+          <button onclick="downloadInvoices()" class="bg-[#0F5C4E] hover:bg-[#0A4A3E] dark:bg-[#D4A22E] dark:hover:bg-[#F0C95A] text-white dark:text-[#0F2E2A] px-6 py-3 rounded-2xl text-sm font-bold shadow-md flex items-center gap-2 transition">
+            <i class="fa-solid fa-download"></i> Download Statements
+          </button>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div class="metric-tile">
+            <p class="text-[9px] sm:text-[10px] leading-tight text-dark/50 dark:text-white/40 font-bold uppercase break-words">Outstanding Balance</p>
+            <p class="text-2xl font-black text-emerald-600 dark:text-emerald-400">$0.00</p>
+            <p class="text-[10px] text-dark/40 dark:text-white/30 mt-1">All invoices paid</p>
+          </div>
+          <div class="metric-tile">
+            <p class="text-[9px] sm:text-[10px] leading-tight text-dark/50 dark:text-white/40 font-bold uppercase break-words">Next Invoice</p>
+            <p class="text-2xl font-black text-[#0F2E2A] dark:text-white">$4,500</p>
+            <p class="text-[10px] text-dark/40 dark:text-white/30 mt-1">Due Jun 1, 2026</p>
+          </div>
+          <div class="metric-tile">
+            <p class="text-[9px] sm:text-[10px] leading-tight text-dark/50 dark:text-white/40 font-bold uppercase break-words">Consultation Hours</p>
+            <p class="text-2xl font-black text-[#0F2E2A] dark:text-white">18 / 25</p>
+            <p class="text-[10px] text-dark/40 dark:text-white/30 mt-1">This month</p>
+          </div>
+        </div>
+
+        <div class="bg-white/80 dark:bg-[#0E231C]/80 p-6 rounded-2xl border border-[#E2EBE8] dark:border-white/5">
+          <div class="flex justify-between items-center flex-wrap gap-2 mb-2">
+            <span class="text-sm font-bold text-dark dark:text-white">Monthly Retainer Usage</span>
+            <span class="text-sm font-bold text-[#0F5C4E] dark:text-[#D4A22E]">72% used</span>
+          </div>
+          <div class="progress-bar"><div class="progress-fill" style="width:72%"></div></div>
+          <p class="text-[10px] text-dark/40 dark:text-white/30 mt-2">18 of 25 consultation hours used. Resets in 6 days.</p>
+        </div>
+
+        <div class="bg-white/80 dark:bg-[#0E231C]/80 rounded-2xl border border-[#E2EBE8] dark:border-white/5 overflow-hidden">
+          <div class="p-5 border-b border-[#E2EBE8] dark:border-white/5">
+            <h3 class="font-bold text-dark dark:text-white text-sm">Invoice History</h3>
+          </div>
+          <div class="overflow-x-auto scrollbar-none">
+            <table class="w-full text-sm min-w-[600px]">
+              <thead class="bg-[#F0F7F4] dark:bg-[#143026] text-[10px] uppercase tracking-wider text-dark/60 dark:text-white/50">
+                <tr>
+                  <th class="text-start px-5 py-3 font-bold">Invoice</th>
+                  <th class="text-start px-5 py-3 font-bold">Date</th>
+                  <th class="text-start px-5 py-3 font-bold">Description</th>
+                  <th class="text-start px-5 py-3 font-bold">Amount</th>
+                  <th class="text-start px-5 py-3 font-bold">Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="border-b border-[#E2EBE8] dark:border-white/5">
+                  <td class="px-5 py-4 font-mono text-xs">#INV-2041</td>
+                  <td class="px-5 py-4 text-dark/70 dark:text-white/70">May 1, 2026</td>
+                  <td class="px-5 py-4 text-dark/70 dark:text-white/70">May Retainer · Grant Writing</td>
+                  <td class="px-5 py-4 font-bold">$4,500</td>
+                  <td class="px-5 py-4"><span class="status-badge status-approved">Paid</span></td>
+                </tr>
+                <tr class="border-b border-[#E2EBE8] dark:border-white/5">
+                  <td class="px-5 py-4 font-mono text-xs">#INV-2038</td>
+                  <td class="px-5 py-4 text-dark/70 dark:text-white/70">Apr 1, 2026</td>
+                  <td class="px-5 py-4 text-dark/70 dark:text-white/70">Apr Retainer · Grant Writing</td>
+                  <td class="px-5 py-4 font-bold">$4,500</td>
+                  <td class="px-5 py-4"><span class="status-badge status-approved">Paid</span></td>
+                </tr>
+                <tr class="border-b border-[#E2EBE8] dark:border-white/5">
+                  <td class="px-5 py-4 font-mono text-xs">#INV-2035</td>
+                  <td class="px-5 py-4 text-dark/70 dark:text-white/70">Mar 15, 2026</td>
+                  <td class="px-5 py-4 text-dark/70 dark:text-white/70">Prospect Research · Add-on</td>
+                  <td class="px-5 py-4 font-bold">$2,200</td>
+                  <td class="px-5 py-4"><span class="status-badge status-approved">Paid</span></td>
+                </tr>
+                <tr>
+                  <td class="px-5 py-4 font-mono text-xs">#INV-2032</td>
+                  <td class="px-5 py-4 text-dark/70 dark:text-white/70">Mar 1, 2026</td>
+                  <td class="px-5 py-4 text-dark/70 dark:text-white/70">Mar Retainer · Grant Writing</td>
+                  <td class="px-5 py-4 font-bold">$4,500</td>
+                  <td class="px-5 py-4"><span class="status-badge status-approved">Paid</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. CONSULTANT -->
+    <section id="panel-consultant" class="flex-grow hidden p-6 lg:p-10">
+      <div class="max-w-4xl mx-auto space-y-8">
+        <div>
+          <h2 class="text-2xl md:text-3xl font-display font-extrabold text-[#0F2E2A] dark:text-white">My <span class="text-[#0F5C4E] dark:text-[#D4A22E]">Consultant</span></h2>
+          <p class="text-sm text-dark/60 dark:text-white/60">Direct line to your dedicated FundRise strategist.</p>
+        </div>
+
+        <div class="bg-white/80 dark:bg-[#0E231C]/80 p-6 md:p-8 rounded-3xl border border-[#E2EBE8] dark:border-white/5">
+          <div class="flex flex-col sm:flex-row items-start sm:items-center gap-5">
+            <div class="w-20 h-20 rounded-2xl flex items-center justify-center bg-gradient-to-br from-[#0F5C4E] to-[#1A7A67] text-[#D4A22E] font-bold text-2xl shadow-lg border-2 border-[#D4A22E]/30 flex-shrink-0">
+              MC
+            </div>
+            <div class="flex-1 min-w-0">
+              <h3 class="font-display text-xl font-bold text-[#0F2E2A] dark:text-white">Marcus Chen</h3>
+              <p class="text-sm text-dark/60 dark:text-white/60 mt-0.5">Lead Grant Strategist · Federal &amp; Foundation Specialist</p>
+              <div class="flex flex-wrap gap-3 mt-3 text-xs">
+                <span class="flex items-center gap-1.5 text-dark/70 dark:text-white/70"><i class="fa-solid fa-envelope text-[#0F5C4E] dark:text-[#D4A22E]"></i> marcus@fundrise.org</span>
+                <span class="flex items-center gap-1.5 text-dark/70 dark:text-white/70"><i class="fa-solid fa-phone text-[#0F5C4E] dark:text-[#D4A22E]"></i> +1 (555) 789-0142</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-6 pt-6 border-t border-[#E2EBE8] dark:border-white/5">
+            <div class="text-center">
+              <p class="text-xl font-black text-[#0F5C4E] dark:text-[#D4A22E]">12</p>
+              <p class="text-[10px] text-dark/50 dark:text-white/40 uppercase font-bold">Years Exp.</p>
+            </div>
+            <div class="text-center">
+              <p class="text-xl font-black text-[#0F5C4E] dark:text-[#D4A22E]">$85M+</p>
+              <p class="text-[10px] text-dark/50 dark:text-white/40 uppercase font-bold">Secured</p>
+            </div>
+            <div class="text-center">
+              <p class="text-xl font-black text-[#0F5C4E] dark:text-[#D4A22E]">5</p>
+              <p class="text-[10px] text-dark/50 dark:text-white/40 uppercase font-bold">Your Projects</p>
+            </div>
+            <div class="text-center">
+              <p class="text-xl font-black text-[#0F5C4E] dark:text-[#D4A22E]">4.9</p>
+              <p class="text-[10px] text-dark/50 dark:text-white/40 uppercase font-bold">Client Rating</p>
+            </div>
+          </div>
+
+          <div class="flex flex-wrap gap-3 mt-6">
+            <button onclick="showToast('Message Sent', 'Marcus will reply within 1 business day.', 'fa-paper-plane')" class="flex-1 min-w-[140px] bg-[#0F5C4E] hover:bg-[#0A4A3E] dark:bg-[#D4A22E] dark:hover:bg-[#F0C95A] text-white dark:text-[#0F2E2A] py-3 rounded-xl font-bold text-sm shadow-md transition flex items-center justify-center gap-2">
+              <i class="fa-solid fa-paper-plane"></i> Message Marcus
+            </button>
+            <button onclick="showToast('Call Scheduled', 'Marcus will call you within 24 hours.', 'fa-calendar-check')" class="flex-1 min-w-[140px] bg-transparent border-2 border-[#0F5C4E] dark:border-[#D4A22E] text-[#0F5C4E] dark:text-[#D4A22E] py-3 rounded-xl font-bold text-sm hover:bg-[#0F5C4E] dark:hover:bg-[#D4A22E] hover:text-white dark:hover:text-[#0F2E2A] transition flex items-center justify-center gap-2">
+              <i class="fa-solid fa-phone"></i> Request a Call
+            </button>
+          </div>
+        </div>
+
+        <div class="space-y-4">
+          <h3 class="text-sm font-bold text-dark/70 dark:text-white/70 flex items-center gap-2">
+            <i class="fa-solid fa-comment-dots text-[#D4A22E]"></i> Recent Notes from Marcus
+          </h3>
+
+          <div class="feedback-item bg-white/80 dark:bg-[#0E231C]/80 p-6 rounded-2xl border border-[#E2EBE8] dark:border-white/5">
+            <div class="flex justify-between items-start flex-wrap gap-2">
+              <span class="font-bold text-dark dark:text-white text-sm">HRSA proposal — revision complete</span>
+              <span class="text-xs text-dark/40 dark:text-white/30">May 22, 2026</span>
+            </div>
+            <p class="text-sm text-dark/70 dark:text-white/70 mt-2">"Rebuilt the evaluation framework per reviewer feedback. Needs your final sign-off by Thursday. Draft v3.0 is in your Proposals tab."</p>
+          </div>
+
+          <div class="feedback-item bg-white/80 dark:bg-[#0E231C]/80 p-6 rounded-2xl border border-[#E2EBE8] dark:border-white/5">
+            <div class="flex justify-between items-start flex-wrap gap-2">
+              <span class="font-bold text-dark dark:text-white text-sm">New funder match: Kresge Foundation</span>
+              <span class="text-xs text-dark/40 dark:text-white/30">May 18, 2026</span>
+            </div>
+            <p class="text-sm text-dark/70 dark:text-white/70 mt-2">"Found a strong alignment for your community development work. Requested capacity $500K–$1M. Want me to draft a LOI this week?"</p>
+          </div>
+
+          <div class="feedback-item bg-white/80 dark:bg-[#0E231C]/80 p-6 rounded-2xl border border-[#E2EBE8] dark:border-white/5">
+            <div class="flex justify-between items-start flex-wrap gap-2">
+              <span class="font-bold text-dark dark:text-white text-sm">Community Health Foundation — awarded</span>
+              <span class="text-xs text-dark/40 dark:text-white/30">May 20, 2026</span>
+            </div>
+            <p class="text-sm text-dark/70 dark:text-white/70 mt-2">"Congratulations! $185,000 approved. Next step is to prepare the stewardship letter for the program officer — I'll have it ready by Friday."</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-white/80 dark:bg-[#0E231C]/80 backdrop-blur-xl border-t border-[#E2EBE8] dark:border-white/10 py-4 px-6 text-center text-[10px] text-dark/40 dark:text-white/30">
+      &copy; 2026 FundRise · Grant Writing &amp; Fundraising Consultancy · Empowering Nonprofits
+    </footer>
+  </main>
+</div>
+
+<!-- ====== SCRIPTS ====== -->
+<script>
+  // ---- SIDEBAR ----
+  function isSidebarOpen() {
+    return document.getElementById('sidebar').classList.contains('sidebar-open');
+  }
+  function openSidebar() {
+    if (window.innerWidth >= 1024) return;
+    const s = document.getElementById('sidebar');
+    const o = document.getElementById('sidebarOverlay');
+    s.classList.add('sidebar-open');
+    o.classList.remove('hidden');
+    requestAnimationFrame(() => o.classList.add('opacity-100'));
+    document.body.style.overflow = 'hidden';
+  }
+  function closeSidebar() {
+    const s = document.getElementById('sidebar');
+    const o = document.getElementById('sidebarOverlay');
+    s.classList.remove('sidebar-open');
+    o.classList.remove('opacity-100');
+    document.body.style.overflow = '';
+    if (window.innerWidth < 1024) {
+      setTimeout(() => o.classList.add('hidden'), 300);
+    } else {
+      o.classList.add('hidden');
+    }
+  }
+  function toggleSidebar() {
+    if (window.innerWidth >= 1024) return;
+    isSidebarOpen() ? closeSidebar() : openSidebar();
+  }
+
+  // ---- TABS ----
+  function switchTab(tabId) {
+    const panels = ['overview', 'applications', 'proposals', 'calendar', 'billing', 'consultant'];
+    panels.forEach(id => {
+      const p = document.getElementById('panel-' + id);
+      if (p) p.classList.add('hidden');
+    });
+    const target = document.getElementById('panel-' + tabId);
+    if (target) target.classList.remove('hidden');
+
+    document.querySelectorAll('.tab-btn').forEach(t => t.classList.remove('active'));
+    const activeBtn = document.getElementById('tab-' + tabId);
+    if (activeBtn) activeBtn.classList.add('active');
+
+    const labelMap = {
+      overview: 'Overview',
+      applications: 'Applications',
+      proposals: 'Proposals',
+      calendar: 'Deadlines',
+      billing: 'Billing',
+      consultant: 'My Consultant'
+    };
+    document.getElementById('currentTabLabel').innerText = labelMap[tabId] || 'Overview';
+
+    if (window.innerWidth < 1024) {
+      closeSidebar();
+    }
+  }
+
+  // ---- FILTER ----
+  function filterApps() {
+    const val = document.getElementById('appFilter').value;
+    const rows = document.querySelectorAll('.app-row');
+    let visible = 0;
+    rows.forEach(r => {
+      if (val === 'all' || r.dataset.status === val) {
+        r.classList.remove('hidden');
+        visible++;
+      } else {
+        r.classList.add('hidden');
+      }
+    });
+    document.getElementById('appEmpty').classList.toggle('hidden', visible > 0);
+  }
+
+  // ---- ACTIONS ----
+  function viewApp(name) {
+    showToast('Opening ' + name, 'Loading full application details…', 'fa-file-signature');
+  }
+  function downloadDoc(name) {
+    showToast('Download started', name + ' is downloading.', 'fa-download');
+    const blob = new Blob(['FundRise Document: ' + name + '\nGenerated: ' + new Date().toLocaleString()], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = name.replace(/\s+/g, '_') + '.txt';
+    a.click();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  }
+  function previewDoc(name) {
+    showToast('Preview mode', 'Opening ' + name + ' in preview…', 'fa-eye');
+  }
+  function downloadInvoices() {
+    const content = 'FundRise Statement of Account\n' +
+      'Client: Sarah Jenkins · HealthForward Alliance\n' +
+      '---\n' +
+      '#INV-2041 | May 1, 2026 | May Retainer · $4,500 | Paid\n' +
+      '#INV-2038 | Apr 1, 2026 | Apr Retainer · $4,500 | Paid\n' +
+      '#INV-2035 | Mar 15, 2026 | Prospect Research · $2,200 | Paid\n' +
+      '#INV-2032 | Mar 1, 2026 | Mar Retainer · $4,500 | Paid\n' +
+      '---\n' +
+      'Outstanding Balance: $0.00\n' +
+      'Generated: ' + new Date().toLocaleString();
+    const blob = new Blob([content], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'FundRise_Statement.txt';
+    a.click();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+    showToast('Download started', 'Your statement is ready.', 'fa-file-arrow-down');
+  }
+
+  // ---- TOAST ----
+  function showToast(title, msg, icon = 'fa-check') {
+    const div = document.createElement('div');
+    div.className = 'toast-container fixed bottom-6 right-6 z-[60] bg-white/95 dark:bg-[#0E231C]/95 backdrop-blur-xl border border-[#D4A22E]/30 p-4 rounded-2xl shadow-2xl flex items-center gap-3.5 max-w-[calc(100vw-3rem)] sm:max-w-sm transition-all duration-500 transform translate-y-20 opacity-0';
+    div.innerHTML = `
+      <div class="w-10 h-10 rounded-xl bg-[#D4A22E]/10 text-[#A87915] dark:text-[#F0C95A] flex items-center justify-center text-lg shrink-0"><i class="fa-solid ${icon}"></i></div>
+      <div class="min-w-0"><h5 class="text-xs font-bold text-dark dark:text-white">${title}</h5><p class="text-[10px] text-dark/70 dark:text-white/60">${msg}</p></div>
+    `;
+    document.body.appendChild(div);
+    requestAnimationFrame(() => {
+      div.classList.remove('translate-y-20', 'opacity-0');
+      div.classList.add('translate-y-0', 'opacity-100');
+    });
+    setTimeout(() => {
+      div.classList.remove('translate-y-0', 'opacity-100');
+      div.classList.add('translate-y-20', 'opacity-0');
+      setTimeout(() => div.remove(), 500);
+    }, 3500);
+  }
+
+  // ---- DARK MODE ----
+  function toggleDarkMode() {
+    document.documentElement.classList.toggle('dark');
+    localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
+  }
+
+  // ---- RTL ----
+  function toggleDir() {
+    const html = document.documentElement;
+    const dir = html.getAttribute('dir') === 'rtl' ? 'ltr' : 'rtl';
+    html.setAttribute('dir', dir);
+    localStorage.setItem('dir', dir);
+    document.getElementById('dirToggle').innerText = dir.toUpperCase();
+
+    // Only close sidebar on mobile
+    if (window.innerWidth < 1024) {
+      closeSidebar();
+    }
+  }
+
+  // ---- INIT ----
+  document.addEventListener('DOMContentLoaded', () => {
+    // Theme
+    if (localStorage.getItem('theme') === 'dark') document.documentElement.classList.add('dark');
+
+    // Direction
+    const savedDir = localStorage.getItem('dir');
+    const dir = savedDir === 'rtl' ? 'rtl' : 'ltr';
+    document.documentElement.setAttribute('dir', dir);
+    document.getElementById('dirToggle').innerText = dir.toUpperCase();
+
+    // Reset sidebar on mobile
+    closeSidebar();
+
+    // Default tab
+    switchTab('overview');
+  });
+
+  // ---- RESIZE ----
+  window.addEventListener('resize', () => {
+    if (window.innerWidth >= 1024) {
+      const o = document.getElementById('sidebarOverlay');
+      o.classList.add('hidden');
+      o.classList.remove('opacity-100');
+      document.body.style.overflow = '';
+    }
+  });
+</script>
+
+</body>
+</html>

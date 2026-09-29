@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>404 | Page Not Found - FundRise Grant &amp; Fundraising Consultancy</title>
+    <!-- Custom Favicon -->
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <meta name="description" content="Oops! This page seems to have drifted away. Return to FundRise for expert grant writing and fundraising strategy.">
+
+    <!-- Tailwind CSS + Fonts -->
+    
+<script src="tailwind.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            overflow: hidden;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #08150F;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+        /* Nonprofit consultancy background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=2070&auto=format');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0.18;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(10, 46, 40, 0.94) 0%, rgba(8, 21, 15, 0.92) 100%);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .error-container {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            max-width: 620px;
+            margin: 0 auto;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+        }
+
+        .error-card {
+            background: rgba(255, 255, 255, 0.97);
+            backdrop-filter: blur(4px);
+            border-radius: clamp(24px, 4vw, 40px);
+            padding: clamp(20px, 4vh, 48px) clamp(16px, 4vw, 36px);
+            text-align: center;
+            box-shadow: 0 35px 60px -15px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(15, 92, 78, 0.25);
+            transition: all 0.3s ease;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        /* Dark mode support */
+        .dark .error-card {
+            background: rgba(14, 35, 28, 0.96);
+            border-color: rgba(212, 162, 46, 0.35);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes floatIcon {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-12px) rotate(3deg);
+            }
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.22;
+            }
+            90% {
+                opacity: 0.22;
+            }
+            100% {
+                transform: translateY(-20vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes starTwinkle {
+            0%, 100% {
+                opacity: 0.3;
+                transform: scale(0.8);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.2);
+            }
+        }
+
+        .animate-fade-up {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        .float-icon {
+            animation: floatIcon 4s ease-in-out infinite;
+        }
+
+        .code-404 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: clamp(60px, 15vh, 130px);
+            font-weight: 800;
+            background: linear-gradient(135deg, #0F5C4E 0%, #D4A22E 70%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            line-height: 1;
+            letter-spacing: -4px;
+            font-style: italic;
+        }
+
+        .dark .code-404 {
+            background: linear-gradient(135deg, #D4A22E 0%, #F0C95A 70%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .main-icon {
+            font-size: clamp(40px, 8vh, 70px);
+            display: inline-block;
+            animation: floatIcon 3s ease-in-out infinite;
+            color: #0F5C4E;
+        }
+
+        .dark .main-icon {
+            color: #D4A22E;
+        }
+
+        .title {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: clamp(18px, 4vh, 28px);
+            font-weight: 700;
+            color: #0F2E2A;
+            margin-top: clamp(8px, 2vh, 16px);
+            margin-bottom: clamp(6px, 1.5vh, 12px);
+        }
+
+        .dark .title {
+            color: #F0F7F4;
+        }
+
+        .message {
+            color: #4B6560;
+            font-size: clamp(12px, 2vh, 15px);
+            line-height: 1.6;
+            max-width: 400px;
+            margin: 0 auto clamp(12px, 3vh, 28px) auto;
+        }
+
+        .dark .message {
+            color: #A8C0B8;
+        }
+
+        .button-group {
+            display: flex;
+            gap: clamp(8px, 2vw, 14px);
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: clamp(12px, 3vh, 32px);
+        }
+
+        .btn-primary {
+            background: #0F5C4E;
+            color: #FFFFFF;
+            padding: 12px 28px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 12px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.25s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(15, 92, 78, 0.25);
+        }
+
+        .btn-primary:hover {
+            background: #0A4A3E;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(15, 92, 78, 0.4);
+        }
+
+        .dark .btn-primary {
+            background: #D4A22E;
+            color: #0F2E2A;
+            box-shadow: 0 4px 12px rgba(212, 162, 46, 0.25);
+        }
+
+        .dark .btn-primary:hover {
+            background: #F0C95A;
+            color: #0F2E2A;
+            box-shadow: 0 8px 20px rgba(212, 162, 46, 0.35);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #0F5C4E;
+            padding: 12px 28px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 12px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            border: 2px solid #0F5C4E;
+            transition: all 0.25s ease;
+        }
+
+        .btn-secondary:hover {
+            background: #0F5C4E;
+            color: #FFFFFF;
+            transform: translateY(-2px);
+        }
+
+        .dark .btn-secondary {
+            color: #D4A22E;
+            border-color: #D4A22E;
+        }
+
+        .dark .btn-secondary:hover {
+            background: #D4A22E;
+            color: #0F2E2A;
+        }
+
+        .suggestion-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: clamp(10px, 2vw, 20px);
+            margin-top: clamp(12px, 2vh, 20px);
+            padding-top: clamp(12px, 2vh, 20px);
+            border-top: 1px solid rgba(15, 92, 78, 0.18);
+        }
+
+        .dark .suggestion-links {
+            border-top-color: rgba(212, 162, 46, 0.25);
+        }
+
+        .suggestion-links a {
+            color: #0F5C4E;
+            text-decoration: none;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            transition: color 0.2s;
+        }
+
+        .suggestion-links a:hover {
+            color: #D4A22E;
+            text-decoration: underline;
+        }
+
+        .dark .suggestion-links a {
+            color: #D4A22E;
+        }
+
+        .dark .suggestion-links a:hover {
+            color: #F0C95A;
+            text-decoration: underline;
+        }
+
+        /* Floating elements */
+        .floating-element {
+            position: fixed;
+            font-size: 20px;
+            pointer-events: none;
+            z-index: 1;
+            animation: floatUp 14s infinite linear;
+            opacity: 0;
+        }
+
+        .star-element {
+            position: fixed;
+            pointer-events: none;
+            z-index: 1;
+            animation: starTwinkle 2.4s ease-in-out infinite;
+            color: rgba(212, 162, 46, 0.4);
+            font-size: 14px;
+        }
+
+        /* RTL Support */
+        [dir="rtl"] .btn-primary i,
+        [dir="rtl"] .btn-secondary i {
+            transform: scaleX(-1);
+        }
+
+        /* Responsive */
+        @media (max-width: 550px) {
+            .btn-primary,
+            .btn-secondary {
+                padding: 10px 18px;
+                font-size: 10px;
+            }
+            .suggestion-links a {
+                font-size: 9.5px;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .btn-primary,
+            .btn-secondary {
+                padding: 8px 16px;
+                font-size: 9px;
+            }
+        }
+
+        @media (max-height: 600px) {
+            .main-icon {
+                display: none;
+            }
+            .message {
+                display: none;
+            }
+            .code-404 {
+                font-size: clamp(50px, 12vh, 90px);
+            }
+        }
+
+        @media (max-height: 480px) {
+            .error-card {
+                padding: 12px 16px;
+                border-radius: 20px;
+            }
+            .code-404 {
+                font-size: 60px;
+            }
+            .title {
+                font-size: 16px;
+                margin-top: 4px;
+            }
+            .button-group {
+                margin-bottom: 8px;
+            }
+            .suggestion-links {
+                margin-top: 8px;
+                padding-top: 8px;
+            }
+        }
+
+        .search-hint {
+            margin-top: clamp(10px, 2vh, 20px);
+            font-size: clamp(9px, 2vh, 11px);
+            color: #7C8F88;
+        }
+
+        .dark .search-hint {
+            color: #A8C0B8;
+        }
+
+        .search-hint a {
+            color: #0F5C4E;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .dark .search-hint a {
+            color: #D4A22E;
+        }
+
+        .search-hint a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Floating decorative elements -->
+    <div class="floating-element" style="left: 5%; animation-duration: 14s; animation-delay: 0s;">??</div>
+    <div class="floating-element" style="left: 15%; animation-duration: 18s; animation-delay: 2s;">??</div>
+    <div class="floating-element" style="left: 30%; animation-duration: 16s; animation-delay: 4s;">??</div>
+    <div class="floating-element" style="left: 55%; animation-duration: 20s; animation-delay: 1s;">??</div>
+    <div class="floating-element" style="left: 70%; animation-duration: 15s; animation-delay: 3s;">??</div>
+    <div class="floating-element" style="left: 85%; animation-duration: 22s; animation-delay: 5s;">??</div>
+    <div class="floating-element" style="left: 92%; animation-duration: 17s; animation-delay: 2s;">??</div>
+    <div class="floating-element" style="left: 42%; animation-duration: 19s; animation-delay: 6s;">??</div>
+
+    <!-- Twinkling stars -->
+    <div class="star-element" style="top: 8%; left: 8%; animation-delay: 0.5s;">?</div>
+    <div class="star-element" style="top: 15%; right: 12%; animation-delay: 1.2s;">?</div>
+    <div class="star-element" style="top: 70%; left: 20%; animation-delay: 0.8s;">?</div>
+    <div class="star-element" style="bottom: 20%; right: 25%; animation-delay: 1.8s;">?</div>
+    <div class="star-element" style="top: 45%; right: 8%; animation-delay: 0.3s;">?</div>
+    <div class="star-element" style="bottom: 35%; left: 10%; animation-delay: 2.0s;">?</div>
+
+    <div class="error-container">
+        <div class="error-card animate-fade-up">
+            <!-- Brand mark -->
+            <div class="flex justify-center mb-6 w-full">
+                <a href="index.html" class="flex items-center gap-3 group" style="text-decoration: none;">
+                    <div class="w-12 h-12 flex items-center justify-center flex-shrink-0 bg-[#0F5C4E] rounded-xl shadow-lg shadow-black/20 border border-[#D4A22E]/40">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-7 h-7 text-[#D4A22E] group-hover:scale-110 transition-transform">
+                            <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+                            <path d="M2 17l10 5 10-5"></path>
+                            <path d="M2 12l10 5 10-5"></path>
+                        </svg>
+                    </div>
+                    <div class="flex flex-col text-left">
+                        <span class="text-xl md:text-2xl font-bold tracking-tight drop-shadow-sm" style="font-family: 'Playfair Display', Georgia, serif;">
+                            <span class="text-gray-900 dark:text-white">Fund</span><span style="color: #0F5C4E;" class="dark:!text-[#D4A22E]">Rise</span>
+                        </span>
+                        <span class="text-[8px] tracking-[0.25em] uppercase font-semibold -mt-1 text-gray-500 dark:text-gray-400">Grant &amp; Fundraising</span>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Animated Main Icon -->
+            <div class="main-icon">
+                <i class="fas fa-compass-drafting"></i>
+            </div>
+
+            <!-- 404 Code -->
+            <div class="code-404">
+                404
+            </div>
+
+            <!-- Error Title -->
+            <h1 class="title">
+                This Page Has Drifted Off Course
+            </h1>
+
+            <!-- Error Message -->
+            <p class="message">
+                The page you're looking for may have been moved, renamed, or never existed. Let's get you back to the resources, services, and support that can fund your mission.
+            </p>
+
+            <!-- Action Buttons -->
+            <div class="button-group">
+                <a href="index.html" class="btn-primary">
+                    <i class="fas fa-home"></i> Back to Home
+                </a>
+                <a href="contact.html" class="btn-secondary">
+                    <i class="fas fa-headset"></i> Contact Support
+                </a>
+            </div>
+
+            <!-- Helpful Quick Links -->
+            <div class="suggestion-links">
+                <a href="about.html">About Us</a>
+                <a href="services.html">Services</a>
+                <a href="fundraising.html">Fundraising</a>
+                <a href="case-studies.html">Case Studies</a>
+                <a href="resources.html">Resources</a>
+                <a href="contact.html">Contact</a>
+            </div>
+
+            <!-- Search hint -->
+            <div class="search-hint">
+                <i class="fas fa-search"></i> Need help finding something? <a href="contact.html">Reach out to our team</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            // Check for saved RTL preference
+            const savedDir = localStorage.getItem('dir') || localStorage.getItem('language');
+            if (savedDir === 'rtl') {
+                document.documentElement.setAttribute('dir', 'rtl');
+            }
+
+            // Check for saved theme preference
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                document.documentElement.classList.add('dark');
+            } else if (savedTheme === 'light') {
+                document.documentElement.classList.remove('dark');
+            } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                document.documentElement.classList.add('dark');
+            }
+
+            // Keyboard shortcuts
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'h' || e.key === 'H') {
+                    window.location.href = 'index.html';
+                }
+                if (e.key === 'c' || e.key === 'C') {
+                    window.location.href = 'contact.html';
+                }
+                if (e.key === 'a' || e.key === 'A') {
+                    window.location.href = 'about.html';
+                }
+                if (e.key === 's' || e.key === 'S') {
+                    window.location.href = 'services.html';
+                }
+                if (e.key === 'r' || e.key === 'R') {
+                    window.location.href = 'resources.html';
+                }
+            });
+
+        })();
+    </script>
+</body>
+
+</html>
+
+
+
+
+
+

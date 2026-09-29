@@ -1,0 +1,1303 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <title>Resources - FundRise | Grant Guides, Templates &amp; Fundraising Tips</title>
+
+    
+<script src="tailwind.js"></script>
+    <style>
+        /* --- FundRise Emerald & Gold Palette --- */
+        :root, html[data-theme='light'] {
+            --color-background: #FFFFFF;
+            --color-primary-text: #0F2E2A;
+            --color-secondary-text: #4B6560;
+            --color-accent: #0F5C4E;
+            --color-accent-light: #D4A22E;
+            --color-border: #E2EBE8;
+            --color-hover: #F0F7F4;
+            --color-footer-bg: #0A2E28;
+            --color-footer-text: #E8F1EE;
+        }
+        html[data-theme='dark'] {
+            --color-background: #08150F;
+            --color-primary-text: #F0F7F4;
+            --color-secondary-text: #A8C0B8;
+            --color-accent: #1A7A67;
+            --color-accent-light: #E0B848;
+            --color-border: #143026;
+            --color-hover: #0E231C;
+            --color-footer-bg: #000000;
+            --color-footer-text: #F0F7F4;
+        }
+
+        body {
+            background-color: var(--color-background);
+            color: var(--color-primary-text);
+            font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+            transition: background-color 0.3s, color 0.3s;
+            overflow-x: hidden;
+        }
+
+        .text-primary-text { color: var(--color-primary-text); }
+        .text-secondary-text { color: var(--color-secondary-text); }
+        .text-accent { color: var(--color-accent); }
+        .text-accent-light { color: var(--color-accent-light); }
+        .bg-background { background-color: var(--color-background); }
+        .bg-hover { background-color: var(--color-hover); }
+        .border-border { border-color: var(--color-border); }
+
+        .bg-emerald-gradient { background: linear-gradient(135deg, #0F5C4E 0%, #1A7A67 100%); }
+        .bg-gold-gradient { background: linear-gradient(135deg, #D4A22E 0%, #F0C95A 100%); }
+
+        #main-footer { background-color: var(--color-footer-bg); color: var(--color-footer-text); }
+        #main-footer .footer-heading { color: var(--color-accent-light) !important; }
+        #main-footer .footer-link:hover { color: var(--color-accent-light); padding-left: 4px; }
+
+        .nav-link { position: relative; transition: color 0.3s; padding-top: 0.25rem; padding-bottom: 0.25rem; }
+        .nav-link::after {
+            content: ''; position: absolute; left: 0; right: 0; bottom: 0;
+            height: 2px; background-color: var(--color-accent-light);
+            transform: scaleX(0); transition: transform 0.3s;
+        }
+        .nav-link:hover::after, .nav-link.active::after { transform: scaleX(1); }
+        .nav-link.active, .nav-link:hover { color: var(--color-accent-light) !important; }
+
+        .dropdown-wrapper { position: relative; }
+        .dropdown-wrapper::before {
+            content: ''; position: absolute; left: 0; right: 0; height: 20px;
+            bottom: 100%; z-index: 100; background: transparent;
+        }
+        .dropdown-menu {
+            position: absolute; top: calc(100% + 5px); left: 0;
+            background-color: var(--color-background); border: 1px solid var(--color-border);
+            border-radius: 0.5rem; box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            min-width: 220px; z-index: 1000; opacity: 0; visibility: hidden;
+            transform: translateY(-10px); transition: all 0.3s ease;
+        }
+        .dropdown-wrapper:hover .dropdown-menu { opacity: 1; visibility: visible; transform: translateY(0); display: block; }
+        .dropdown-menu a {
+            display: block; padding: 0.75rem 1rem; color: var(--color-primary-text);
+            text-decoration: none; font-size: 0.875rem; transition: all 0.2s ease;
+            border-bottom: 1px solid var(--color-border);
+        }
+        .dropdown-menu a:last-child { border-bottom: none; }
+        .dropdown-menu a:hover { background-color: var(--color-hover); color: var(--color-accent-light); padding-left: 1.25rem; }
+
+        .book-btn { background-color: var(--color-accent); color: white; transition: all 0.3s ease; }
+        html[data-theme='dark'] .book-btn { background-color: var(--color-accent-light); color: #08150F; }
+        .book-btn:hover { opacity: 0.9; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(15, 92, 78, 0.3); }
+
+        @media (max-width: 1024px) {
+            .dropdown-menu { position: static; display: none; opacity: 1; visibility: visible; transform: none; box-shadow: none; }
+            .dropdown-wrapper:hover .dropdown-menu { display: block; }
+        }
+
+        /* Dark mode overrides */
+        html[data-theme='dark'] .bg-white,
+        html[data-theme='dark'] section.bg-white { background-color: var(--color-background) !important; }
+        html[data-theme='dark'] .bg-\[\#F0F7F4\],
+        html[data-theme='dark'] section.bg-\[\#F0F7F4\] { background-color: var(--color-hover) !important; }
+        html[data-theme='dark'] .text-\[\#0F5C4E\],
+        html[data-theme='dark'] h2.text-\[\#0F5C4E\],
+        html[data-theme='dark'] h3.text-\[\#0F5C4E\] { color: var(--color-primary-text) !important; }
+        html[data-theme='dark'] .text-accent { color: var(--color-accent-light) !important; }
+        html[data-theme='dark'] .text-gray-600,
+        html[data-theme='dark'] .text-gray-500,
+        html[data-theme='dark'] .text-gray-400 { color: var(--color-secondary-text) !important; }
+        html[data-theme='dark'] .border-gray-100,
+        html[data-theme='dark'] .border-gray-200 { border-color: var(--color-border) !important; }
+        html[data-theme='dark'] .bg-white.rounded-2xl,
+        html[data-theme='dark'] .bg-white.rounded-3xl,
+        html[data-theme='dark'] .bg-white.p-8 { background-color: var(--color-hover) !important; }
+
+        /* Guide resource card */
+        .guide-card { transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.3s ease; }
+        .guide-card:hover {
+            transform: translateY(-6px);
+            border-color: var(--color-accent-light);
+            box-shadow: 0 22px 45px -22px rgba(15, 92, 78, 0.35);
+        }
+
+        /* Tip card */
+        .tip-card {
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .tip-card::before {
+            content: '';
+            position: absolute; left: 0; top: 0; bottom: 0;
+            width: 4px; background: var(--color-accent-light);
+            transform: scaleY(0); transform-origin: top;
+            transition: transform 0.4s ease;
+        }
+        .tip-card:hover::before { transform: scaleY(1); }
+        .tip-card:hover { transform: translateX(6px); box-shadow: 0 12px 30px -14px rgba(15, 92, 78, 0.25); }
+
+        /* Template card */
+        .template-card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .template-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 42px -20px rgba(15, 92, 78, 0.35);
+        }
+        .template-icon {
+            transition: transform 0.4s ease;
+        }
+        .template-card:hover .template-icon { transform: rotate(-6deg) scale(1.08); }
+
+        /* Article card */
+        .article-card { transition: transform 0.35s ease, box-shadow 0.35s ease; }
+        .article-card:hover { transform: translateY(-6px); box-shadow: 0 22px 45px -22px rgba(15, 92, 78, 0.3); }
+        .article-card img { transition: transform 0.6s ease; }
+        .article-card:hover img { transform: scale(1.07); }
+
+        /* FAQ accordion */
+        .faq-item {
+            border: 1px solid var(--color-border);
+            border-radius: 1rem;
+            background: var(--color-background);
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            overflow: hidden;
+        }
+        .faq-item:hover { border-color: var(--color-accent-light); }
+        .faq-item.open {
+            border-color: var(--color-accent-light);
+            box-shadow: 0 14px 32px -18px rgba(15, 92, 78, 0.3);
+        }
+        .faq-trigger {
+            width: 100%; text-align: left; cursor: pointer;
+            padding: 1.1rem 1.25rem;
+            display: flex; align-items: center; justify-content: space-between;
+            gap: 1rem;
+            font-weight: 600;
+            color: var(--color-primary-text);
+            font-size: 0.95rem;
+            transition: background-color 0.2s ease;
+        }
+        .faq-trigger:hover { background-color: var(--color-hover); }
+        .faq-icon {
+            flex-shrink: 0;
+            width: 28px; height: 28px; border-radius: 50%;
+            background: var(--color-hover);
+            display: flex; align-items: center; justify-content: center;
+            color: var(--color-accent);
+            transition: transform 0.35s ease, background-color 0.3s ease, color 0.3s ease;
+        }
+        .faq-item.open .faq-icon {
+            transform: rotate(180deg);
+            background: var(--color-accent);
+            color: #FFFFFF;
+        }
+        html[data-theme='dark'] .faq-item.open .faq-icon {
+            background: var(--color-accent-light);
+            color: #08150F;
+        }
+        .faq-panel {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+        }
+        .faq-panel-inner {
+            padding: 0 1.25rem 1.25rem 1.25rem;
+            color: var(--color-secondary-text);
+            font-size: 0.875rem;
+            line-height: 1.7;
+        }
+
+        /* Italic serif number */
+        .service-number {
+            font-family: Georgia, 'Times New Roman', serif;
+            font-style: italic;
+            font-weight: 700;
+            line-height: 1;
+        }
+
+        /* Text clamp */
+        .line-clamp-3 {
+            display: -webkit-box; -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical; overflow: hidden;
+        }
+
+        /* Decorative dot pattern */
+        .dot-pattern {
+            background-image: radial-gradient(circle, var(--color-accent-light) 1px, transparent 1px);
+            background-size: 22px 22px;
+            opacity: 0.18;
+        }
+
+        section[id] { scroll-margin-top: 90px; }
+    </style>
+</head>
+<body class="antialiased flex flex-col min-h-screen">
+
+    <!-- HEADER -->
+    <header class="sticky top-0 z-50 transition-colors duration-300 shadow-xl border-b border-border bg-background" id="main-header">
+        <nav class="container mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between h-[68px] relative">
+            <a href="index.html" class="text-2xl font-serif font-semibold tracking-tight flex-shrink-0">
+                <div class="flex items-center gap-2">
+                    <svg class="w-8 h-8 text-accent-light" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+                        <path d="M2 17l10 5 10-5"></path>
+                        <path d="M2 12l10 5 10-5"></path>
+                    </svg>
+                    <span class="text-accent-light">FundRise</span>
+                </div>
+            </a>
+
+            <div class="hidden xl:flex items-center justify-center flex-1 space-x-6 z-10 mx-4">
+                <div class="flex space-x-6 rtl:space-x-reverse rtl:ml-6 text-primary-text font-medium text-sm">
+                    <div class="dropdown-wrapper">
+                        <button class="nav-link flex items-center font-bold">
+                            Home
+                            <svg class="w-3 h-3 ml-1 relative top-[2.5px] transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div class="dropdown-menu">
+                            <a href="index.html">Home 1</a>
+                            <a href="home2.html">Home 2</a>
+                        </div>
+                    </div>
+                    <a href="about.html" class="nav-link">About</a>
+                    <a href="services.html" class="nav-link">Services</a>
+                    <a href="fundraising.html" class="nav-link">Fundraising</a>
+                    <a href="case-studies.html" class="nav-link">Case Studies</a>
+                    <a href="resources.html" class="nav-link active">Resources</a>
+                    <a href="contact.html" class="nav-link">Contact</a>
+
+                    <div class="dropdown-wrapper">
+                        <button class="nav-link flex items-center text-primary-text">
+                            Dashboard
+                            <svg class="w-3 h-3 ml-1 relative top-[2.5px] transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div class="dropdown-menu">
+                            <a href="admin.html">Admin Dashboard</a>
+                            <a href="customer-dashboard.html">Customer Dashboard</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hidden xl:flex items-center space-x-3 rtl:space-x-reverse rtl:mr-4 flex-shrink-0">
+                
+                
+                <button id="theme-toggle" class="text-primary-text hover:text-accent-light p-1.5 rounded-full transition duration-200" title="Toggle Theme">
+                    <svg class="w-6 h-6 light-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+                    <svg class="w-6 h-6 dark-icon hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
+                </button><button id="lang-icon" class="text-primary-text hover:text-accent-light p-1.5 rounded-full transition duration-200" title="Toggle RTL">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7.5 21 3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5" /></svg>
+                </button>
+
+                <a href="login.html" class="ml-2 px-6 py-2 text-sm font-bold book-btn rounded-full shadow-md hover:opacity-90 transition-opacity">Login</a>
+            </div>
+
+            <div class="xl:hidden flex items-center space-x-3"><button id="mobile-menu-open" class="text-primary-text hover:text-accent-light p-1.5 rounded-full transition duration-200" aria-label="Open menu">
+                    <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" /></svg>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <main class="flex-grow">
+
+        <!-- ============ HERO ============ -->
+        <section class="relative min-h-screen flex items-center justify-center overflow-hidden">
+            <div class="absolute inset-0">
+                <img src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=1600&q=80"
+                     class="w-full h-full object-cover scale-105"
+                     alt="Library of nonprofit fundraising resources">
+                <div class="absolute inset-0 bg-gradient-to-b from-black/80 via-black/60 to-black/90"></div>
+            </div>
+
+            <div class="relative z-10 text-center px-6 max-w-4xl">
+                <p class="text-[#D4A22E] uppercase tracking-[4px] text-xs mb-4 font-semibold">
+                    Free Knowledge � Real Tools
+                </p>
+                <h1 class="font-serif text-4xl md:text-6xl lg:text-7xl font-semibold text-white leading-tight mb-6">
+                    Resources to
+                    <br>
+                    <span class="italic bg-gradient-to-r from-yellow-400 to-amber-500 bg-clip-text text-transparent">
+                        Fund Your Mission
+                    </span>
+                </h1>
+                <p class="text-gray-300 text-base md:text-xl max-w-2xl mx-auto leading-relaxed mb-8">
+                    Grant guides, fundraising tips, ready-to-use templates, and practical articles � everything your team needs to grow revenue and win more grants.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="#grant-guides" class="px-8 py-3 bg-[#D4A22E] text-black font-bold rounded-full hover:scale-105 hover:brightness-95 transition duration-300 shadow-lg">
+                        Browse Resources
+                    </a>
+                    <a href="contact.html" class="px-8 py-3 border border-white/80 text-white rounded-full hover:bg-white/10 transition duration-300">
+                        Ask a Question
+                    </a>
+                </div>
+
+                <!-- Quick nav strip -->
+                <div class="mt-12 inline-block w-full max-w-3xl rounded-full p-[2px]" style="background: linear-gradient(90deg, #0F5C4E 0%, #1A7A67 50%, #D4A22E 100%);">
+                    <div class="bg-black/40 backdrop-blur-md rounded-full px-4 sm:px-6 py-3 flex flex-wrap justify-center gap-x-4 sm:gap-x-6 gap-y-2 text-xs sm:text-sm font-medium">
+                        <a href="#grant-guides" class="text-white hover:text-[#D4A22E] transition">Grant Guides</a>
+                        <a href="#fundraising-tips" class="text-white hover:text-[#D4A22E] transition">Fundraising Tips</a>
+                        <a href="#templates" class="text-white hover:text-[#D4A22E] transition">Templates</a>
+                        <a href="#articles" class="text-white hover:text-[#D4A22E] transition">Articles</a>
+                        <a href="#faqs" class="text-white hover:text-[#D4A22E] transition">FAQs</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ RESOURCE STATS BAR ============ -->
+        <section class="bg-hover border-y border-border transition-colors duration-300">
+            <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10">
+                <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+                    <div class="text-center bg-background border border-border rounded-2xl p-5 sm:p-6 shadow-sm hover:-translate-y-1 transition-transform duration-300">
+                        <i class="fas fa-book-open text-2xl sm:text-3xl text-accent-light mb-3"></i>
+                        <p class="text-2xl sm:text-3xl font-serif font-bold text-accent">28</p>
+                        <p class="text-[11px] sm:text-sm text-secondary-text mt-1">Grant guides &amp; playbooks</p>
+                    </div>
+                    <div class="text-center bg-background border border-border rounded-2xl p-5 sm:p-6 shadow-sm hover:-translate-y-1 transition-transform duration-300">
+                        <i class="fas fa-file-lines text-2xl sm:text-3xl text-accent-light mb-3"></i>
+                        <p class="text-2xl sm:text-3xl font-serif font-bold text-accent">45+</p>
+                        <p class="text-[11px] sm:text-sm text-secondary-text mt-1">Downloadable templates</p>
+                    </div>
+                    <div class="text-center bg-background border border-border rounded-2xl p-5 sm:p-6 shadow-sm hover:-translate-y-1 transition-transform duration-300">
+                        <i class="fas fa-lightbulb text-2xl sm:text-3xl text-accent-light mb-3"></i>
+                        <p class="text-2xl sm:text-3xl font-serif font-bold text-accent">120</p>
+                        <p class="text-[11px] sm:text-sm text-secondary-text mt-1">Fundraising tips</p>
+                    </div>
+                    <div class="text-center bg-background border border-border rounded-2xl p-5 sm:p-6 shadow-sm hover:-translate-y-1 transition-transform duration-300">
+                        <i class="fas fa-newspaper text-2xl sm:text-3xl text-accent-light mb-3"></i>
+                        <p class="text-2xl sm:text-3xl font-serif font-bold text-accent">90+</p>
+                        <p class="text-[11px] sm:text-sm text-secondary-text mt-1">Articles published</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ 1. GRANT GUIDES ============ -->
+        <section id="grant-guides" class="py-20 sm:py-24 bg-background transition-colors duration-300">
+            <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                <div class="flex flex-col lg:flex-row items-center gap-12 lg:gap-16 mb-16">
+                    <div class="w-full lg:w-1/2 relative">
+                        <div class="dot-pattern absolute -top-6 -left-6 w-32 h-32 rounded-2xl -z-10"></div>
+                        <div class="relative overflow-hidden rounded-2xl shadow-2xl hover:scale-[1.02] transition-transform duration-500">
+                            <img src="assets/images/learning-track-guides.jpg"
+                                 alt="Grant guide books and notebooks"
+                                 class="w-full h-[320px] sm:h-[420px] lg:h-[480px] object-cover">
+                        </div>
+                    </div>
+
+                    <div class="w-full lg:w-1/2">
+                        <div class="flex items-center gap-4 mb-4">
+                            <span class="service-number text-5xl sm:text-6xl text-accent-light/40">01</span>
+                            <span class="h-px flex-1 bg-border"></span>
+                        </div>
+                        <span class="text-accent-light font-bold tracking-widest uppercase text-sm">Learning Track</span>
+                        <h2 class="font-serif text-3xl sm:text-4xl md:text-5xl font-semibold text-accent mt-3 mb-6">Grant Guides</h2>
+                        <p class="text-secondary-text text-base sm:text-lg leading-relaxed mb-6">
+                            Deep-dive, step-by-step guides that walk you through every stage of the grant lifecycle � from prospect research and letter of inquiry to final reporting and renewal strategy.
+                        </p>
+
+                        <!-- Guide list -->
+                        <div class="space-y-3 mb-8">
+                            <a href="#" class="flex items-start gap-4 p-4 bg-hover border border-border rounded-xl hover:border-accent-light transition group">
+                                <div class="w-10 h-10 rounded-lg bg-emerald-gradient flex items-center justify-center text-white flex-shrink-0">
+                                    <i class="fas fa-search-dollar"></i>
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <p class="font-semibold text-primary-text text-sm sm:text-base group-hover:text-accent-light transition">The Complete Grant Prospect Research Guide</p>
+                                    <p class="text-xs sm:text-sm text-secondary-text mt-0.5">38 pages � PDF � Updated 2026</p>
+                                </div>
+                                <i class="fas fa-arrow-down text-accent-light mt-2 flex-shrink-0"></i>
+                            </a>
+                            <a href="#" class="flex items-start gap-4 p-4 bg-hover border border-border rounded-xl hover:border-accent-light transition group">
+                                <div class="w-10 h-10 rounded-lg bg-emerald-gradient flex items-center justify-center text-white flex-shrink-0">
+                                    <i class="fas fa-file-signature"></i>
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <p class="font-semibold text-primary-text text-sm sm:text-base group-hover:text-accent-light transition">Writing Winning Federal Grant Proposals</p>
+                                    <p class="text-xs sm:text-sm text-secondary-text mt-0.5">52 pages � PDF � Includes rubric breakdown</p>
+                                </div>
+                                <i class="fas fa-arrow-down text-accent-light mt-2 flex-shrink-0"></i>
+                            </a>
+                            <a href="#" class="flex items-start gap-4 p-4 bg-hover border border-border rounded-xl hover:border-accent-light transition group">
+                                <div class="w-10 h-10 rounded-lg bg-gold-gradient flex items-center justify-center text-[#0F2E2A] flex-shrink-0">
+                                    <i class="fas fa-calculator"></i>
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <p class="font-semibold text-primary-text text-sm sm:text-base group-hover:text-accent-light transition">Budget Narratives That Funders Trust</p>
+                                    <p class="text-xs sm:text-sm text-secondary-text mt-0.5">24 pages � PDF � With worked examples</p>
+                                </div>
+                                <i class="fas fa-arrow-down text-accent-light mt-2 flex-shrink-0"></i>
+                            </a>
+                            <a href="#" class="flex items-start gap-4 p-4 bg-hover border border-border rounded-xl hover:border-accent-light transition group">
+                                <div class="w-10 h-10 rounded-lg bg-emerald-gradient flex items-center justify-center text-white flex-shrink-0">
+                                    <i class="fas fa-clipboard-check"></i>
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <p class="font-semibold text-primary-text text-sm sm:text-base group-hover:text-accent-light transition">Post-Award Reporting &amp; Renewal Playbook</p>
+                                    <p class="text-xs sm:text-sm text-secondary-text mt-0.5">30 pages � PDF � Templates included</p>
+                                </div>
+                                <i class="fas fa-arrow-down text-accent-light mt-2 flex-shrink-0"></i>
+                            </a>
+                        </div>
+
+                        <a href="#" class="inline-flex items-center gap-2 px-6 py-3 book-btn rounded-full font-bold text-sm shadow-md">
+                            <i class="fas fa-download"></i> Download All Guides
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ 2. FUNDRAISING TIPS ============ -->
+        <section id="fundraising-tips" class="py-20 sm:py-24 bg-hover transition-colors duration-300">
+            <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-14 sm:mb-16">
+                    <div class="flex items-center justify-center gap-4 mb-4">
+                        <span class="service-number text-5xl sm:text-6xl text-accent-light/40">02</span>
+                    </div>
+                    <span class="text-accent-light font-bold tracking-widest uppercase text-sm">Practical Track</span>
+                    <h2 class="font-serif text-3xl sm:text-4xl md:text-5xl font-semibold text-accent mt-4 mb-4">Fundraising Tips</h2>
+                    <p class="text-secondary-text max-w-2xl mx-auto text-base sm:text-lg">
+                        Short, actionable tips you can apply this week. No fluff, no filler � just what works in the field.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-5">
+                    <!-- Tip 1 -->
+                    <div class="tip-card bg-background border border-border rounded-xl p-5 sm:p-6">
+                        <div class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-lg bg-emerald-gradient flex items-center justify-center text-white flex-shrink-0">
+                                <i class="fas fa-user-plus text-sm"></i>
+                            </div>
+                            <div>
+                                <p class="text-[10px] uppercase tracking-widest text-accent-light font-bold mb-1">Donor Retention</p>
+                                <h3 class="font-semibold text-primary-text text-base sm:text-lg mb-2">Send a thank-you within 48 hours</h3>
+                                <p class="text-secondary-text text-sm leading-relaxed">
+                                    Donors who receive a personal thank-you within two days are 4x more likely to give again. Build a 48-hour thank-you SOP for your team.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tip 2 -->
+                    <div class="tip-card bg-background border border-border rounded-xl p-5 sm:p-6">
+                        <div class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-lg bg-gold-gradient flex items-center justify-center text-[#0F2E2A] flex-shrink-0">
+                                <i class="fas fa-envelope-open-text text-sm"></i>
+                            </div>
+                            <div>
+                                <p class="text-[10px] uppercase tracking-widest text-accent-light font-bold mb-1">Email Appeals</p>
+                                <h3 class="font-semibold text-primary-text text-base sm:text-lg mb-2">Write the subject line last</h3>
+                                <p class="text-secondary-text text-sm leading-relaxed">
+                                    Your subject line should summarize the single most compelling idea in the email. Draft the body first, then pull the punchiest phrase up top.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tip 3 -->
+                    <div class="tip-card bg-background border border-border rounded-xl p-5 sm:p-6">
+                        <div class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-lg bg-emerald-gradient flex items-center justify-center text-white flex-shrink-0">
+                                <i class="fas fa-magnifying-glass-dollar text-sm"></i>
+                            </div>
+                            <div>
+                                <p class="text-[10px] uppercase tracking-widest text-accent-light font-bold mb-1">Prospect Research</p>
+                                <h3 class="font-semibold text-primary-text text-base sm:text-lg mb-2">Look for 3 signals, not 1</h3>
+                                <p class="text-secondary-text text-sm leading-relaxed">
+                                    A single signal (wealth, affinity, or prior giving) is weak. Three together means it's time to reach out. Score every prospect on all three.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tip 4 -->
+                    <div class="tip-card bg-background border border-border rounded-xl p-5 sm:p-6">
+                        <div class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-lg bg-gold-gradient flex items-center justify-center text-[#0F2E2A] flex-shrink-0">
+                                <i class="fas fa-chart-line text-sm"></i>
+                            </div>
+                            <div>
+                                <p class="text-[10px] uppercase tracking-widest text-accent-light font-bold mb-1">Grants</p>
+                                <h3 class="font-semibold text-primary-text text-base sm:text-lg mb-2">Track win/loss reasons, not just results</h3>
+                                <p class="text-secondary-text text-sm leading-relaxed">
+                                    After every declined proposal, ask the funder (politely) why. Over 12 months, the patterns will tell you exactly where to focus.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tip 5 -->
+                    <div class="tip-card bg-background border border-border rounded-xl p-5 sm:p-6">
+                        <div class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-lg bg-emerald-gradient flex items-center justify-center text-white flex-shrink-0">
+                                <i class="fas fa-hand-holding-heart text-sm"></i>
+                            </div>
+                            <div>
+                                <p class="text-[10px] uppercase tracking-widest text-accent-light font-bold mb-1">Major Gifts</p>
+                                <h3 class="font-semibold text-primary-text text-base sm:text-lg mb-2">Ask for a conversation, not a gift</h3>
+                                <p class="text-secondary-text text-sm leading-relaxed">
+                                    "Could I share what we're working on?" out-performs "Can you give $X?" every time. The gift comes from the conversation.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tip 6 -->
+                    <div class="tip-card bg-background border border-border rounded-xl p-5 sm:p-6">
+                        <div class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-lg bg-gold-gradient flex items-center justify-center text-[#0F2E2A] flex-shrink-0">
+                                <i class="fas fa-repeat text-sm"></i>
+                            </div>
+                            <div>
+                                <p class="text-[10px] uppercase tracking-widest text-accent-light font-bold mb-1">Board Engagement</p>
+                                <h3 class="font-semibold text-primary-text text-base sm:text-lg mb-2">Give every board member 3 names</h3>
+                                <p class="text-secondary-text text-sm leading-relaxed">
+                                    Boards freeze at "help fundraise." Instead, assign each member 3 specific prospects to introduce. Clarity drives action.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center mt-10">
+                    <a href="#" class="inline-flex items-center gap-2 px-6 py-3 btn-outline-ocean border border-accent text-accent rounded-full font-bold text-sm hover:bg-accent hover:text-white transition">
+                        <i class="fas fa-lightbulb"></i> Browse All 120 Tips
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ 3. TEMPLATES ============ -->
+        <section id="templates" class="py-20 sm:py-24 bg-background transition-colors duration-300">
+            <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-14 sm:mb-16">
+                    <div class="flex items-center justify-center gap-4 mb-4">
+                        <span class="service-number text-5xl sm:text-6xl text-accent-light/40">03</span>
+                    </div>
+                    <span class="text-accent-light font-bold tracking-widest uppercase text-sm">Ready-to-Use Track</span>
+                    <h2 class="font-serif text-3xl sm:text-4xl md:text-5xl font-semibold text-accent mt-4 mb-4">Templates</h2>
+                    <p class="text-secondary-text max-w-2xl mx-auto text-base sm:text-lg">
+                        Download, customize, and submit. These are the exact templates our team uses with clients every day.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
+                    <!-- Template 1 -->
+                    <div class="template-card bg-hover border border-border rounded-2xl p-6 sm:p-7 shadow-sm flex flex-col">
+                        <div class="w-14 h-14 rounded-2xl bg-emerald-gradient flex items-center justify-center text-white mb-5 template-icon">
+                            <i class="fas fa-file-word text-xl"></i>
+                        </div>
+                        <p class="text-[10px] uppercase tracking-widest text-accent-light font-bold mb-2">Word Document</p>
+                        <h3 class="font-serif text-lg sm:text-xl font-medium text-primary-text mb-3 min-h-[56px] sm:min-h-[60px]">Letter of Inquiry (LOI) Template</h3>
+                        <p class="text-secondary-text text-sm leading-relaxed mb-5">
+                            A funder-ready LOI structure with optional blocks for program summary, need statement, and budget snapshot.
+                        </p>
+                        <a href="#" class="inline-flex items-center gap-2 text-accent-light text-sm font-bold hover:gap-3 transition-all mt-auto">
+                            <i class="fas fa-download"></i> Download Free
+                        </a>
+                    </div>
+
+                    <!-- Template 2 -->
+                    <div class="template-card bg-hover border border-border rounded-2xl p-6 sm:p-7 shadow-sm flex flex-col">
+                        <div class="w-14 h-14 rounded-2xl bg-gold-gradient flex items-center justify-center text-[#0F2E2A] mb-5 template-icon">
+                            <i class="fas fa-file-excel text-xl"></i>
+                        </div>
+                        <p class="text-[10px] uppercase tracking-widest text-accent-light font-bold mb-2">Excel Spreadsheet</p>
+                        <h3 class="font-serif text-lg sm:text-xl font-medium text-primary-text mb-3 min-h-[56px] sm:min-h-[60px]">Grant Tracking Dashboard</h3>
+                        <p class="text-secondary-text text-sm leading-relaxed mb-5">
+                            Track every submission, deadline, funder contact, amount requested, and status in a single sheet. Pre-formatted.
+                        </p>
+                        <a href="#" class="inline-flex items-center gap-2 text-accent-light text-sm font-bold hover:gap-3 transition-all mt-auto">
+                            <i class="fas fa-download"></i> Download Free
+                        </a>
+                    </div>
+
+                    <!-- Template 3 -->
+                    <div class="template-card bg-hover border border-border rounded-2xl p-6 sm:p-7 shadow-sm flex flex-col">
+                        <div class="w-14 h-14 rounded-2xl bg-emerald-gradient flex items-center justify-center text-white mb-5 template-icon">
+                            <i class="fas fa-file-powerpoint text-xl"></i>
+                        </div>
+                        <p class="text-[10px] uppercase tracking-widest text-accent-light font-bold mb-2">Slide Deck</p>
+                        <h3 class="font-serif text-lg sm:text-xl font-medium text-primary-text mb-3 min-h-[56px] sm:min-h-[60px]">Board Fundraising Update Deck</h3>
+                        <p class="text-secondary-text text-sm leading-relaxed mb-5">
+                            A 12-slide template for reporting fundraising progress to your board � with KPI placeholders and talking points.
+                        </p>
+                        <a href="#" class="inline-flex items-center gap-2 text-accent-light text-sm font-bold hover:gap-3 transition-all mt-auto">
+                            <i class="fas fa-download"></i> Download Free
+                        </a>
+                    </div>
+
+                    <!-- Template 4 -->
+                    <div class="template-card bg-hover border border-border rounded-2xl p-6 sm:p-7 shadow-sm flex flex-col">
+                        <div class="w-14 h-14 rounded-2xl bg-gold-gradient flex items-center justify-center text-[#0F2E2A] mb-5 template-icon">
+                            <i class="fas fa-file-pdf text-xl"></i>
+                        </div>
+                        <p class="text-[10px] uppercase tracking-widest text-accent-light font-bold mb-2">PDF Guide</p>
+                        <h3 class="font-serif text-lg sm:text-xl font-medium text-primary-text mb-3 min-h-[56px] sm:min-h-[60px]">Case for Support Framework</h3>
+                        <p class="text-secondary-text text-sm leading-relaxed mb-5">
+                            The core messaging document every campaign needs. Fill-in-the-blank template for program, impact, and ask.
+                        </p>
+                        <a href="#" class="inline-flex items-center gap-2 text-accent-light text-sm font-bold hover:gap-3 transition-all mt-auto">
+                            <i class="fas fa-download"></i> Download Free
+                        </a>
+                    </div>
+
+                    <!-- Template 5 -->
+                    <div class="template-card bg-hover border border-border rounded-2xl p-6 sm:p-7 shadow-sm flex flex-col">
+                        <div class="w-14 h-14 rounded-2xl bg-emerald-gradient flex items-center justify-center text-white mb-5 template-icon">
+                            <i class="fas fa-envelope text-xl"></i>
+                        </div>
+                        <p class="text-[10px] uppercase tracking-widest text-accent-light font-bold mb-2">Email Template</p>
+                        <h3 class="font-serif text-lg sm:text-xl font-medium text-primary-text mb-3 min-h-[56px] sm:min-h-[60px]">Donor Thank-You Series</h3>
+                        <p class="text-secondary-text text-sm leading-relaxed mb-5">
+                            A 5-email sequence: immediate thank-you, impact follow-up, 30-day check-in, milestone update, and next-year ask.
+                        </p>
+                        <a href="#" class="inline-flex items-center gap-2 text-accent-light text-sm font-bold hover:gap-3 transition-all mt-auto">
+                            <i class="fas fa-download"></i> Download Free
+                        </a>
+                    </div>
+
+                    <!-- Template 6 -->
+                    <div class="template-card bg-hover border border-border rounded-2xl p-6 sm:p-7 shadow-sm flex flex-col">
+                        <div class="w-14 h-14 rounded-2xl bg-gold-gradient flex items-center justify-center text-[#0F2E2A] mb-5 template-icon">
+                            <i class="fas fa-clipboard-list text-xl"></i>
+                        </div>
+                        <p class="text-[10px] uppercase tracking-widest text-accent-light font-bold mb-2">Checklist</p>
+                        <h3 class="font-serif text-lg sm:text-xl font-medium text-primary-text mb-3 min-h-[56px] sm:min-h-[60px]">Pre-Submission Review Checklist</h3>
+                        <p class="text-secondary-text text-sm leading-relaxed mb-5">
+                            42-point checklist covering narrative, budget, attachments, formatting, and funder-specific requirements.
+                        </p>
+                        <a href="#" class="inline-flex items-center gap-2 text-accent-light text-sm font-bold hover:gap-3 transition-all mt-auto">
+                            <i class="fas fa-download"></i> Download Free
+                        </a>
+                    </div>
+                </div>
+
+                <div class="text-center mt-10">
+                    <a href="#" class="inline-flex items-center gap-2 px-6 py-3 book-btn rounded-full font-bold text-sm shadow-md">
+                        <i class="fas fa-box-archive"></i> View Full Template Library
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ 4. HELPFUL ARTICLES ============ -->
+        <section id="articles" class="py-20 sm:py-24 bg-hover transition-colors duration-300">
+            <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-14 sm:mb-16">
+                    <div class="flex items-center justify-center gap-4 mb-4">
+                        <span class="service-number text-5xl sm:text-6xl text-accent-light/40">04</span>
+                    </div>
+                    <span class="text-accent-light font-bold tracking-widest uppercase text-sm">Reading Track</span>
+                    <h2 class="font-serif text-3xl sm:text-4xl md:text-5xl font-semibold text-accent mt-4 mb-4">Helpful Articles</h2>
+                    <p class="text-secondary-text max-w-2xl mx-auto text-base sm:text-lg">
+                        Long-form insight on the trends, tools, and tactics shaping nonprofit fundraising today.
+                    </p>
+                </div>
+
+                <!-- Featured article -->
+                <article class="article-card bg-background border border-border rounded-3xl overflow-hidden shadow-sm mb-8 grid grid-cols-1 lg:grid-cols-2">
+                    <div class="overflow-hidden h-64 sm:h-80 lg:h-auto">
+                        <img src="assets/images/article-featured.jpg"
+                             alt="Featured article on nonprofit fundraising trends"
+                             class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6 sm:p-10 flex flex-col justify-center">
+                        <span class="inline-block bg-gold-gradient text-[#0F2E2A] text-[10px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-full mb-4 self-start">
+                            Editor's Pick
+                        </span>
+                        <p class="text-[10px] sm:text-xs uppercase tracking-widest text-accent-light font-bold mb-2">Trends � 8 min read</p>
+                        <h3 class="font-serif text-xl sm:text-2xl lg:text-3xl font-medium text-primary-text mb-4 leading-tight">
+                            The 2026 Fundraising Landscape: 7 Shifts Every Nonprofit Should Know
+                        </h3>
+                        <p class="text-secondary-text text-sm sm:text-base leading-relaxed mb-6 line-clamp-3">
+                            From AI-assisted prospect research to the rise of donor-advised funds, the nonprofit funding landscape is shifting faster than ever. Here's what's changing and how to adapt your strategy before your next board meeting.
+                        </p>
+                        <div class="flex items-center justify-between pt-5 border-t border-border">
+                            <div class="flex items-center gap-3">
+                                <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=100&q=80"
+                                     alt="Author" class="w-9 h-9 rounded-full object-cover">
+                                <div>
+                                    <p class="text-xs font-bold text-primary-text">Sarah Chen</p>
+                                    <p class="text-[10px] text-secondary-text">Mar 12, 2026</p>
+                                </div>
+                            </div>
+                            <a href="#" class="inline-flex items-center gap-1.5 text-accent-light text-xs sm:text-sm font-bold hover:gap-2.5 transition-all">
+                                Read Article <i class="fas fa-arrow-right text-[10px]"></i>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Article grid -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+                    <!-- Article 1 -->
+                    <article class="article-card bg-background border border-border rounded-2xl overflow-hidden shadow-sm flex flex-col">
+                        <div class="overflow-hidden h-48 sm:h-52">
+                            <img src="assets/images/article-1.jpg"
+                                 alt="Data-driven donor research"
+                                 class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-5 sm:p-6 flex flex-col flex-grow">
+                            <p class="text-[10px] uppercase tracking-widest text-accent-light font-bold mb-2">Research � 6 min read</p>
+                            <h3 class="font-serif text-base sm:text-lg font-medium text-primary-text mb-3 leading-snug min-h-[72px] sm:min-h-[84px]">
+                                How to Score a Prospect in Under 10 Minutes
+                            </h3>
+                            <p class="text-secondary-text text-sm leading-relaxed line-clamp-3 mb-4">
+                                A simple 3-signal framework for deciding who's worth a phone call � and who isn't.
+                            </p>
+                            <a href="#" class="inline-flex items-center gap-1.5 text-accent-light text-xs font-bold hover:gap-2.5 transition-all mt-auto">
+                                Read More <i class="fas fa-arrow-right text-[10px]"></i>
+                            </a>
+                        </div>
+                    </article>
+
+                    <!-- Article 2 -->
+                    <article class="article-card bg-background border border-border rounded-2xl overflow-hidden shadow-sm flex flex-col">
+                        <div class="overflow-hidden h-48 sm:h-52">
+                            <img src="assets/images/article-2.jpg"
+                                 alt="Grant writing at desk"
+                                 class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-5 sm:p-6 flex flex-col flex-grow">
+                            <p class="text-[10px] uppercase tracking-widest text-accent-light font-bold mb-2">Grants � 9 min read</p>
+                            <h3 class="font-serif text-base sm:text-lg font-medium text-primary-text mb-3 leading-snug min-h-[72px] sm:min-h-[84px]">
+                                Why Most Federal Proposals Get Rejected (And How Yours Won't)
+                            </h3>
+                            <p class="text-secondary-text text-sm leading-relaxed line-clamp-3 mb-4">
+                                The 5 most common scoring gaps we see in reviewed proposals � and how to fix each one.
+                            </p>
+                            <a href="#" class="inline-flex items-center gap-1.5 text-accent-light text-xs font-bold hover:gap-2.5 transition-all mt-auto">
+                                Read More <i class="fas fa-arrow-right text-[10px]"></i>
+                            </a>
+                        </div>
+                    </article>
+
+                    <!-- Article 3 -->
+                    <article class="article-card bg-background border border-border rounded-2xl overflow-hidden shadow-sm flex flex-col">
+                        <div class="overflow-hidden h-48 sm:h-52">
+                            <img src="assets/images/article-3.jpg"
+                                 alt="Major gifts conversation"
+                                 class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-5 sm:p-6 flex flex-col flex-grow">
+                            <p class="text-[10px] uppercase tracking-widest text-accent-light font-bold mb-2">Major Gifts � 7 min read</p>
+                            <h3 class="font-serif text-base sm:text-lg font-medium text-primary-text mb-3 leading-snug min-h-[72px] sm:min-h-[84px]">
+                                The Quiet Phase Playbook: Getting to 70% Before You Launch
+                            </h3>
+                            <p class="text-secondary-text text-sm leading-relaxed line-clamp-3 mb-4">
+                                Why campaigns that skip the quiet phase almost always stall � and the exact structure we use.
+                            </p>
+                            <a href="#" class="inline-flex items-center gap-1.5 text-accent-light text-xs font-bold hover:gap-2.5 transition-all mt-auto">
+                                Read More <i class="fas fa-arrow-right text-[10px]"></i>
+                            </a>
+                        </div>
+                    </article>
+
+                    <!-- Article 4 -->
+                    <article class="article-card bg-background border border-border rounded-2xl overflow-hidden shadow-sm flex flex-col">
+                        <div class="overflow-hidden h-48 sm:h-52">
+                            <img src="assets/images/article-4.jpg"
+                                 alt="Board meeting"
+                                 class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-5 sm:p-6 flex flex-col flex-grow">
+                            <p class="text-[10px] uppercase tracking-widest text-accent-light font-bold mb-2">Governance � 5 min read</p>
+                            <h3 class="font-serif text-base sm:text-lg font-medium text-primary-text mb-3 leading-snug min-h-[72px] sm:min-h-[84px]">
+                                Getting Your Board to Actually Fundraise: A 90-Day Plan
+                            </h3>
+                            <p class="text-secondary-text text-sm leading-relaxed line-clamp-3 mb-4">
+                                A structured roadmap for moving your board from passive approval to active fundraising.
+                            </p>
+                            <a href="#" class="inline-flex items-center gap-1.5 text-accent-light text-xs font-bold hover:gap-2.5 transition-all mt-auto">
+                                Read More <i class="fas fa-arrow-right text-[10px]"></i>
+                            </a>
+                        </div>
+                    </article>
+
+                    <!-- Article 5 -->
+                    <article class="article-card bg-background border border-border rounded-2xl overflow-hidden shadow-sm flex flex-col">
+                        <div class="overflow-hidden h-48 sm:h-52">
+                            <img src="assets/images/article-5.jpg"
+                                 alt="Team reviewing data"
+                                 class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-5 sm:p-6 flex flex-col flex-grow">
+                            <p class="text-[10px] uppercase tracking-widest text-accent-light font-bold mb-2">Donor Retention � 6 min read</p>
+                            <h3 class="font-serif text-base sm:text-lg font-medium text-primary-text mb-3 leading-snug min-h-[72px] sm:min-h-[84px]">
+                                The 5 Metrics That Predict Whether a Donor Will Give Again
+                            </h3>
+                            <p class="text-secondary-text text-sm leading-relaxed line-clamp-3 mb-4">
+                                Forget gut feeling. These are the five data points that reliably predict retention.
+                            </p>
+                            <a href="#" class="inline-flex items-center gap-1.5 text-accent-light text-xs font-bold hover:gap-2.5 transition-all mt-auto">
+                                Read More <i class="fas fa-arrow-right text-[10px]"></i>
+                            </a>
+                        </div>
+                    </article>
+
+                    <!-- Article 6 -->
+                    <article class="article-card bg-background border border-border rounded-2xl overflow-hidden shadow-sm flex flex-col">
+                        <div class="overflow-hidden h-48 sm:h-52">
+                            <img src="assets/images/article-6.jpg"
+                                 alt="Nonprofit team meeting"
+                                 class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-5 sm:p-6 flex flex-col flex-grow">
+                            <p class="text-[10px] uppercase tracking-widest text-accent-light font-bold mb-2">Storytelling � 8 min read</p>
+                            <h3 class="font-serif text-base sm:text-lg font-medium text-primary-text mb-3 leading-snug min-h-[72px] sm:min-h-[84px]">
+                                Storytelling That Funds Programs: A Framework for Nonprofits
+                            </h3>
+                            <p class="text-secondary-text text-sm leading-relaxed line-clamp-3 mb-4">
+                                How to build a narrative that moves donors from sympathy to sustained investment.
+                            </p>
+                            <a href="#" class="inline-flex items-center gap-1.5 text-accent-light text-xs font-bold hover:gap-2.5 transition-all mt-auto">
+                                Read More <i class="fas fa-arrow-right text-[10px]"></i>
+                            </a>
+                        </div>
+                    </article>
+                </div>
+
+                <div class="text-center mt-10">
+                    <a href="#" class="inline-flex items-center gap-2 px-6 py-3 border border-accent text-accent rounded-full font-bold text-sm hover:bg-accent hover:text-white transition">
+                        <i class="fas fa-book"></i> View All Articles
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ 5. FAQs ============ -->
+        <section id="faqs" class="py-20 sm:py-24 bg-background transition-colors duration-300">
+            <div class="container mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-14 sm:mb-16">
+                    <div class="flex items-center justify-center gap-4 mb-4">
+                        <span class="service-number text-5xl sm:text-6xl text-accent-light/40">05</span>
+                    </div>
+                    <span class="text-accent-light font-bold tracking-widest uppercase text-sm">Answers Track</span>
+                    <h2 class="font-serif text-3xl sm:text-4xl md:text-5xl font-semibold text-accent mt-4 mb-4">Frequently Asked Questions</h2>
+                    <p class="text-secondary-text max-w-2xl mx-auto text-base sm:text-lg">
+                        The questions we hear most from nonprofit leaders, development directors, and board members.
+                    </p>
+                </div>
+
+                <div class="space-y-4">
+
+                    <div class="faq-item">
+                        <button class="faq-trigger" aria-expanded="false">
+                            <span>How is FundRise different from hiring a full-time development director?</span>
+                            <span class="faq-icon"><i class="fas fa-chevron-down text-xs"></i></span>
+                        </button>
+                        <div class="faq-panel">
+                            <div class="faq-panel-inner">
+                                A full-time development director costs $90K�$140K plus benefits, takes 3�6 months to hire, and may not have the specialized grant-writing or prospect-research skills you need at every stage. With FundRise, you get a senior team on demand � often at a fraction of the cost � with expertise across grant writing, major gifts, campaigns, and donor research. Most clients start with a project sprint, then move to a fractional retainer once they see the value.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-trigger" aria-expanded="false">
+                            <span>Do you work with small nonprofits or only large institutions?</span>
+                            <span class="faq-icon"><i class="fas fa-chevron-down text-xs"></i></span>
+                        </button>
+                        <div class="faq-panel">
+                            <div class="faq-panel-inner">
+                                Both � and we pride ourselves on it. Roughly 40% of our clients have annual budgets under $1M. We offer tiered pricing, project-based engagements, and pro-bono support through our Nonprofit Relief Initiative. If we're not the right financial fit, we'll tell you honestly and point you toward resources you can use on your own.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-trigger" aria-expanded="false">
+                            <span>How quickly can we see results from grant writing?</span>
+                            <span class="faq-icon"><i class="fas fa-chevron-down text-xs"></i></span>
+                        </button>
+                        <div class="faq-panel">
+                            <div class="faq-panel-inner">
+                                Grant cycles vary widely. Foundation grants typically see results in 3�6 months; federal grants can take 9�15 months from submission to award. What we can promise: within the first 30 days, you'll have a prioritized funder list, a clear submission calendar, and at least one proposal in development. For faster results, our fundraising strategy and donor outreach services often show impact within 60�90 days.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-trigger" aria-expanded="false">
+                            <span>Do you replace our existing grant writer or work alongside them?</span>
+                            <span class="faq-icon"><i class="fas fa-chevron-down text-xs"></i></span>
+                        </button>
+                        <div class="faq-panel">
+                            <div class="faq-panel-inner">
+                                Either way works. Many clients use us to augment their in-house team during peak seasons, or to handle specialized proposals (like federal grants) that their staff isn't trained for. We're happy to collaborate, co-write, or take the lead � whatever fits your team best. Our goal is to leave you stronger, not dependent on us.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-trigger" aria-expanded="false">
+                            <span>What does a typical engagement cost?</span>
+                            <span class="faq-icon"><i class="fas fa-chevron-down text-xs"></i></span>
+                        </button>
+                        <div class="faq-panel">
+                            <div class="faq-panel-inner">
+                                Pricing depends on scope. A single grant proposal project typically ranges from $4,500 to $12,000 depending on complexity. Retainer engagements start at $3,500/month for fractional development support. Grant research projects start at $2,500. We provide a fixed quote after a free 30-minute consultation � no hourly surprises, no hidden fees.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-trigger" aria-expanded="false">
+                            <span>Can you help us if we've never applied for a grant before?</span>
+                            <span class="faq-icon"><i class="fas fa-chevron-down text-xs"></i></span>
+                        </button>
+                        <div class="faq-panel">
+                            <div class="faq-panel-inner">
+                                Absolutely � first-time applicants are one of our favorite client types. We'll start by assessing your readiness (501c3 status, financials, program data, evaluation capacity), then build the infrastructure you need: a grants calendar, boilerplate language, budget templates, and a funder prospect list. From there, we'll co-write your first few proposals and coach your team through the process so you can eventually run it in-house.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-trigger" aria-expanded="false">
+                            <span>Do you offer training for our in-house team?</span>
+                            <span class="faq-icon"><i class="fas fa-chevron-down text-xs"></i></span>
+                        </button>
+                        <div class="faq-panel">
+                            <div class="faq-panel-inner">
+                                Yes � our Capacity Building program includes workshops, 1:1 coaching, and custom playbooks for your development team. Popular topics include prospect research, grant writing fundamentals, major gift conversations, and board fundraising engagement. We can deliver training virtually or on-site, and we tailor every session to your sector and experience level.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-trigger" aria-expanded="false">
+                            <span>What sectors do you specialize in?</span>
+                            <span class="faq-icon"><i class="fas fa-chevron-down text-xs"></i></span>
+                        </button>
+                        <div class="faq-panel">
+                            <div class="faq-panel-inner">
+                                We've secured funding across health, education, environment, arts &amp; culture, youth development, housing, social services, faith-based organizations, and animal welfare. Our research team maintains active funder databases across all these sectors, so we can quickly identify aligned opportunities. If we don't have deep expertise in your sector, we'll tell you upfront.
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="text-center mt-12">
+                    <p class="text-secondary-text text-sm sm:text-base mb-4">Still have questions? We'd love to hear from you.</p>
+                    <a href="contact.html" class="inline-flex items-center gap-2 px-6 py-3 book-btn rounded-full font-bold text-sm shadow-md">
+                        <i class="fas fa-comments"></i> Ask Us Anything
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ FINAL CTA ============ -->
+        <section class="py-20 sm:py-24 bg-hover transition-colors duration-300">
+            <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                <div class="bg-gradient-to-r from-[#0F5C4E] via-[#1A7A67] to-[#D4A22E] rounded-[2rem] p-8 sm:p-14 md:p-20 text-center shadow-2xl relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-72 h-72 bg-white/10 blur-[100px] rounded-full"></div>
+                    <div class="absolute bottom-0 left-0 w-56 h-56 bg-black/20 blur-[80px] rounded-full"></div>
+                    <div class="relative z-10">
+                        <span class="text-[#F4D06F] uppercase tracking-[4px] text-xs font-semibold">Ready to Learn More?</span>
+                        <h2 class="font-serif text-3xl sm:text-4xl md:text-5xl font-semibold text-white mt-4 mb-5 leading-tight">
+                            Free Resources, Real Results
+                        </h2>
+                        <p class="text-white/90 text-base sm:text-lg md:text-xl max-w-2xl mx-auto mb-10 font-light">
+                            Download the guides, use the templates, and when you're ready � let's talk about your specific goals.
+                        </p>
+                        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                            <a href="contact.html" class="whitespace-nowrap text-center px-6 sm:px-10 py-4 bg-white text-[#0F5C4E] rounded-full font-bold text-base sm:text-lg hover:bg-[#D4A22E] hover:text-[#0F2E2A] transition-all duration-300 transform hover:scale-105 shadow-xl">
+                                Schedule a Consultation
+                            </a>
+                            <a href="#grant-guides" class="whitespace-nowrap text-center px-6 sm:px-10 py-4 border-2 border-white/70 text-white rounded-full font-bold text-base sm:text-lg hover:bg-white/10 transition-all duration-300">
+                                Download Free Guides
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- MOBILE DRAWER -->
+    <div id="mobile-menu-drawer" class="fixed inset-0 z-50 pointer-events-none transition-all duration-300">
+        <div id="drawer-backdrop" class="absolute inset-0 bg-black opacity-0 transition-opacity duration-300 pointer-events-none"></div>
+
+        <div id="drawer-content" class="absolute top-0 left-0 right-0 bg-background rounded-b-2xl shadow-2xl p-6 xl:hidden max-h-[85vh] overflow-y-auto transform translate-y-[-100%] transition-transform duration-300 ease-out">
+            <div class="flex justify-between items-center pb-4 border-b border-border">
+                <a href="index.html" class="text-2xl font-serif font-semibold tracking-tight flex-shrink-0">
+                    <div class="flex items-center gap-2">
+                        <svg class="w-7 h-7 text-accent-light" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+                            <path d="M2 17l10 5 10-5"></path>
+                            <path d="M2 12l10 5 10-5"></path>
+                        </svg>
+                        <span class="text-accent-light">FundRise</span>
+                    </div>
+                </a>
+                <button id="mobile-menu-close" class="text-primary-text hover:text-accent-light p-1.5 rounded-full transition duration-200" aria-label="Close menu">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+            </div>
+
+            <nav class="flex flex-col space-y-1 py-4">
+                <div>
+                    <button class="block text-accent-light font-medium text-lg py-2 w-full text-left flex justify-between items-center" id="mobile-homes-toggle">
+                        Home <svg class="w-4 h-4 transform transition-transform duration-200 text-primary-text" id="homes-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div id="mobile-homes-menu" class="hidden pl-4 flex flex-col space-y-1 mt-1 border-l-2 border-border rtl:pl-0 rtl:pr-4 rtl:border-l-0 rtl:border-r-2">
+                        <a href="index.html" class="block text-secondary-text hover:text-accent-light transition duration-200 text-base py-1 px-2">Home 1</a>
+                        <a href="home2.html" class="block text-secondary-text hover:text-accent-light transition duration-200 text-base py-1 px-2">Home 2</a>
+                    </div>
+                </div>
+
+                <a href="about.html" class="block text-primary-text font-medium text-lg hover:text-accent-light transition duration-200 py-2">About</a>
+                <a href="services.html" class="block text-primary-text font-medium text-lg hover:text-accent-light transition duration-200 py-2">Services</a>
+                <a href="fundraising.html" class="block text-primary-text font-medium text-lg hover:text-accent-light transition duration-200 py-2">Fundraising</a>
+                <a href="case-studies.html" class="block text-primary-text font-medium text-lg hover:text-accent-light transition duration-200 py-2">Case Studies</a>
+                <a href="resources.html" class="block text-accent-light font-medium text-lg py-2">Resources</a>
+                <a href="contact.html" class="block text-primary-text font-medium text-lg hover:text-accent-light transition duration-200 py-2">Contact</a>
+
+                <div>
+                    <button class="block text-primary-text font-medium text-lg py-2 w-full text-left flex justify-between items-center" id="mobile-dashboard-toggle">
+                        Dashboard
+                        <svg class="w-4 h-4 transform transition-transform duration-200 text-primary-text" id="dashboard-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div id="mobile-dashboard-menu" class="hidden pl-4 flex flex-col space-y-1 mt-1 border-l-2 border-border rtl:pl-0 rtl:pr-4 rtl:border-l-0 rtl:border-r-2">
+                        <a href="admin.html" class="block text-secondary-text hover:text-accent-light transition duration-200 text-base py-1 px-2">Admin Dashboard</a>
+                        <a href="customer-dashboard.html" class="block text-secondary-text hover:text-accent-light transition duration-200 text-base py-1 px-2">Customer Dashboard</a>
+                    </div>
+                </div>
+            </nav>
+
+            <div class="pt-4 border-t border-border mt-4 flex justify-around items-center">
+                <button id="mobile-lang-icon-drawer" class="flex flex-col items-center text-primary-text hover:text-accent-light p-2 transition duration-200">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7.5 21 3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5" /></svg>
+                    <span class="text-xs mt-1 text-secondary-text">RTL</span>
+                </button>
+
+                <button id="drawer-theme-toggle" class="flex flex-col items-center text-primary-text hover:text-accent-light p-2 transition duration-200">
+                    <svg class="w-6 h-6 light-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+                    <svg class="w-6 h-6 dark-icon hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
+                    <span class="text-xs mt-1 text-secondary-text">Theme</span>
+                </button>
+            </div>
+            <div class="flex mt-5 w-full px-2">
+                <a href="login.html" class="w-full book-btn text-center py-3 rounded-xl font-bold text-sm shadow-md">Login</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer id="main-footer" class="pt-20 transition-colors duration-300">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 pb-16 border-b border-gray-800">
+                  <div class="lg:col-span-2">
+                      <a href="index.html" class="flex items-center gap-2 inline-flex hover:opacity-80 transition-opacity">
+                        <svg class="w-8 h-8 text-accent-light" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+                            <path d="M2 17l10 5 10-5"></path>
+                            <path d="M2 12l10 5 10-5"></path>
+                        </svg>
+                        <h1 class="text-2xl font-serif font-semibold tracking-tight flex-shrink-0"><span class="text-accent-light">FundRise</span></h1>
+                      </a>
+                      <p class="text-lg leading-relaxed max-w-sm !text-gray-300">
+                        Empowering nonprofits with expert grant writing and fundraising strategy � so every mission gets the funding it deserves.
+                    </p>
+                    <div class="flex space-x-6 mt-10">
+                        <a href="#" class="text-white hover:text-accent-light transition text-xl"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-white hover:text-accent-light transition text-xl"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="text-white hover:text-accent-light transition text-xl"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-white hover:text-accent-light transition text-xl"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="footer-heading font-medium text-xl mb-6">Resources</h4>
+                    <ul class="space-y-4">
+                        <li><a href="resources.html#grant-guides" class="footer-link">Grant Guides</a></li>
+                        <li><a href="resources.html#fundraising-tips" class="footer-link">Fundraising Tips</a></li>
+                        <li><a href="resources.html#templates" class="footer-link">Templates</a></li>
+                        <li><a href="resources.html#faqs" class="footer-link">FAQs</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="footer-heading font-medium text-xl mb-6">Quick Links</h4>
+                    <ul class="space-y-4">
+                        <li><a href="index.html" class="footer-link">Home</a></li>
+                        <li><a href="about.html" class="footer-link">About</a></li>
+                        <li><a href="case-studies.html" class="footer-link">Case Studies</a></li>
+                        <li><a href="contact.html" class="footer-link">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="footer-heading font-medium text-xl mb-6">Contact Us</h4>
+                    <ul class="space-y-4 !text-gray-300">
+                        <li class="flex items-start gap-3">
+                            <i class="fas fa-map-marker-alt mt-1 text-accent-light"></i>
+                            <span class="text-sm">456 Impact Way, Suite 200<br>Washington, DC 20001</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fas fa-phone text-accent-light"></i>
+                            <span class="text-sm">+1 (555) 789-0123</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fas fa-envelope text-accent-light"></i>
+                            <span class="text-sm">hello@fundrise.org</span>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="footer-heading font-medium text-xl mb-6">Newsletter</h4>
+                    <p class="text-sm mb-6 !text-gray-300">Subscribe for grant deadlines, funder insights, and fundraising tips � straight to your inbox.</p>
+                    <div class="flex flex-col space-y-4">
+                        <input type="email" placeholder="Your email address" class="p-4 text-sm rounded-xl bg-gray-900 border border-gray-800 focus:ring-1 focus:ring-accent-light focus:outline-none text-white" />
+                        <button class="bg-gold-gradient text-black font-bold py-3 rounded-xl transition hover:opacity-90">Subscribe</button>
+                    </div>
+                </div>
+            </div>
+            <div class="py-10 text-center text-gray-500 text-sm">� 2026 FundRise. All rights reserved. � Empowering Nonprofits, One Grant at a Time.</div>
+        </div>
+    </footer>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const html = document.documentElement;
+
+        const savedLang = localStorage.getItem('language') || 'en';
+        html.setAttribute('dir', savedLang === 'ar' ? 'rtl' : 'ltr');
+
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        applyTheme(savedTheme);
+
+        const themeToggles = [
+            document.getElementById('theme-toggle'),
+            document.getElementById('mobile-theme-toggle'),
+            document.getElementById('drawer-theme-toggle')
+        ].filter(Boolean);
+
+        function applyTheme(theme) {
+            html.setAttribute('data-theme', theme);
+            document.querySelectorAll('.light-icon').forEach(i => i.classList.toggle('hidden', theme === 'dark'));
+            document.querySelectorAll('.dark-icon').forEach(i => i.classList.toggle('hidden', theme === 'light'));
+        }
+
+        themeToggles.forEach(btn => { if (btn) btn.addEventListener('click', () => {
+            const next = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+            localStorage.setItem('theme', next);
+            applyTheme(next); }); });
+
+        const menuDrawer = document.getElementById('mobile-menu-drawer');
+        const menuContent = document.getElementById('drawer-content');
+        const menuBackdrop = document.getElementById('drawer-backdrop');
+
+        const openDrawer = () => {
+            menuDrawer.classList.remove('pointer-events-none');
+            menuContent.classList.remove('translate-y-[-100%]');
+            menuBackdrop.classList.add('opacity-50', 'pointer-events-auto');
+            document.body.style.overflow = 'hidden';
+        };
+
+        const closeDrawer = () => {
+            menuContent.classList.add('translate-y-[-100%]');
+            menuBackdrop.classList.remove('opacity-50', 'pointer-events-auto');
+            setTimeout(() => {
+                menuDrawer.classList.add('pointer-events-none');
+                document.body.style.overflow = '';
+            }, 300);
+        };
+
+        document.getElementById('mobile-menu-open')?.addEventListener('click', openDrawer);
+        document.getElementById('mobile-menu-close')?.addEventListener('click', closeDrawer);
+        menuBackdrop?.addEventListener('click', closeDrawer);
+
+        const setupAccordion = (toggleId, menuId, iconId) => {
+            const toggle = document.getElementById(toggleId);
+            toggle?.addEventListener('click', () => {
+                document.getElementById(menuId)?.classList.toggle('hidden');
+                document.getElementById(iconId)?.classList.toggle('rotate-180');
+            });
+        };
+
+        setupAccordion('mobile-homes-toggle', 'mobile-homes-menu', 'homes-icon');
+        setupAccordion('mobile-dashboard-toggle', 'mobile-dashboard-menu', 'dashboard-icon');
+
+        const toggleRTL = () => {
+            const current = localStorage.getItem('language') === 'ar' ? 'en' : 'ar';
+            localStorage.setItem('language', current);
+            html.setAttribute('dir', current === 'ar' ? 'rtl' : 'ltr');
+        };
+
+        document.getElementById('lang-icon')?.addEventListener('click', toggleRTL);
+        document.getElementById('mobile-lang-icon-drawer')?.addEventListener('click', toggleRTL);
+
+        // ===== FAQ ACCORDION =====
+        const faqItems = document.querySelectorAll('.faq-item');
+        faqItems.forEach(item => {
+            const trigger = item.querySelector('.faq-trigger');
+            const panel = item.querySelector('.faq-panel');
+            trigger?.addEventListener('click', () => {
+                const isOpen = item.classList.contains('open');
+                // Close all
+                faqItems.forEach(other => {
+                    other.classList.remove('open');
+                    const p = other.querySelector('.faq-panel');
+                    const t = other.querySelector('.faq-trigger');
+                    if (p) p.style.maxHeight = '0px';
+                    if (t) t.setAttribute('aria-expanded', 'false');
+                });
+                // Open this one if it was closed
+                if (!isOpen) {
+                    item.classList.add('open');
+                    panel.style.maxHeight = panel.scrollHeight + 'px';
+                    trigger.setAttribute('aria-expanded', 'true');
+                }
+            });
+        });
+
+        // Recalculate open FAQ panel height on resize
+        window.addEventListener('resize', () => {
+            const openItem = document.querySelector('.faq-item.open');
+            if (openItem) {
+                const panel = openItem.querySelector('.faq-panel');
+                if (panel) panel.style.maxHeight = panel.scrollHeight + 'px';
+            }
+        });
+
+        // Smooth scroll for anchor links with sticky header offset
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const targetId = this.getAttribute('href');
+                if (targetId.length > 1) {
+                    const targetEl = document.querySelector(targetId);
+                    if (targetEl) {
+                        e.preventDefault();
+                        const headerOffset = 90;
+                        const elementPosition = targetEl.getBoundingClientRect().top + window.pageYOffset;
+                        const offsetPosition = elementPosition - headerOffset;
+                        window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+                    }
+                }
+            });
+        });
+    });
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
