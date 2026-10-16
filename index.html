@@ -5,41 +5,70 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <title>FundRise - Nonprofit Grant Writing &amp; Fundraising Consultancy </title>
+    <title>FundRise - Nonprofit Grant Writing &amp; Fundraising Consultancy</title>
 
-    
-<script src="tailwind.js"></script>
+    <!-- Tailwind CSS Runtime -->
+    <script src="tailwind.js"></script>
+    <script>
+        tailwind.config = {
+            darkMode: ['class', '[data-theme="dark"]'],
+            theme: {
+                extend: {
+                    colors: {
+                        accent: '#0F5C4E',
+                        'accent-dark': '#0A4A3E',
+                        'accent-light': '#D4A22E',
+                        'accent-lighter': '#F0C95A',
+                        'primary-text': '#0F2E2A',
+                        'secondary-text': '#475569',
+                        border: '#E2EBE8',
+                        hover: '#F0F7F4',
+                    },
+                    fontFamily: {
+                        serif: ['ui-serif', 'Georgia', 'Cambria', '"Times New Roman"', 'Times', 'serif'],
+                        sans: ['ui-sans-serif', 'system-ui', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', '"Helvetica Neue"', 'Arial', 'sans-serif'],
+                    }
+                }
+            }
+        };
+    </script>
+
     <style>
-        /* - FundRise Emerald & Gold Palette - */
+        /* --- FundRise Modern Accessible Theme --- */
         :root, html[data-theme='light'] {
             --color-background: #FFFFFF;
+            --color-card-bg: #FFFFFF;
             --color-primary-text: #0F2E2A;
-            --color-secondary-text: #4B6560;
+            --color-secondary-text: #475569;
             --color-accent: #0F5C4E;
             --color-accent-light: #D4A22E;
+            --color-accent-lighter: #F0C95A;
             --color-border: #E2EBE8;
-            --color-hover: #F0F7F4;
-            --color-footer-bg: #0A2E28;
+            --color-hover: #F8FAF9;
+            --color-footer-bg: #071F1B;
             --color-footer-text: #E8F1EE;
         }
         html[data-theme='dark'] {
             --color-background: #08150F;
+            --color-card-bg: #0E231C;
             --color-primary-text: #F0F7F4;
-            --color-secondary-text: #A8C0B8;
+            --color-secondary-text: #94A3B8;
             --color-accent: #1A7A67;
             --color-accent-light: #E0B848;
+            --color-accent-lighter: #F0C95A;
             --color-border: #143026;
-            --color-hover: #0E231C;
-            --color-footer-bg: #000000;
+            --color-hover: #0B1E17;
+            --color-footer-bg: #030B08;
             --color-footer-text: #F0F7F4;
         }
 
         body {
             background-color: var(--color-background);
             color: var(--color-primary-text);
-            font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
-            transition: background-color 0.3s, color 0.3s;
+            font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            transition: background-color 0.3s ease, color 0.3s ease;
             overflow-x: hidden;
+            line-height: 1.6;
         }
 
         .text-primary-text { color: var(--color-primary-text); }
@@ -53,68 +82,121 @@
         .bg-emerald-gradient { background: linear-gradient(135deg, #0F5C4E 0%, #1A7A67 100%); }
         .bg-gold-gradient { background: linear-gradient(135deg, #D4A22E 0%, #F0C95A 100%); }
 
-        #main-footer { background-color: var(--color-footer-bg); color: var(--color-footer-text); }
-        #main-footer .footer-heading { color: var(--color-accent-light) !important; }
-        #main-footer .footer-link:hover { color: var(--color-accent-light); padding-left: 4px; }
-
-        .nav-link { position: relative; transition: color 0.3s; padding-top: 0.25rem; padding-bottom: 0.25rem; }
+        /* Navigation */
+        .nav-link { position: relative; transition: color 0.25s ease; padding: 0.25rem 0; }
         .nav-link::after {
-            content: ''; position: absolute; left: 0; right: 0; bottom: 0;
+            content: ''; position: absolute; left: 0; right: 0; bottom: -2px;
             height: 2px; background-color: var(--color-accent-light);
-            transform: scaleX(0); transition: transform 0.3s;
+            transform: scaleX(0); transition: transform 0.25s ease;
         }
         .nav-link:hover::after, .nav-link.active::after { transform: scaleX(1); }
         .nav-link.active, .nav-link:hover { color: var(--color-accent-light) !important; }
 
         .dropdown-wrapper { position: relative; }
-        .dropdown-wrapper::before {
-            content: ''; position: absolute; left: 0; right: 0; height: 20px;
-            bottom: 100%; z-index: 100; background: transparent;
-        }
         .dropdown-menu {
-            position: absolute; top: calc(100% + 5px); left: 0;
+            position: absolute; top: calc(100% + 8px); left: 0;
             background-color: var(--color-background); border: 1px solid var(--color-border);
-            border-radius: 0.5rem; box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-            min-width: 220px; z-index: 1000; opacity: 0; visibility: hidden;
-            transform: translateY(-10px); transition: all 0.3s ease;
+            border-radius: 0.75rem; box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+            min-width: 210px; z-index: 1000; opacity: 0; visibility: hidden;
+            transform: translateY(-8px); transition: all 0.25s ease;
         }
         .dropdown-wrapper:hover .dropdown-menu { opacity: 1; visibility: visible; transform: translateY(0); display: block; }
         .dropdown-menu a {
-            display: block; padding: 0.75rem 1rem; color: var(--color-primary-text);
+            display: block; padding: 0.75rem 1.25rem; color: var(--color-primary-text);
             text-decoration: none; font-size: 0.875rem; transition: all 0.2s ease;
             border-bottom: 1px solid var(--color-border);
         }
         .dropdown-menu a:last-child { border-bottom: none; }
-        .dropdown-menu a:hover { background-color: var(--color-hover); color: var(--color-accent-light); padding-left: 1.25rem; }
+        .dropdown-menu a:hover { background-color: var(--color-hover); color: var(--color-accent-light); padding-left: 1.5rem; }
 
-        .book-btn { background-color: var(--color-accent); color: white; transition: all 0.3s ease; }
-        html[data-theme='dark'] .book-btn { background-color: var(--color-accent-light); color: #08150F; }
-        .book-btn:hover { opacity: 0.9; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(15, 92, 78, 0.3); }
-
-        @media (max-width: 1024px) {
-            .dropdown-menu { position: static; display: none; opacity: 1; visibility: visible; transform: none; box-shadow: none; }
-            .dropdown-wrapper:hover .dropdown-menu { display: block; }
+        .book-btn {
+            background-color: var(--color-accent);
+            color: #FFFFFF !important;
+            transition: all 0.25s ease;
+        }
+        .book-btn:hover {
+            opacity: 0.92;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 14px rgba(15, 92, 78, 0.35);
         }
 
-        /* Dark mode overrides */
-        html[data-theme='dark'] .bg-white,
-        html[data-theme='dark'] section.bg-white { background-color: var(--color-background) !important; }
-        html[data-theme='dark'] .bg-\[\#F0F7F4\],
-        html[data-theme='dark'] section.bg-\[\#F0F7F4\] { background-color: var(--color-hover) !important; }
-        html[data-theme='dark'] .text-\[\#0F5C4E\],
-        html[data-theme='dark'] h2.text-\[\#0F5C4E\],
-        html[data-theme='dark'] h3.text-\[\#0F5C4E\] { color: var(--color-primary-text) !important; }
-        html[data-theme='dark'] .text-accent { color: var(--color-accent-light) !important; }
-        html[data-theme='dark'] .text-gray-600,
-        html[data-theme='dark'] .text-gray-500,
-        html[data-theme='dark'] .text-gray-400 { color: var(--color-secondary-text) !important; }
-        html[data-theme='dark'] .border-gray-100,
-        html[data-theme='dark'] .border-gray-200 { border-color: var(--color-border) !important; }
-        html[data-theme='dark'] .bg-white.rounded-2xl,
-        html[data-theme='dark'] .bg-white.rounded-3xl,
-        html[data-theme='dark'] .bg-white.p-8 { background-color: var(--color-hover) !important; }
+        /* High-Conversion CTA Buttons with Bulletproof Hover States */
+        .cta-btn-primary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.625rem;
+            padding: 1rem 2.25rem;
+            background-color: #0F5C4E;
+            color: #FFFFFF !important;
+            font-weight: 700;
+            font-size: 1rem;
+            border-radius: 9999px;
+            border: 2px solid #0F5C4E;
+            box-shadow: 0 10px 25px -5px rgba(15, 92, 78, 0.45);
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .cta-btn-primary:hover {
+            background-color: #147A67;
+            border-color: #D4A22E;
+            color: #FFFFFF !important;
+            transform: translateY(-2px);
+            box-shadow: 0 16px 32px -4px rgba(15, 92, 78, 0.5), 0 0 14px rgba(212, 162, 46, 0.4);
+        }
+        .cta-btn-primary:active {
+            transform: translateY(0);
+        }
 
-        /* Hero marquee */
+        .cta-btn-outline {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.625rem;
+            padding: 1rem 2.25rem;
+            background-color: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            color: #FFFFFF !important;
+            font-weight: 700;
+            font-size: 1rem;
+            border-radius: 9999px;
+            border: 2px solid rgba(255, 255, 255, 0.85);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .cta-btn-outline:hover {
+            background-color: #D4A22E;
+            border-color: #D4A22E;
+            color: #0F2E2A !important;
+            transform: translateY(-2px);
+            box-shadow: 0 16px 32px -4px rgba(212, 162, 46, 0.55);
+        }
+        .cta-btn-outline:hover i {
+            color: #0F2E2A !important;
+        }
+        .cta-btn-outline:active {
+            transform: translateY(0);
+        }
+
+        /* Clean Modern Card Architecture (Replaces Neumorphism) */
+        .feature-card {
+            background-color: var(--color-card-bg);
+            border: 1px solid var(--color-border);
+            border-radius: 1rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+        }
+        .feature-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 16px 32px -8px rgba(15, 92, 78, 0.12);
+            border-color: var(--color-accent-light);
+        }
+
+        /* Marquee Animation */
         @keyframes marquee {
             0% { transform: translateX(0); }
             100% { transform: translateX(-50%); }
@@ -122,118 +204,30 @@
         .marquee-track {
             display: flex;
             width: max-content;
-            animation: marquee 32s linear infinite;
+            animation: marquee 35s linear infinite;
         }
         .marquee-track:hover { animation-play-state: paused; }
 
-        /* Italic serif number */
-        .service-number {
-            font-family: Georgia, 'Times New Roman', serif;
-            font-style: italic;
-            font-weight: 700;
-            line-height: 1;
+        /* Accordion */
+        .faq-item {
+            border: 1px solid var(--color-border);
+            background-color: var(--color-card-bg);
+            border-radius: 0.75rem;
+            transition: border-color 0.25s ease;
+        }
+        .faq-item.active {
+            border-color: var(--color-accent);
         }
 
-        /* Floating badge */
-        @keyframes floatBadge {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-        .float-badge { animation: floatBadge 5s ease-in-out infinite; }
-
-        /* Stat counter pulse */
-        @keyframes softPulse {
-            0%, 100% { box-shadow: 0 0 0 0 rgba(212,162,46,0.4); }
-            50% { box-shadow: 0 0 0 10px rgba(212,162,46,0); }
-        }
-        .pulse-ring { animation: softPulse 3s ease-in-out infinite; }
-
-        /* Bento grid tile */
-        .bento-tile {
-            position: relative;
-            overflow: hidden;
-            border-radius: 1.5rem;
-            transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.3s ease;
-        }
-        .bento-tile:hover {
-            transform: translateY(-6px);
-            border-color: var(--color-accent-light);
-            box-shadow: 0 25px 50px -25px rgba(15, 92, 78, 0.4);
-        }
-
-        /* Reveal-style animated underline */
-        .reveal-link {
-            position: relative;
-            display: inline-block;
-        }
-        .reveal-link::after {
-            content: '';
-            position: absolute; left: 0; bottom: -2px;
-            width: 100%; height: 2px;
-            background: var(--color-accent-light);
-            transform: scaleX(0); transform-origin: right;
-            transition: transform 0.35s ease;
-        }
-        .reveal-link:hover::after { transform: scaleX(1); transform-origin: left; }
-
-        /* Comparison slider visual */
-        .compare-bar {
-            position: relative;
-            height: 12px;
-            border-radius: 9999px;
-            background: var(--color-border);
-            overflow: hidden;
-        }
-        .compare-fill-a {
-            position: absolute; top: 0; left: 0; bottom: 0;
-            background: var(--color-accent);
-            border-radius: 9999px;
-        }
-        .compare-fill-b {
-            position: absolute; top: 0; left: 0; bottom: 0;
-            background: var(--color-accent-light);
-            border-radius: 9999px;
-        }
-
-        /* Step connector */
-        .step-line {
-            position: absolute;
-            top: 28px;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, var(--color-accent-light), transparent);
-            z-index: 0;
-        }
-
-        section[id] { scroll-margin-top: 90px; }
-
-        /* Video play badge */
-        .play-badge {
-            width: 72px; height: 72px;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.9);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #0F5C4E;
-            font-size: 1.5rem;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.25);
-            transition: transform 0.3s ease, background 0.3s ease;
-        }
-        .play-badge:hover {
-            transform: scale(1.08);
-            background: #D4A22E;
-            color: #0F2E2A;
-        }
+        section[id] { scroll-margin-top: 80px; }
     </style>
 </head>
 <body class="antialiased flex flex-col min-h-screen">
 
-    <!-- HEADER -->
-    <header class="sticky top-0 z-50 transition-colors duration-300 shadow-xl border-b border-border bg-background" id="main-header">
+    <!-- ============ HEADER ============ -->
+    <header class="sticky top-0 z-50 transition-colors duration-300 shadow-md border-b border-border bg-background" id="main-header">
         <nav class="container mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between h-[68px] relative">
-            <a href="index.html" class="text-2xl font-serif font-semibold tracking-tight flex-shrink-0">
+            <a href="index.html" class="text-2xl font-serif font-semibold tracking-tight flex-shrink-0" aria-label="FundRise Home">
                 <div class="flex items-center gap-2">
                     <svg class="w-8 h-8 text-accent-light" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
@@ -244,16 +238,17 @@
                 </div>
             </a>
 
+            <!-- Desktop Nav -->
             <div class="hidden xl:flex items-center justify-center flex-1 space-x-6 z-10 mx-4">
                 <div class="flex space-x-6 rtl:space-x-reverse rtl:ml-6 text-primary-text font-medium text-sm">
                     <div class="dropdown-wrapper">
-                        <button class="nav-link flex items-center font-bold">
+                        <button class="nav-link flex items-center font-bold text-accent-light" aria-haspopup="true">
                             Home
-                            <svg class="w-3 h-3 ml-1 relative top-[2.5px] transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            <svg class="w-3 h-3 ml-1 relative top-[1px] transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                         </button>
                         <div class="dropdown-menu">
-                            <a href="index.html">Home 1</a>
-                            <a href="home2.html">Home 2</a>
+                            <a href="index.html" class="font-bold text-accent-light">Home 1 (Consultancy)</a>
+                            <a href="home2.html">Home 2 (Growth Platform)</a>
                         </div>
                     </div>
                     <a href="about.html" class="nav-link">About</a>
@@ -266,7 +261,7 @@
                     <div class="dropdown-wrapper">
                         <button class="nav-link flex items-center text-primary-text">
                             Dashboard
-                            <svg class="w-3 h-3 ml-1 relative top-[2.5px] transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            <svg class="w-3 h-3 ml-1 relative top-[1px] transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                         </button>
                         <div class="dropdown-menu">
                             <a href="admin.html">Admin Dashboard</a>
@@ -276,21 +271,22 @@
                 </div>
             </div>
 
+            <!-- Header Controls -->
             <div class="hidden xl:flex items-center space-x-3 rtl:space-x-reverse rtl:mr-4 flex-shrink-0">
-                
-                
-                <button id="theme-toggle" class="text-primary-text hover:text-accent-light p-1.5 rounded-full transition duration-200" title="Toggle Theme">
-                    <svg class="w-6 h-6 light-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
-                    <svg class="w-6 h-6 dark-icon hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
-                </button><button id="lang-icon" class="text-primary-text hover:text-accent-light p-1.5 rounded-full transition duration-200" title="Toggle RTL">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7.5 21 3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5" /></svg>
+                <button id="theme-toggle" class="text-primary-text hover:text-accent-light p-2 rounded-full transition duration-200" title="Toggle Theme" aria-label="Toggle Theme">
+                    <svg class="w-5 h-5 light-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+                    <svg class="w-5 h-5 dark-icon hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
                 </button>
-
-                <a href="login.html" class="ml-2 px-6 py-2 text-sm font-bold book-btn rounded-full shadow-md hover:opacity-90 transition-opacity">Login</a>
+                <button id="lang-icon" class="text-primary-text hover:text-accent-light p-2 rounded-full transition duration-200" title="Toggle RTL" aria-label="Toggle RTL">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7.5 21 3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5" /></svg>
+                </button>
+                <a href="login.html" class="ml-2 px-5 py-2 text-sm font-bold book-btn rounded-full shadow-sm hover:opacity-90 transition-opacity">Login</a>
             </div>
 
-            <div class="xl:hidden flex items-center space-x-3"><button id="mobile-menu-open" class="text-primary-text hover:text-accent-light p-1.5 rounded-full transition duration-200" aria-label="Open menu">
-                    <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" /></svg>
+            <!-- Mobile Hamburger -->
+            <div class="xl:hidden flex items-center space-x-3">
+                <button id="mobile-menu-open" class="text-primary-text hover:text-accent-light p-2 rounded-full transition duration-200" aria-label="Open menu">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" /></svg>
                 </button>
             </div>
         </nav>
@@ -298,578 +294,585 @@
 
     <main class="flex-grow">
 
-        <!-- ============ HERO (Split Layout with Image Right) ============ -->
-        <section class="relative overflow-hidden transition-colors duration-300 min-h-[90vh] flex flex-col items-center justify-center w-full">
-            <div class="absolute inset-0">
-                <img src="assets/images/home2-hero.png"
-                     class="w-full h-full object-cover scale-105"
-                     alt="Nonprofit team collaborating on grant strategy">
-                <div class="absolute inset-0 bg-gradient-to-b from-black/75 via-black/55 to-black/85"></div>
-            </div>
-            <div class="relative z-10 text-center px-6 max-w-5xl mx-auto py-12 lg:py-20">
-                    <!-- Center: Text -->
-                    <div class="flex flex-col items-center">
-                        <div class="inline-flex items-center gap-2 bg-hover border border-border rounded-full px-4 py-1.5 mb-6">
-                            <span class="w-2 h-2 rounded-full bg-accent-light pulse-ring"></span>
-                            <span class="text-xs font-bold uppercase tracking-widest text-accent-light">Trusted by 600+ Nonprofits</span>
-                        </div>
-
-                        <h1 class="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold text-white leading-[1.05] mb-6">
-                            Your Mission
-                            <br>
-                            <span class="italic text-accent-light">Deserves</span>
-                            <br>
-                            <span class="relative inline-block text-white">
-                                Funding
-                                <span class="absolute left-0 -bottom-2 w-full h-[6px] bg-gold-gradient rounded-full opacity-70"></span>
-                            </span>
-                        </h1>
-
-                        <p class="text-gray-300 text-base sm:text-lg lg:text-xl leading-relaxed mb-8 max-w-xl">
-                            We help nonprofits raise more through smarter grant writing, sharper fundraising strategy, and deeper donor research ï¿½ so you can spend less time chasing dollars and more time changing lives.
-                        </p>
-
-                        <div class="flex flex-col sm:flex-row gap-4 justify-center mb-10 w-full">
-                            <a href="contact.html" class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-[#0F5C4E] hover:bg-[#0A4A3E] text-white font-bold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02]">
-                                <i class="fas fa-calendar-check"></i>
-                                Book a Free Consultation
-                            </a>
-                            <a href="case-studies.html" class="inline-flex items-center justify-center gap-2 px-8 py-4 border-2 border-white/80 text-white font-bold rounded-full hover:border-accent-light hover:text-accent-light transition-all duration-300">
-                                <i class="fas fa-trophy"></i>
-                                See Our Results
-                            </a>
-                        </div>
-
-                        <!-- Trust bar -->
-                        <div class="grid grid-cols-3 gap-4 max-w-lg mx-auto w-full">
-                            <div>
-                                <p class="text-2xl sm:text-3xl font-serif font-bold text-accent-light">$250M+</p>
-                                <p class="text-[10px] sm:text-xs text-gray-300 uppercase tracking-wider mt-1">Grants Secured</p>
-                            </div>
-                            <div>
-                                <p class="text-2xl sm:text-3xl font-serif font-bold text-accent-light">92%</p>
-                                <p class="text-[10px] sm:text-xs text-gray-300 uppercase tracking-wider mt-1">Win Rate</p>
-                            </div>
-                            <div>
-                                <p class="text-2xl sm:text-3xl font-serif font-bold text-accent-light">12+</p>
-                                <p class="text-[10px] sm:text-xs text-gray-300 uppercase tracking-wider mt-1">Years Experience</p>
-                            </div>
-                        </div>
-                    </div>
-            </div>
-        </section>
-
-        <!-- Marquee Logo Strip -->
-            <div class="border-y border-border bg-hover py-6 overflow-hidden">
-                <div class="marquee-track">
-                    <div class="flex items-center gap-12 sm:gap-16 px-6 sm:px-8">
-                        <span class="text-sm sm:text-base font-serif font-bold text-secondary-text whitespace-nowrap">HealthForward Alliance</span>
-                        <span class="text-sm sm:text-base font-serif font-bold text-secondary-text whitespace-nowrap">BrightPath Learning</span>
-                        <span class="text-sm sm:text-base font-serif font-bold text-secondary-text whitespace-nowrap">GreenRoots</span>
-                        <span class="text-sm sm:text-base font-serif font-bold text-secondary-text whitespace-nowrap">Riverside Arts</span>
-                        <span class="text-sm sm:text-base font-serif font-bold text-secondary-text whitespace-nowrap">Harbor House</span>
-                        <span class="text-sm sm:text-base font-serif font-bold text-secondary-text whitespace-nowrap">YouthForward</span>
-                        <span class="text-sm sm:text-base font-serif font-bold text-secondary-text whitespace-nowrap">CareBridge Clinics</span>
-                        <span class="text-sm sm:text-base font-serif font-bold text-secondary-text whitespace-nowrap">PawsRescue</span>
-                    </div>
-                    <div class="flex items-center gap-12 sm:gap-16 px-6 sm:px-8" aria-hidden="true">
-                        <span class="text-sm sm:text-base font-serif font-bold text-secondary-text whitespace-nowrap">HealthForward Alliance</span>
-                        <span class="text-sm sm:text-base font-serif font-bold text-secondary-text whitespace-nowrap">BrightPath Learning</span>
-                        <span class="text-sm sm:text-base font-serif font-bold text-secondary-text whitespace-nowrap">GreenRoots</span>
-                        <span class="text-sm sm:text-base font-serif font-bold text-secondary-text whitespace-nowrap">Riverside Arts</span>
-                        <span class="text-sm sm:text-base font-serif font-bold text-secondary-text whitespace-nowrap">Harbor House</span>
-                        <span class="text-sm sm:text-base font-serif font-bold text-secondary-text whitespace-nowrap">YouthForward</span>
-                        <span class="text-sm sm:text-base font-serif font-bold text-secondary-text whitespace-nowrap">CareBridge Clinics</span>
-                        <span class="text-sm sm:text-base font-serif font-bold text-secondary-text whitespace-nowrap">PawsRescue</span>
-                    </div>
-                </div>
+        <!-- ============ 1. HERO SECTION (Clean, Authoritative Editorial Flagship) ============ -->
+        <section class="relative overflow-hidden min-h-[88vh] flex flex-col items-center justify-center w-full py-16 sm:py-20 lg:py-24">
+            <!-- Background Photography with Rich Gradient Overlay -->
+            <div class="absolute inset-0 z-0">
+                <img src="assets/images/hero.jpg"
+                     class="w-full h-full object-cover object-center"
+                     alt="Nonprofit leadership team discussing grant strategy">
+                <div class="absolute inset-0 bg-gradient-to-r from-[#071F1B]/95 via-[#0A2E28]/90 to-[#0F2E2A]/92"></div>
             </div>
 
-
-        <!-- ============ THE PROBLEM (Dark Band) ============ -->
-        <section class="py-16 sm:py-24 bg-[#0A2E28] text-white relative overflow-hidden">
-            <div class="absolute inset-0 opacity-15" style="background-image: radial-gradient(circle, #D4A22E 1px, transparent 1px); background-size: 32px 32px;"></div>
-            <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
-                    <div>
-                        <span class="text-[#D4A22E] font-bold tracking-widest uppercase text-sm">The Reality</span>
-                        <h2 class="font-serif text-3xl sm:text-4xl md:text-5xl font-semibold mt-4 mb-6 leading-tight">
-                            Nonprofits leave <span class="text-[#D4A22E] italic">$100B+</span> on the table every year.
-                        </h2>
-                        <p class="text-white/75 text-base sm:text-lg leading-relaxed mb-6">
-                            The funding exists. The problem is access ï¿½ finding the right funders, telling the right story, and submitting at the right time. Most nonprofits simply don't have the bandwidth.
-                        </p>
-                        <p class="text-white/75 text-base sm:text-lg leading-relaxed">
-                            That's where FundRise comes in. We plug into your team, take ownership of the pipeline, and turn your mission into funded programs.
-                        </p>
+            <div class="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
+                <div class="flex flex-col items-center">
+                    
+                    <!-- Eyebrow Pill -->
+                    <div class="inline-flex items-center gap-2 bg-white/10 border border-white/20 backdrop-blur-md rounded-full px-4 py-1.5 mb-6 text-white text-xs sm:text-sm font-semibold tracking-wide">
+                        <span class="w-2 h-2 rounded-full bg-[#D4A22E]"></span>
+                        <span>Trusted by 600+ Nonprofits Nationwide • Over $250M Secured</span>
                     </div>
 
-                    <div class="grid grid-cols-2 gap-4 sm:gap-6">
-                        <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-5 sm:p-6">
-                            <p class="text-3xl sm:text-4xl font-serif font-bold text-[#D4A22E] mb-2">65%</p>
-                            <p class="text-xs sm:text-sm text-white/70 leading-relaxed">of nonprofits write fewer than 5 grants per year</p>
-                        </div>
-                        <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-5 sm:p-6">
-                            <p class="text-3xl sm:text-4xl font-serif font-bold text-[#D4A22E] mb-2">48%</p>
-                            <p class="text-xs sm:text-sm text-white/70 leading-relaxed">of proposals are declined on fit, not quality</p>
-                        </div>
-                        <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-5 sm:p-6">
-                            <p class="text-3xl sm:text-4xl font-serif font-bold text-[#D4A22E] mb-2">3x</p>
-                            <p class="text-xs sm:text-sm text-white/70 leading-relaxed">more proposals submitted by orgs with dedicated support</p>
-                        </div>
-                        <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-5 sm:p-6">
-                            <p class="text-3xl sm:text-4xl font-serif font-bold text-[#D4A22E] mb-2">+42%</p>
-                            <p class="text-xs sm:text-sm text-white/70 leading-relaxed">average donor retention lift after strategy work</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+                    <!-- Main Headline -->
+                    <h1 class="font-serif text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold text-white leading-[1.12] mb-6 tracking-tight">
+                        Empowering Nonprofits to Win
+                        <span class="text-[#D4A22E] italic">High-Impact Grants</span>
+                        &amp; Fuel Their Mission
+                    </h1>
 
-        <!-- ============ BENTO SERVICES GRID ============ -->
-        <section class="py-20 sm:py-24 bg-background transition-colors duration-300">
-            <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-
-                <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-12 sm:mb-16">
-                    <div class="max-w-2xl">
-                        <span class="text-accent-light font-bold tracking-widest uppercase text-sm">What We Do</span>
-                        <h2 class="font-serif text-3xl sm:text-4xl md:text-5xl font-semibold text-primary-text mt-4 leading-tight">
-                            A full-service fundraising partner, built around <span class="italic text-accent">your mission</span>.
-                        </h2>
-                    </div>
-                    <a href="services.html" class="reveal-link text-accent-light font-bold text-sm sm:text-base whitespace-nowrap">
-                        View All Services ?
-                    </a>
-                </div>
-
-                <!-- Bento Grid -->
-                <div class="grid grid-cols-1 md:grid-cols-6 gap-5 sm:gap-6">
-
-                    <!-- Large tile 1 (spans 3 cols) -->
-                    <div class="bento-tile md:col-span-3 border border-border bg-hover p-6 sm:p-8 h-full flex flex-col">
-                        <div class="flex items-center gap-3 mb-5">
-                            <div class="w-12 h-12 rounded-xl bg-emerald-gradient flex items-center justify-center text-white">
-                                <i class="fas fa-pen-fancy text-lg"></i>
-                            </div>
-                            <span class="text-[10px] uppercase tracking-widest font-bold text-accent-light">Grant Writing</span>
-                        </div>
-                        <h3 class="font-serif text-2xl sm:text-3xl font-medium text-primary-text mb-3">From LOI to Award</h3>
-                        <p class="text-secondary-text text-sm sm:text-base leading-relaxed mb-5">
-                            Full-cycle proposal development ï¿½ prospect research, narrative writing, budget preparation, and post-award reporting. Every proposal is custom-built.
-                        </p>
-
-                        <div class="bg-background/80 rounded-xl p-4 mb-4 border border-border">
-                            <h4 class="text-[10px] uppercase tracking-widest font-bold text-primary-text mb-2">Key Deliverables</h4>
-                            <ul class="text-sm text-secondary-text space-y-2">
-                                <li class="flex items-start"><i class="fas fa-angle-right text-accent-light mt-1 mr-2 text-xs"></i> Comprehensive Needs Assessment</li>
-                                <li class="flex items-start"><i class="fas fa-angle-right text-accent-light mt-1 mr-2 text-xs"></i> Detailed Budget & Justifications</li>
-                                <li class="flex items-start"><i class="fas fa-angle-right text-accent-light mt-1 mr-2 text-xs"></i> Strategic Evaluation Plans</li>
-                            </ul>
-                        </div>
-                        <div class="flex flex-wrap items-center gap-4 text-xs text-secondary-text mt-auto">
-                            <span><i class="fas fa-check-circle text-accent-light mr-1"></i>Federal</span>
-                            <span><i class="fas fa-check-circle text-accent-light mr-1"></i>Foundation</span>
-                            <span><i class="fas fa-check-circle text-accent-light mr-1"></i>Corporate</span>
-                        </div>
-                    </div>
-
-                    <!-- Small tile (spans 3 cols) with image -->
-                    <div class="bento-tile md:col-span-3 border border-border bg-hover overflow-hidden">
-                        <img src="assets/images/h2.jpg"
-                             alt="Fundraising strategy session"
-                             class="w-full h-48 sm:h-52 object-cover">
-                        <div class="p-6 sm:p-7">
-                            <div class="flex items-center gap-3 mb-3">
-                                <div class="w-10 h-10 rounded-xl bg-gold-gradient flex items-center justify-center text-[#0F2E2A]">
-                                    <i class="fas fa-chart-pie text-sm"></i>
-                                </div>
-                                <span class="text-[10px] uppercase tracking-widest font-bold text-accent-light">Fundraising Strategy</span>
-                            </div>
-                            <h3 class="font-serif text-xl sm:text-2xl font-medium text-primary-text mb-2">Diversify Revenue</h3>
-                            <p class="text-secondary-text text-sm leading-relaxed">
-                                Grants + individual giving + major gifts + corporate partnerships. One plan, many streams.
-                            </p>
-                        </div>
-                    </div>
-
-                    <!-- Small tile 3 (spans 2 cols) -->
-                    <div class="bento-tile md:col-span-2 border border-border bg-emerald-gradient text-white p-6 sm:p-7 flex flex-col">
-                        <div class="w-12 h-12 rounded-xl bg-white/15 backdrop-blur-sm flex items-center justify-center text-[#D4A22E] mb-5">
-                            <i class="fas fa-magnifying-glass-dollar text-lg"></i>
-                        </div>
-                        <h3 class="font-serif text-xl sm:text-2xl font-medium mb-3 min-h-[3.5rem] md:min-h-[4rem]">Donor Research</h3>
-                        <p class="text-white/75 text-sm leading-relaxed mb-5">
-                            Scored, prioritized prospect lists with capacity, affinity, and connection paths.
-                        </p>
-                        <div class="mt-auto">
-                            <p class="text-2xl font-serif font-bold text-[#D4A22E]">12K+</p>
-                            <p class="text-[10px] uppercase tracking-widest text-white/60 mt-1">Profiles built</p>
-                        </div>
-                    </div>
-
-                    <!-- Small tile 4 (spans 2 cols) -->
-                    <div class="bento-tile md:col-span-2 border border-border bg-hover p-6 sm:p-7 flex flex-col">
-                        <div class="w-12 h-12 rounded-xl bg-gold-gradient flex items-center justify-center text-[#0F2E2A] mb-5">
-                            <i class="fas fa-clipboard-check text-lg"></i>
-                        </div>
-                        <h3 class="font-serif text-xl sm:text-2xl font-medium text-primary-text mb-3 min-h-[3.5rem] md:min-h-[4rem]">Proposal Review</h3>
-                        <p class="text-secondary-text text-sm leading-relaxed mb-5">
-                            A reviewer's eye before the reviewer sees it. Rubric scoring, gap analysis, and line edits.
-                        </p>
-                        <div class="mt-auto">
-                            <p class="text-2xl font-serif font-bold text-accent-light">92%</p>
-                            <p class="text-[10px] uppercase tracking-widest text-secondary-text mt-1">Post-review win rate</p>
-                        </div>
-                    </div>
-
-                    <!-- Small tile 5 (spans 2 cols) -->
-                    <div class="bento-tile md:col-span-2 border border-border bg-hover p-6 sm:p-7 flex flex-col">
-                        <div class="w-12 h-12 rounded-xl bg-emerald-gradient flex items-center justify-center text-white mb-5">
-                            <i class="fas fa-comments text-lg"></i>
-                        </div>
-                        <h3 class="font-serif text-xl sm:text-2xl font-medium text-primary-text mb-3 min-h-[3.5rem] md:min-h-[4rem]">Consultation</h3>
-                        <p class="text-secondary-text text-sm leading-relaxed mb-5">
-                            Free 30-minute strategy call. No pitch, no pressure ï¿½ just clear next steps.
-                        </p>
-                        <div class="mt-auto">
-                            <a href="contact.html" class="reveal-link text-accent-light text-xs font-bold">
-                                Book a Call ?
-                            </a>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </section>
-
-        <!-- ============ PROCESS AS VERTICAL TABS ============ -->
-        <section class="py-20 sm:py-24 bg-hover transition-colors duration-300">
-            <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                <div class="text-center mb-12 sm:mb-16">
-                    <span class="text-accent-light font-bold tracking-widest uppercase text-sm">How We Work</span>
-                    <h2 class="font-serif text-3xl sm:text-4xl md:text-5xl font-semibold text-primary-text mt-4 mb-4">
-                        A process, not a promise.
-                    </h2>
-                    <p class="text-secondary-text max-w-2xl mx-auto text-base sm:text-lg">
-                        Four disciplined phases that consistently move the needle ï¿½ from research to reporting.
+                    <!-- Clear Subtitle -->
+                    <p class="text-gray-200 text-base sm:text-lg lg:text-xl leading-relaxed mb-10 max-w-2xl font-normal">
+                        FundRise is the premier grant writing and fundraising consultancy. We architect winning proposals, uncover high-match funders, and build diversified revenue systems for ambitious organizations.
                     </p>
-                </div>
 
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
-
-                    <!-- Left: Vertical tabs -->
-                    <div class="space-y-3" role="tablist">
-                        <button class="process-tab w-full text-left p-4 sm:p-5 rounded-2xl border-2 border-accent-light bg-background transition-all duration-300" data-step="1">
-                            <div class="flex items-center gap-4">
-                                <span class="service-number text-4xl text-accent-light/60 w-12 flex-shrink-0">01</span>
-                                <div class="min-w-0">
-                                    <p class="font-serif text-lg sm:text-xl font-medium text-primary-text">Discover &amp; Research</p>
-                                    <p class="text-xs text-secondary-text mt-0.5">Mission, capacity, and funder fit</p>
-                                </div>
-                                <i class="fas fa-chevron-right text-accent-light ml-auto flex-shrink-0 transition-transform"></i>
-                            </div>
-                        </button>
-
-                        <button class="process-tab w-full text-left p-4 sm:p-5 rounded-2xl border-2 border-border bg-background hover:border-accent-light transition-all duration-300" data-step="2">
-                            <div class="flex items-center gap-4">
-                                <span class="service-number text-4xl text-accent-light/60 w-12 flex-shrink-0">02</span>
-                                <div class="min-w-0">
-                                    <p class="font-serif text-lg sm:text-xl font-medium text-primary-text">Build the Case</p>
-                                    <p class="text-xs text-secondary-text mt-0.5">Story, data, and outcome framework</p>
-                                </div>
-                                <i class="fas fa-chevron-right text-secondary-text ml-auto flex-shrink-0 transition-transform"></i>
-                            </div>
-                        </button>
-
-                        <button class="process-tab w-full text-left p-4 sm:p-5 rounded-2xl border-2 border-border bg-background hover:border-accent-light transition-all duration-300" data-step="3">
-                            <div class="flex items-center gap-4">
-                                <span class="service-number text-4xl text-accent-light/60 w-12 flex-shrink-0">03</span>
-                                <div class="min-w-0">
-                                    <p class="font-serif text-lg sm:text-xl font-medium text-primary-text">Write &amp; Submit</p>
-                                    <p class="text-xs text-secondary-text mt-0.5">Tailored proposals, budgets, and portals</p>
-                                </div>
-                                <i class="fas fa-chevron-right text-secondary-text ml-auto flex-shrink-0 transition-transform"></i>
-                            </div>
-                        </button>
-
-                        <button class="process-tab w-full text-left p-4 sm:p-5 rounded-2xl border-2 border-border bg-background hover:border-accent-light transition-all duration-300" data-step="4">
-                            <div class="flex items-center gap-4">
-                                <span class="service-number text-4xl text-accent-light/60 w-12 flex-shrink-0">04</span>
-                                <div class="min-w-0">
-                                    <p class="font-serif text-lg sm:text-xl font-medium text-primary-text">Report &amp; Renew</p>
-                                    <p class="text-xs text-secondary-text mt-0.5">Stewardship, impact reports, renewals</p>
-                                </div>
-                                <i class="fas fa-chevron-right text-secondary-text ml-auto flex-shrink-0 transition-transform"></i>
-                            </div>
-                        </button>
-                    </div>
-
-                    <!-- Right: Content panel -->
-                    <div class="bg-background border border-border rounded-3xl p-6 sm:p-10 shadow-lg min-h-[400px] relative overflow-hidden">
-                        <div class="process-panel" data-panel="1">
-                            <span class="text-[10px] uppercase tracking-widest font-bold text-accent-light">Phase 01</span>
-                            <h3 class="font-serif text-2xl sm:text-3xl font-medium text-primary-text mt-2 mb-4">Discover &amp; Research</h3>
-                            <p class="text-secondary-text text-sm sm:text-base leading-relaxed mb-6">
-                                We start by understanding what makes your organization unique ï¿½ your programs, your data, your capacity, and the funders whose priorities actually align with your work.
-                            </p>
-                            <ul class="space-y-3 mb-6">
-                                <li class="flex items-start gap-3 text-sm text-secondary-text"><i class="fas fa-check-circle text-accent-light mt-1"></i>Organizational readiness assessment</li>
-                                <li class="flex items-start gap-3 text-sm text-secondary-text"><i class="fas fa-check-circle text-accent-light mt-1"></i>Funder prospect research &amp; scoring</li>
-                                <li class="flex items-start gap-3 text-sm text-secondary-text"><i class="fas fa-check-circle text-accent-light mt-1"></i>12-month grants calendar</li>
-                            </ul>
-                            <p class="text-xs uppercase tracking-widest font-bold text-accent-light">Deliverable</p>
-                            <p class="text-sm text-primary-text font-medium">Prioritized funder list + submission timeline</p>
-                        </div>
-
-                        <div class="process-panel hidden" data-panel="2">
-                            <span class="text-[10px] uppercase tracking-widest font-bold text-accent-light">Phase 02</span>
-                            <h3 class="font-serif text-2xl sm:text-3xl font-medium text-primary-text mt-2 mb-4">Build the Case</h3>
-                            <p class="text-secondary-text text-sm sm:text-base leading-relaxed mb-6">
-                                Funders don't fund need ï¿½ they fund outcomes. We help you translate your mission into measurable impact, told through story and supported by data.
-                            </p>
-                            <ul class="space-y-3 mb-6">
-                                <li class="flex items-start gap-3 text-sm text-secondary-text"><i class="fas fa-check-circle text-accent-light mt-1"></i>Case for support narrative</li>
-                                <li class="flex items-start gap-3 text-sm text-secondary-text"><i class="fas fa-check-circle text-accent-light mt-1"></i>Logic model &amp; outcomes framework</li>
-                                <li class="flex items-start gap-3 text-sm text-secondary-text"><i class="fas fa-check-circle text-accent-light mt-1"></i>Evaluation &amp; measurement plan</li>
-                            </ul>
-                            <p class="text-xs uppercase tracking-widest font-bold text-accent-light">Deliverable</p>
-                            <p class="text-sm text-primary-text font-medium">Case for support + logic model + evaluation plan</p>
-                        </div>
-
-                        <div class="process-panel hidden" data-panel="3">
-                            <span class="text-[10px] uppercase tracking-widest font-bold text-accent-light">Phase 03</span>
-                            <h3 class="font-serif text-2xl sm:text-3xl font-medium text-primary-text mt-2 mb-4">Write &amp; Submit</h3>
-                            <p class="text-secondary-text text-sm sm:text-base leading-relaxed mb-6">
-                                This is where we earn our keep. Every proposal is written from scratch ï¿½ tailored to the funder's language, scoring rubric, and priorities. No templates, no recycled content.
-                            </p>
-                            <ul class="space-y-3 mb-6">
-                                <li class="flex items-start gap-3 text-sm text-secondary-text"><i class="fas fa-check-circle text-accent-light mt-1"></i>Narrative &amp; proposal development</li>
-                                <li class="flex items-start gap-3 text-sm text-secondary-text"><i class="fas fa-check-circle text-accent-light mt-1"></i>Budget narratives &amp; financials</li>
-                                <li class="flex items-start gap-3 text-sm text-secondary-text"><i class="fas fa-check-circle text-accent-light mt-1"></i>Attachment prep &amp; portal submission</li>
-                            </ul>
-                            <p class="text-xs uppercase tracking-widest font-bold text-accent-light">Deliverable</p>
-                            <p class="text-sm text-primary-text font-medium">Submitted proposal + confirmation tracking</p>
-                        </div>
-
-                        <div class="process-panel hidden" data-panel="4">
-                            <span class="text-[10px] uppercase tracking-widest font-bold text-accent-light">Phase 04</span>
-                            <h3 class="font-serif text-2xl sm:text-3xl font-medium text-primary-text mt-2 mb-4">Report &amp; Renew</h3>
-                            <p class="text-secondary-text text-sm sm:text-base leading-relaxed mb-6">
-                                Winning the grant is only half the battle. We help you report on outcomes, steward the relationship, and build a renewal strategy that keeps the funding flowing.
-                            </p>
-                            <ul class="space-y-3 mb-6">
-                                <li class="flex items-start gap-3 text-sm text-secondary-text"><i class="fas fa-check-circle text-accent-light mt-1"></i>Impact &amp; progress reports</li>
-                                <li class="flex items-start gap-3 text-sm text-secondary-text"><i class="fas fa-check-circle text-accent-light mt-1"></i>Funder stewardship &amp; communications</li>
-                                <li class="flex items-start gap-3 text-sm text-secondary-text"><i class="fas fa-check-circle text-accent-light mt-1"></i>Renewal &amp; expansion strategy</li>
-                            </ul>
-                            <p class="text-xs uppercase tracking-widest font-bold text-accent-light">Deliverable</p>
-                            <p class="text-sm text-primary-text font-medium">Reports submitted + renewal pipeline</p>
-                        </div>
-
-                        <!-- Decorative corner -->
-                        <div class="absolute -bottom-10 -right-10 w-40 h-40 rounded-full bg-accent-light/10 blur-2xl pointer-events-none"></div>
-                    </div>
-
-                </div>
-            </div>
-        </section>
-
-        <!-- ============ BEFORE / AFTER COMPARISON ============ -->
-        <section class="py-20 sm:py-24 bg-background transition-colors duration-300">
-            <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                <div class="text-center mb-12 sm:mb-16">
-                    <span class="text-accent-light font-bold tracking-widest uppercase text-sm">The Impact</span>
-                    <h2 class="font-serif text-3xl sm:text-4xl md:text-5xl font-semibold text-primary-text mt-4 mb-4">
-                        What changes when we work together.
-                    </h2>
-                    <p class="text-secondary-text max-w-2xl mx-auto text-base sm:text-lg">
-                        Based on client data across 600+ engagements. Real numbers, real growth.
-                    </p>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
-
-                    <!-- Metric 1 -->
-                    <div class="bg-hover border border-border rounded-2xl p-6 sm:p-8">
-                        <div class="flex items-center justify-between mb-5">
-                            <span class="text-xs uppercase tracking-widest font-bold text-accent-light">Grant Submissions</span>
-                            <i class="fas fa-file-signature text-2xl text-accent-light"></i>
-                        </div>
-                        <div class="space-y-4">
-                            <div>
-                                <div class="flex justify-between text-xs mb-1.5"><span class="text-secondary-text">Before FundRise</span><span class="font-bold text-primary-text">4 / year</span></div>
-                                <div class="compare-bar"><div class="compare-fill-a" style="width: 20%"></div></div>
-                            </div>
-                            <div>
-                                <div class="flex justify-between text-xs mb-1.5"><span class="text-secondary-text">With FundRise</span><span class="font-bold text-primary-text">17 / year</span></div>
-                                <div class="compare-bar"><div class="compare-fill-b" style="width: 85%"></div></div>
-                            </div>
-                        </div>
-                        <p class="mt-5 text-sm text-secondary-text">A <span class="font-bold text-accent-light">4.2x</span> increase in proposal volume.</p>
-                    </div>
-
-                    <!-- Metric 2 -->
-                    <div class="bg-hover border border-border rounded-2xl p-6 sm:p-8">
-                        <div class="flex items-center justify-between mb-5">
-                            <span class="text-xs uppercase tracking-widest font-bold text-accent-light">Annual Revenue</span>
-                            <i class="fas fa-sack-dollar text-2xl text-accent-light"></i>
-                        </div>
-                        <div class="space-y-4">
-                            <div>
-                                <div class="flex justify-between text-xs mb-1.5"><span class="text-secondary-text">Before FundRise</span><span class="font-bold text-primary-text">$650K</span></div>
-                                <div class="compare-bar"><div class="compare-fill-a" style="width: 30%"></div></div>
-                            </div>
-                            <div>
-                                <div class="flex justify-between text-xs mb-1.5"><span class="text-secondary-text">With FundRise</span><span class="font-bold text-primary-text">$2.1M</span></div>
-                                <div class="compare-bar"><div class="compare-fill-b" style="width: 90%"></div></div>
-                            </div>
-                        </div>
-                        <p class="mt-5 text-sm text-secondary-text">A <span class="font-bold text-accent-light">3.2x</span> revenue lift in 18 months.</p>
-                    </div>
-
-                    <!-- Metric 3 -->
-                    <div class="bg-hover border border-border rounded-2xl p-6 sm:p-8">
-                        <div class="flex items-center justify-between mb-5">
-                            <span class="text-xs uppercase tracking-widest font-bold text-accent-light">Donor Retention</span>
-                            <i class="fas fa-hand-holding-heart text-2xl text-accent-light"></i>
-                        </div>
-                        <div class="space-y-4">
-                            <div>
-                                <div class="flex justify-between text-xs mb-1.5"><span class="text-secondary-text">Before FundRise</span><span class="font-bold text-primary-text">41%</span></div>
-                                <div class="compare-bar"><div class="compare-fill-a" style="width: 41%"></div></div>
-                            </div>
-                            <div>
-                                <div class="flex justify-between text-xs mb-1.5"><span class="text-secondary-text">With FundRise</span><span class="font-bold text-primary-text">83%</span></div>
-                                <div class="compare-bar"><div class="compare-fill-b" style="width: 83%"></div></div>
-                            </div>
-                        </div>
-                        <p class="mt-5 text-sm text-secondary-text">A <span class="font-bold text-accent-light">2x</span> improvement in retention.</p>
-                    </div>
-
-                </div>
-            </div>
-        </section>
-
-
-        <!-- ============ FAQ QUICK STRIP ============ -->
-        <section class="py-20 sm:py-24 bg-hover transition-colors duration-300">
-            <div class="container mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-                <div class="text-center mb-12">
-                    <span class="text-accent-light font-bold tracking-widest uppercase text-sm">Common Questions</span>
-                    <h2 class="font-serif text-3xl sm:text-4xl font-semibold text-primary-text mt-4 mb-4">
-                        Answered in One Line
-                    </h2>
-                </div>
-
-                <div class="space-y-4">
-                    <div class="bg-background border border-border rounded-2xl p-5 flex items-start gap-4">
-                        <i class="fas fa-circle-question text-accent-light text-xl mt-0.5 flex-shrink-0"></i>
-                        <div>
-                            <p class="font-semibold text-primary-text text-sm sm:text-base mb-1">Do you work with small nonprofits?</p>
-                            <p class="text-secondary-text text-sm">Yes ï¿½ 40% of our clients have budgets under $1M. We have tiered pricing built for it.</p>
-                        </div>
-                    </div>
-
-                    <div class="bg-background border border-border rounded-2xl p-5 flex items-start gap-4">
-                        <i class="fas fa-circle-question text-accent-light text-xl mt-0.5 flex-shrink-0"></i>
-                        <div>
-                            <p class="font-semibold text-primary-text text-sm sm:text-base mb-1">How quickly will we see results?</p>
-                            <p class="text-secondary-text text-sm">Foundation grants: 3ï¿½6 months. Federal: 9ï¿½15 months. Donor strategy: 60ï¿½90 days.</p>
-                        </div>
-                    </div>
-
-                    <div class="bg-background border border-border rounded-2xl p-5 flex items-start gap-4">
-                        <i class="fas fa-circle-question text-accent-light text-xl mt-0.5 flex-shrink-0"></i>
-                        <div>
-                            <p class="font-semibold text-primary-text text-sm sm:text-base mb-1">Can you work alongside our in-house team?</p>
-                            <p class="text-secondary-text text-sm">Absolutely. We co-write, augment, or take the lead ï¿½ whatever fits your team best.</p>
-                        </div>
-                    </div>
-
-                    <div class="bg-background border border-border rounded-2xl p-5 flex items-start gap-4">
-                        <i class="fas fa-circle-question text-accent-light text-xl mt-0.5 flex-shrink-0"></i>
-                        <div>
-                            <p class="font-semibold text-primary-text text-sm sm:text-base mb-1">What does a typical engagement cost?</p>
-                            <p class="text-secondary-text text-sm">Single proposals: $4.5Kï¿½$12K. Retainers: from $3.5K/mo. All fixed-price, quoted up front.</p>
-                        </div>
-                    </div>
-
-                    <div class="text-center mt-10">
-                        <a href="resources.html#faqs" class="inline-flex items-center gap-2 px-6 py-3 border border-border rounded-full font-bold text-sm text-accent hover:bg-background transition">
-                            <i class="fas fa-list"></i>
-                            See All FAQs
+                    <!-- Interactive CTA Buttons with High-Contrast Bulletproof Hover States -->
+                    <div class="flex flex-col sm:flex-row gap-4 sm:gap-5 justify-center mb-14 w-full sm:w-auto">
+                        <a href="contact.html" class="cta-btn-primary">
+                            <i class="fas fa-calendar-check text-[#D4A22E]"></i>
+                            <span>Book a Free Consultation</span>
+                        </a>
+                        <a href="case-studies.html" class="cta-btn-outline">
+                            <i class="fas fa-trophy"></i>
+                            <span>See Our Results</span>
                         </a>
                     </div>
+
+                    <!-- Trust Metrics Grid -->
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-8 max-w-4xl mx-auto w-full pt-8 border-t border-white/15">
+                        <div class="text-center">
+                            <p class="text-3xl sm:text-4xl font-serif font-bold text-[#D4A22E] mb-1">$250M+</p>
+                            <p class="text-xs sm:text-sm text-gray-300 font-medium">Grants Secured</p>
+                        </div>
+                        <div class="text-center">
+                            <p class="text-3xl sm:text-4xl font-serif font-bold text-[#D4A22E] mb-1">92%</p>
+                            <p class="text-xs sm:text-sm text-gray-300 font-medium">Application Win Rate</p>
+                        </div>
+                        <div class="text-center">
+                            <p class="text-3xl sm:text-4xl font-serif font-bold text-[#D4A22E] mb-1">600+</p>
+                            <p class="text-xs sm:text-sm text-gray-300 font-medium">Nonprofit Clients</p>
+                        </div>
+                        <div class="text-center">
+                            <p class="text-3xl sm:text-4xl font-serif font-bold text-[#D4A22E] mb-1">12+</p>
+                            <p class="text-xs sm:text-sm text-gray-300 font-medium">Years of Excellence</p>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </section>
 
-        <!-- ============ FINAL CTA (Split Design) ============ -->
-        <section class="py-20 sm:py-24 bg-background transition-colors duration-300">
+        <!-- ============ 2. FUNDER MARQUEE STRIP ============ -->
+        <section class="border-y border-border bg-hover py-6 overflow-hidden">
+            <div class="container mx-auto px-4 mb-3 text-center">
+                <span class="text-xs font-bold uppercase tracking-widest text-secondary-text">Funding Secured From Major Institutional &amp; Federal Grantmakers</span>
+            </div>
+            <div class="marquee-track">
+                <div class="flex items-center gap-10 sm:gap-16 px-6">
+                    <span class="text-base sm:text-lg font-serif font-bold text-primary-text whitespace-nowrap">Ford Foundation</span>
+                    <span class="text-accent-light">•</span>
+                    <span class="text-base sm:text-lg font-serif font-bold text-primary-text whitespace-nowrap">National Institutes of Health (NIH)</span>
+                    <span class="text-accent-light">•</span>
+                    <span class="text-base sm:text-lg font-serif font-bold text-primary-text whitespace-nowrap">National Science Foundation (NSF)</span>
+                    <span class="text-accent-light">•</span>
+                    <span class="text-base sm:text-lg font-serif font-bold text-primary-text whitespace-nowrap">The Kresge Foundation</span>
+                    <span class="text-accent-light">•</span>
+                    <span class="text-base sm:text-lg font-serif font-bold text-primary-text whitespace-nowrap">Bill &amp; Melinda Gates Foundation</span>
+                    <span class="text-accent-light">•</span>
+                    <span class="text-base sm:text-lg font-serif font-bold text-primary-text whitespace-nowrap">MacArthur Foundation</span>
+                    <span class="text-accent-light">•</span>
+                    <span class="text-base sm:text-lg font-serif font-bold text-primary-text whitespace-nowrap">HRSA Health Resources</span>
+                    <span class="text-accent-light">•</span>
+                    <span class="text-base sm:text-lg font-serif font-bold text-primary-text whitespace-nowrap">U.S. Department of Housing (HUD)</span>
+                </div>
+                <div class="flex items-center gap-10 sm:gap-16 px-6" aria-hidden="true">
+                    <span class="text-base sm:text-lg font-serif font-bold text-primary-text whitespace-nowrap">Ford Foundation</span>
+                    <span class="text-accent-light">•</span>
+                    <span class="text-base sm:text-lg font-serif font-bold text-primary-text whitespace-nowrap">National Institutes of Health (NIH)</span>
+                    <span class="text-accent-light">•</span>
+                    <span class="text-base sm:text-lg font-serif font-bold text-primary-text whitespace-nowrap">National Science Foundation (NSF)</span>
+                    <span class="text-accent-light">•</span>
+                    <span class="text-base sm:text-lg font-serif font-bold text-primary-text whitespace-nowrap">The Kresge Foundation</span>
+                    <span class="text-accent-light">•</span>
+                    <span class="text-base sm:text-lg font-serif font-bold text-primary-text whitespace-nowrap">Bill &amp; Melinda Gates Foundation</span>
+                    <span class="text-accent-light">•</span>
+                    <span class="text-base sm:text-lg font-serif font-bold text-primary-text whitespace-nowrap">MacArthur Foundation</span>
+                    <span class="text-accent-light">•</span>
+                    <span class="text-base sm:text-lg font-serif font-bold text-primary-text whitespace-nowrap">HRSA Health Resources</span>
+                    <span class="text-accent-light">•</span>
+                    <span class="text-base sm:text-lg font-serif font-bold text-primary-text whitespace-nowrap">U.S. Department of Housing (HUD)</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ 3. THE REALITY & OPPORTUNITY (Clean High-Contrast Stats) ============ -->
+        <section class="py-16 sm:py-20 bg-background transition-colors duration-300">
             <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                <div class="bg-gradient-to-br from-[#0F5C4E] via-[#1A7A67] to-[#0A4A3E] rounded-[2rem] shadow-2xl overflow-hidden relative">
-                    <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(circle, #D4A22E 1px, transparent 1px); background-size: 28px 28px;"></div>
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+                    
+                    <div class="lg:col-span-6">
+                        <span class="text-xs uppercase tracking-widest font-bold text-accent px-3 py-1 bg-emerald-50 dark:bg-emerald-950/40 rounded-full inline-block mb-3">The Funding Dilemma</span>
+                        <h2 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-semibold text-primary-text leading-tight mb-5">
+                            Over <span class="text-accent">$100 Billion</span> in Grants is Awarded Annually. Why Do Most Nonprofits Miss Out?
+                        </h2>
+                        <p class="text-secondary-text text-base sm:text-lg leading-relaxed mb-6">
+                            Brilliant nonprofits fail to secure grants not because their programs lack impact, but because complex scoring rubrics, buried notices of funding opportunity (NOFOs), and overworked in-house teams create an insurmountable barrier.
+                        </p>
+                        <p class="text-secondary-text text-base sm:text-lg leading-relaxed mb-8">
+                            FundRise embeds seasoned grant strategists, former grant reviewers, and research analysts into your organization. We take full ownership of the pipeline from discovery to post-award compliance.
+                        </p>
+                        <div class="flex items-center gap-4">
+                            <a href="about.html" class="inline-flex items-center font-bold text-accent hover:text-accent-light transition gap-2 text-sm sm:text-base">
+                                Learn about our approach <i class="fas fa-arrow-right text-xs"></i>
+                            </a>
+                        </div>
+                    </div>
 
-                    <div class="grid grid-cols-1 lg:grid-cols-2 relative z-10">
-                        <!-- Left content -->
-                        <div class="p-8 sm:p-12 lg:p-10 text-white">
-                            <span class="text-[#F4D06F] uppercase tracking-[4px] text-xs font-semibold">Ready When You Are</span>
-                            <h2 class="font-serif text-3xl sm:text-4xl md:text-5xl font-semibold mt-2 mb-3 leading-tight">
-                                Let's fund your mission ï¿½ together.
-                            </h2>
-                            <p class="text-white/80 text-base sm:text-lg leading-relaxed mb-6 max-w-md">
-                                Book a free 30-minute consultation and we'll map out the fastest path to funding your next program.
+                    <div class="lg:col-span-6 grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
+                        <div class="feature-card p-6 border-l-4 border-l-accent">
+                            <span class="text-3xl font-serif font-bold text-accent block mb-2">73%</span>
+                            <h3 class="font-bold text-primary-text text-base mb-2">Staff Burnout</h3>
+                            <p class="text-secondary-text text-sm">Development directors spend over 60% of their hours on administrative drafting instead of cultivating major donors.</p>
+                        </div>
+                        <div class="feature-card p-6 border-l-4 border-l-accent-light">
+                            <span class="text-3xl font-serif font-bold text-accent-light block mb-2">48%</span>
+                            <h3 class="font-bold text-primary-text text-base mb-2">Mismatch Rejections</h3>
+                            <p class="text-secondary-text text-sm">Nearly half of rejected grant proposals are declined due to misaligned priorities, not programmatic merit.</p>
+                        </div>
+                        <div class="feature-card p-6 border-l-4 border-l-accent-light">
+                            <span class="text-3xl font-serif font-bold text-accent-light block mb-2">3.4x</span>
+                            <h3 class="font-bold text-primary-text text-base mb-2">Higher Win Multiplier</h3>
+                            <p class="text-secondary-text text-sm">Organizations with dedicated grant consulting partners submit 3x more proposals and secure 3.4x more total funding.</p>
+                        </div>
+                        <div class="feature-card p-6 border-l-4 border-l-accent">
+                            <span class="text-3xl font-serif font-bold text-accent block mb-2">14 Days</span>
+                            <h3 class="font-bold text-primary-text text-base mb-2">Rapid Turnaround</h3>
+                            <p class="text-secondary-text text-sm">Our rapid sprint capability allows complete, audit-ready submissions ready in weeks rather than months.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ 4. WHY NONPROFITS CHOOSE US (4 Value Pillars) ============ -->
+        <section class="py-20 bg-background transition-colors duration-300">
+            <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <span class="text-xs uppercase tracking-widest font-bold text-accent mb-2 block">The FundRise Advantage</span>
+                    <h2 class="font-serif text-3xl sm:text-4xl md:text-5xl font-semibold text-primary-text mb-4">
+                        Why Mission-Driven Leaders Trust Our Team
+                    </h2>
+                    <p class="text-secondary-text text-base sm:text-lg">
+                        We don't sell recycled boilerplates or generic lists. We provide institutional expertise and measurable ROI.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    
+                    <!-- Pillar 1 -->
+                    <div class="feature-card overflow-hidden flex flex-col">
+                        <img src="assets/images/expert-writers.jpg" alt="Expert Grant Writers" class="w-full h-44 object-cover">
+                        <div class="p-6 flex-1 flex flex-col">
+                            <h3 class="font-serif text-lg font-bold text-primary-text mb-2">Former Grant Reviewers</h3>
+                            <p class="text-secondary-text text-sm leading-relaxed mb-4">
+                                Our writing team includes specialists who have evaluated applications for federal agencies and major foundations. We know what gets scored a 100.
                             </p>
+                        </div>
+                    </div>
 
-                            <div class="flex flex-col sm:flex-row gap-4">
-                                <a href="contact.html" class="inline-flex items-center justify-center gap-2 px-7 py-4 bg-white text-[#0F5C4E] rounded-full font-bold text-sm sm:text-base hover:bg-[#D4A22E] hover:text-[#0F2E2A] transition-all duration-300 transform hover:scale-105 shadow-xl whitespace-nowrap">
-                                    <i class="fas fa-calendar-check"></i>
-                                    Book Your Free Call
-                                </a>
-                                <a href="case-studies.html" class="inline-flex items-center justify-center gap-2 px-7 py-4 border-2 border-white/50 text-white rounded-full font-bold text-sm sm:text-base hover:bg-white/10 transition-all duration-300 whitespace-nowrap">
-                                    See Case Studies
-                                </a>
+                    <!-- Pillar 2 -->
+                    <div class="feature-card overflow-hidden flex flex-col">
+                        <img src="assets/images/custom-strategy.jpg" alt="Custom Grant Strategy" class="w-full h-44 object-cover">
+                        <div class="p-6 flex-1 flex flex-col">
+                            <h3 class="font-serif text-lg font-bold text-primary-text mb-2">Zero Boilerplate</h3>
+                            <p class="text-secondary-text text-sm leading-relaxed mb-4">
+                                Every proposal is constructed from your unique community data, programs, and theory of change. Funders recognize authenticity immediately.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Pillar 3 -->
+                    <div class="feature-card overflow-hidden flex flex-col">
+                        <img src="assets/images/capacity-building.jpg" alt="Capacity Building" class="w-full h-44 object-cover">
+                        <div class="p-6 flex-1 flex flex-col">
+                            <h3 class="font-serif text-lg font-bold text-primary-text mb-2">Capacity Building</h3>
+                            <p class="text-secondary-text text-sm leading-relaxed mb-4">
+                                We work collaboratively with your executive leadership, training staff and upgrading your internal tracking systems as we win grants together.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Pillar 4 -->
+                    <div class="feature-card overflow-hidden flex flex-col">
+                        <img src="assets/images/measurable-results.jpg" alt="Measurable Results" class="w-full h-44 object-cover">
+                        <div class="p-6 flex-1 flex flex-col">
+                            <h3 class="font-serif text-lg font-bold text-primary-text mb-2">Fixed-Fee Transparency</h3>
+                            <p class="text-secondary-text text-sm leading-relaxed mb-4">
+                                Ethical, transparent, and compliant with AFP codes. Clear fixed-price retainers with no hidden fees or commission percentages.
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ 5. FLAGSHIP CASE STUDY SHOWCASE ($12M Win) ============ -->
+        <section class="py-20 bg-hover transition-colors duration-300">
+            <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                <div class="bg-background border border-border rounded-2xl p-8 sm:p-12 shadow-sm">
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+                        
+                        <div class="lg:col-span-7">
+                            <div class="inline-flex items-center gap-2 text-xs font-bold text-accent uppercase tracking-wider mb-4 px-3 py-1 bg-emerald-50 dark:bg-emerald-950/40 rounded-full">
+                                <i class="fas fa-trophy text-accent-light"></i> Featured Impact Story
                             </div>
+                            <h2 class="font-serif text-2xl sm:text-4xl font-semibold text-primary-text mb-4 leading-tight">
+                                How HealthForward Alliance Secured a $12.4M Federal Multi-Year Award
+                            </h2>
+                            <p class="text-secondary-text text-base leading-relaxed mb-6">
+                                Serving under-resourced clinics across three counties, HealthForward had been rejected on two prior federal grant cycles. FundRise reconstructed their needs assessment, authored a community-centric evaluation plan, and achieved a top-tier peer review score of 98/100.
+                            </p>
+                            
+                            <blockquote class="border-l-4 border-l-accent-light pl-4 py-1 italic text-primary-text text-sm sm:text-base mb-6">
+                                "FundRise transformed how our board and leadership think about grant strategy. They didn't just submit a winning proposal — they gave our organization a permanent fundraising engine."
+                                <span class="block mt-2 font-bold not-italic text-xs sm:text-sm text-secondary-text">— Sarah Jenkins, Executive Director</span>
+                            </blockquote>
 
-                            <!-- Trust badges -->
-                            <div class="mt-6 pt-5 border-t border-white/20">
-                                <p class="text-xs uppercase tracking-widest text-white/60 mb-4">Trusted by nonprofits funded by</p>
-                                <div class="flex flex-wrap gap-x-6 gap-y-2 text-sm font-semibold text-white/80">
-                                    <span>HRSA</span>
-                                    <span>ï¿½</span>
-                                    <span>NIH</span>
-                                    <span>ï¿½</span>
-                                    <span>NSF</span>
-                                    <span>ï¿½</span>
-                                    <span>Ford Foundation</span>
-                                    <span>ï¿½</span>
-                                    <span>Kresge</span>
+                            <a href="case-studies.html" class="inline-flex items-center gap-2 font-bold text-accent hover:text-accent-light transition text-sm">
+                                Read the full case study <i class="fas fa-arrow-right text-xs"></i>
+                            </a>
+                        </div>
+
+                        <div class="lg:col-span-5 bg-hover rounded-xl p-6 sm:p-8 border border-border">
+                            <h3 class="font-serif text-lg font-bold text-primary-text mb-6 pb-3 border-b border-border">Performance Transformation</h3>
+                            <div class="space-y-6">
+                                <div>
+                                    <div class="flex justify-between text-xs font-bold text-secondary-text mb-1">
+                                        <span>Historical Win Rate</span>
+                                        <span class="text-accent font-bold">18% → 92%</span>
+                                    </div>
+                                    <div class="w-full bg-border h-2.5 rounded-full overflow-hidden">
+                                        <div class="bg-accent h-full rounded-full" style="width: 92%"></div>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <div class="flex justify-between text-xs font-bold text-secondary-text mb-1">
+                                        <span>Annual Grant Funding</span>
+                                        <span class="text-accent font-bold">$650K → $4.2M/yr</span>
+                                    </div>
+                                    <div class="w-full bg-border h-2.5 rounded-full overflow-hidden">
+                                        <div class="bg-accent-light h-full rounded-full" style="width: 85%"></div>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <div class="flex justify-between text-xs font-bold text-secondary-text mb-1">
+                                        <span>Proposal Development Speed</span>
+                                        <span class="text-accent font-bold">45 Days → 14 Days</span>
+                                    </div>
+                                    <div class="w-full bg-border h-2.5 rounded-full overflow-hidden">
+                                        <div class="bg-accent h-full rounded-full" style="width: 78%"></div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Right: image -->
-                        <div class="relative min-h-[280px] lg:min-h-0">
-                            <img src="assets/images/h4.jpg"
-                                 alt="Team collaborating on funding strategy"
-                                 class="absolute inset-0 w-full h-full object-cover"
-                                 style="-webkit-mask-image: linear-gradient(to right, transparent, black 30%); mask-image: linear-gradient(to right, transparent, black 30%);">
-                            <div class="absolute inset-0 bg-gradient-to-r from-[#0F5C4E]/30 via-transparent to-transparent pointer-events-none"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-                            <!-- Floating card -->
-                           
+        <!-- ============ 6. THE 4-PHASE STRATEGIC METHODOLOGY ============ -->
+        <section class="py-20 bg-background transition-colors duration-300">
+            <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <span class="text-xs uppercase tracking-widest font-bold text-accent-light mb-2 block">Disciplined Execution</span>
+                    <h2 class="font-serif text-3xl sm:text-4xl md:text-5xl font-semibold text-primary-text mb-4">
+                        Our Proven 4-Phase Delivery Framework
+                    </h2>
+                    <p class="text-secondary-text text-base sm:text-lg">
+                        A structured, stress-free process designed to deliver exceptional, submission-ready proposals on time, every time.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    
+                    <div class="feature-card p-6">
+                        <span class="w-10 h-10 rounded-full bg-emerald-50 dark:bg-emerald-950/60 text-accent font-serif font-bold text-lg flex items-center justify-center mb-4">1</span>
+                        <span class="text-xs font-bold uppercase tracking-wider text-accent-light block mb-1">Weeks 1 – 2</span>
+                        <h3 class="font-serif text-lg font-bold text-primary-text mb-2">Discovery &amp; Readiness</h3>
+                        <p class="text-secondary-text text-sm leading-relaxed">
+                            Comprehensive intake of program data, past submissions, 990 filings, and funder guidelines to identify priority targets.
+                        </p>
+                    </div>
+
+                    <div class="feature-card p-6">
+                        <span class="w-10 h-10 rounded-full bg-amber-50 dark:bg-amber-950/60 text-accent-light font-serif font-bold text-lg flex items-center justify-center mb-4">2</span>
+                        <span class="text-xs font-bold uppercase tracking-wider text-accent-light block mb-1">Weeks 3 – 4</span>
+                        <h3 class="font-serif text-lg font-bold text-primary-text mb-2">Narrative Architecture</h3>
+                        <p class="text-secondary-text text-sm leading-relaxed">
+                            Drafting evidence-based problem statements, project goals, logic models, itemized budgets, and letters of commitment.
+                        </p>
+                    </div>
+
+                    <div class="feature-card p-6">
+                        <span class="w-10 h-10 rounded-full bg-emerald-50 dark:bg-emerald-950/60 text-accent font-serif font-bold text-lg flex items-center justify-center mb-4">3</span>
+                        <span class="text-xs font-bold uppercase tracking-wider text-accent-light block mb-1">Week 5</span>
+                        <h3 class="font-serif text-lg font-bold text-primary-text mb-2">Red-Team Audit</h3>
+                        <p class="text-secondary-text text-sm leading-relaxed">
+                            Rigorous peer review simulated against real grant scoring rubrics to catch compliance gaps and optimize points.
+                        </p>
+                    </div>
+
+                    <div class="feature-card p-6">
+                        <span class="w-10 h-10 rounded-full bg-amber-50 dark:bg-amber-950/60 text-accent-light font-serif font-bold text-lg flex items-center justify-center mb-4">4</span>
+                        <span class="text-xs font-bold uppercase tracking-wider text-accent-light block mb-1">Submission &amp; Beyond</span>
+                        <h3 class="font-serif text-lg font-bold text-primary-text mb-2">Filing &amp; Stewardship</h3>
+                        <p class="text-secondary-text text-sm leading-relaxed">
+                            Full portal upload assistance, confirmation tracking, and post-award reporting setup for multi-year renewals.
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ 7. CLIENT TESTIMONIALS ============ -->
+        <section class="py-20 bg-hover transition-colors duration-300">
+            <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <span class="text-xs uppercase tracking-widest font-bold text-accent mb-2 block">Client Voices</span>
+                    <h2 class="font-serif text-3xl sm:text-4xl md:text-5xl font-semibold text-primary-text mb-4">
+                        Trusted by Nonprofit Executives Across the Country
+                    </h2>
+                    <p class="text-secondary-text text-base sm:text-lg">
+                        Hear from the organizations whose missions have expanded through our collaborative partnership.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    
+                    <div class="feature-card p-8 flex flex-col">
+                        <div class="flex text-amber-400 mb-4 text-sm">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                        <p class="text-primary-text text-sm sm:text-base leading-relaxed mb-6 italic flex-1">
+                            "FundRise helped us win our first multi-million dollar federal grant from HRSA. Their strategic depth and attention to technical compliance is unmatched in this sector."
+                        </p>
+                        <div class="pt-4 border-t border-border flex items-center justify-between">
+                            <div>
+                                <p class="font-bold text-primary-text text-sm">Dr. Marcus Vance</p>
+                                <p class="text-xs text-secondary-text">CEO, CareBridge Health Network</p>
+                            </div>
+                            <span class="text-xs font-bold text-accent px-2.5 py-1 bg-emerald-50 dark:bg-emerald-950/40 rounded">$3.4M Won</span>
+                        </div>
+                    </div>
+
+                    <div class="feature-card p-8 flex flex-col">
+                        <div class="flex text-amber-400 mb-4 text-sm">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                        <p class="text-primary-text text-sm sm:text-base leading-relaxed mb-6 italic flex-1">
+                            "Before FundRise, we were submitting grants reactively. They built us a pipeline of 24 qualified foundations and helped us win 5 grants within our first 6 months."
+                        </p>
+                        <div class="pt-4 border-t border-border flex items-center justify-between">
+                            <div>
+                                <p class="font-bold text-primary-text text-sm">Elena Rostova</p>
+                                <p class="text-xs text-secondary-text">Development Director, BrightPath Learning</p>
+                            </div>
+                            <span class="text-xs font-bold text-accent px-2.5 py-1 bg-emerald-50 dark:bg-emerald-950/40 rounded">$850K Won</span>
+                        </div>
+                    </div>
+
+                    <div class="feature-card p-8 flex flex-col">
+                        <div class="flex text-amber-400 mb-4 text-sm">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                        <p class="text-primary-text text-sm sm:text-base leading-relaxed mb-6 italic flex-1">
+                            "The return on investment has been exceptional. Our board finally feels confident in our long-term funding roadmap. FundRise is truly an extension of our core team."
+                        </p>
+                        <div class="pt-4 border-t border-border flex items-center justify-between">
+                            <div>
+                                <p class="font-bold text-primary-text text-sm">James Thornton</p>
+                                <p class="text-xs text-secondary-text">Board Chair, GreenRoots Initiative</p>
+                            </div>
+                            <span class="text-xs font-bold text-accent px-2.5 py-1 bg-emerald-50 dark:bg-emerald-950/40 rounded">$1.6M Won</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ 8. ACCESSIBLE FAQ ACCORDION ============ -->
+        <section class="py-20 bg-background transition-colors duration-300">
+            <div class="container mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+                
+                <div class="text-center mb-14">
+                    <span class="text-xs uppercase tracking-widest font-bold text-accent-light mb-2 block">Clear Answers</span>
+                    <h2 class="font-serif text-3xl sm:text-4xl font-semibold text-primary-text mb-4">
+                        Frequently Asked Questions
+                    </h2>
+                    <p class="text-secondary-text text-base">
+                        Everything you need to know about partnering with FundRise.
+                    </p>
+                </div>
+
+                <div class="space-y-4" id="faq-list">
+                    
+                    <div class="faq-item p-5 cursor-pointer" onclick="toggleFaq(this)">
+                        <div class="flex items-center justify-between">
+                            <h3 class="font-semibold text-primary-text text-base sm:text-lg">What types of nonprofits do you work with?</h3>
+                            <i class="fas fa-chevron-down text-accent transition-transform duration-200"></i>
+                        </div>
+                        <div class="faq-answer hidden mt-3 pt-3 border-t border-border text-secondary-text text-sm sm:text-base leading-relaxed">
+                            We partner with 501(c)(3) organizations across healthcare, education, community housing, environmental justice, youth development, and human services. Our clients range from emerging organizations with $500K annual budgets to established networks with $25M+ budgets.
+                        </div>
+                    </div>
+
+                    <div class="faq-item p-5 cursor-pointer" onclick="toggleFaq(this)">
+                        <div class="flex items-center justify-between">
+                            <h3 class="font-semibold text-primary-text text-base sm:text-lg">How quickly can we submit our first grant?</h3>
+                            <i class="fas fa-chevron-down text-accent transition-transform duration-200"></i>
+                        </div>
+                        <div class="faq-answer hidden mt-3 pt-3 border-t border-border text-secondary-text text-sm sm:text-base leading-relaxed">
+                            For single grant sprints with imminent deadlines, our rapid response team can construct, audit, and submit a proposal in as little as 10 to 14 business days. For full pipeline retainers, we conduct discovery in Weeks 1–2 and begin submissions in Month 1.
+                        </div>
+                    </div>
+
+                    <div class="faq-item p-5 cursor-pointer" onclick="toggleFaq(this)">
+                        <div class="flex items-center justify-between">
+                            <h3 class="font-semibold text-primary-text text-base sm:text-lg">Do you work on a commission or contingency fee basis?</h3>
+                            <i class="fas fa-chevron-down text-accent transition-transform duration-200"></i>
+                        </div>
+                        <div class="faq-answer hidden mt-3 pt-3 border-t border-border text-secondary-text text-sm sm:text-base leading-relaxed">
+                            No. Working on a percentage of funds raised violates the ethical guidelines of the Association of Fundraising Professionals (AFP) and can disqualify nonprofits from federal funding. We operate exclusively on transparent, predictable fixed fees agreed upon up front.
+                        </div>
+                    </div>
+
+                    <div class="faq-item p-5 cursor-pointer" onclick="toggleFaq(this)">
+                        <div class="flex items-center justify-between">
+                            <h3 class="font-semibold text-primary-text text-base sm:text-lg">Can you augment our existing in-house development team?</h3>
+                            <i class="fas fa-chevron-down text-accent transition-transform duration-200"></i>
+                        </div>
+                        <div class="faq-answer hidden mt-3 pt-3 border-t border-border text-secondary-text text-sm sm:text-base leading-relaxed">
+                            Yes. Many of our clients have in-house development staff who focus on major donors and events while our team handles the technical research, drafting, and compliance of large foundation and federal submissions.
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ 9. FINAL HIGH-CONVERSION CTA ============ -->
+        <section class="py-16 sm:py-20 bg-hover transition-colors duration-300">
+            <div class="container mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+                <div class="bg-gradient-to-r from-[#0F5C4E] to-[#0A2E28] rounded-3xl p-8 sm:p-14 text-center text-white shadow-xl relative overflow-hidden">
+                    <div class="relative z-10 max-w-2xl mx-auto">
+                        <span class="text-xs uppercase tracking-widest font-bold text-[#D4A22E] mb-3 block">Ready to Fund Your Vision?</span>
+                        <h2 class="font-serif text-3xl sm:text-4xl md:text-5xl font-semibold mb-4 leading-tight text-white">
+                            Let's Build Your Active Grant Pipeline Today.
+                        </h2>
+                        <p class="text-white/80 text-base sm:text-lg mb-8 leading-relaxed">
+                            Schedule a free, confidential 30-minute consultation with a senior grant strategist. We will review your upcoming deadlines and evaluate your funding capacity.
+                        </p>
+                        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                            <a href="contact.html" class="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-[#D4A22E] text-[#0F2E2A] font-bold text-base hover:bg-[#F0C95A] transition shadow-lg">
+                                <i class="fas fa-calendar-check"></i>
+                                Schedule Free Strategy Call
+                            </a>
+                            <a href="case-studies.html" class="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full border-2 border-white/80 text-white font-bold text-base hover:bg-white hover:text-[#0F2E2A] transition">
+                                <i class="fas fa-book-open"></i>
+                                Explore All Case Studies
+                            </a>
                         </div>
                     </div>
                 </div>
             </div>
-        </section> 
+        </section>
 
     </main>
 
-    <!-- MOBILE DRAWER -->
-    <div id="mobile-menu-drawer" class="fixed inset-0 z-50 pointer-events-none transition-all duration-300">
-        <div id="drawer-backdrop" class="absolute inset-0 bg-black opacity-0 transition-opacity duration-300 pointer-events-none"></div>
+    <!-- ============ FOOTER ============ -->
+    <footer id="main-footer" class="bg-[#071F1B] text-gray-300 pt-16 border-t border-gray-800">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 pb-16 border-b border-gray-800">
+                <div class="lg:col-span-2">
+                    <a href="index.html" class="flex items-center gap-2 inline-flex hover:opacity-85 transition-opacity mb-4">
+                        <svg class="w-8 h-8 text-accent-light" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+                            <path d="M2 17l10 5 10-5"></path>
+                            <path d="M2 12l10 5 10-5"></path>
+                        </svg>
+                        <span class="text-2xl font-serif font-semibold tracking-tight text-accent-light">FundRise</span>
+                    </a>
+                    <p class="text-sm leading-relaxed max-w-sm text-gray-400">
+                        Empowering nonprofits with expert grant writing, funder prospect intelligence, and multi-year fundraising strategy — so every mission receives the funding it deserves.
+                    </p>
+                    <div class="flex space-x-4 mt-6">
+                        <a href="#" class="text-gray-400 hover:text-accent-light transition" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-accent-light transition" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-accent-light transition" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-accent-light transition" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
 
+                <div>
+                    <h4 class="text-accent-light font-semibold text-sm uppercase tracking-wider mb-4">Quick Links</h4>
+                    <ul class="space-y-2.5 text-sm">
+                        <li><a href="index.html" class="hover:text-white transition">Home 1</a></li>
+                        <li><a href="home2.html" class="hover:text-white transition">Home 2</a></li>
+                        <li><a href="about.html" class="hover:text-white transition">About</a></li>
+                        <li><a href="services.html" class="hover:text-white transition">Services</a></li>
+                        <li><a href="contact.html" class="hover:text-white transition">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-accent-light font-semibold text-sm uppercase tracking-wider mb-4">Expertise</h4>
+                    <ul class="space-y-2.5 text-sm">
+                        <li><a href="services.html" class="hover:text-white transition">Federal Grants</a></li>
+                        <li><a href="services.html" class="hover:text-white transition">Foundation LOIs</a></li>
+                        <li><a href="fundraising.html" class="hover:text-white transition">Fundraising Strategy</a></li>
+                        <li><a href="case-studies.html" class="hover:text-white transition">Case Studies</a></li>
+                        <li><a href="resources.html" class="hover:text-white transition">Resources</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-accent-light font-semibold text-sm uppercase tracking-wider mb-4">Contact Info</h4>
+                    <ul class="space-y-2.5 text-sm text-gray-400">
+                        <li><i class="fas fa-location-dot mr-2 text-accent-light"></i>Washington, DC &amp; Nationwide</li>
+                        <li><i class="fas fa-phone mr-2 text-accent-light"></i>+1 (555) 789-0123</li>
+                        <li><i class="fas fa-envelope mr-2 text-accent-light"></i>hello@fundrise.org</li>
+                        <li><i class="fas fa-clock mr-2 text-accent-light"></i>Mon–Fri: 9am – 5pm ET</li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-accent-light font-semibold text-sm uppercase tracking-wider mb-4">Newsletter</h4>
+                    <p class="text-xs text-gray-400 mb-3 leading-relaxed">Weekly grant deadlines and funder intelligence in your inbox.</p>
+                    <form onsubmit="event.preventDefault(); alert('Thank you for subscribing to FundRise Grant Radar!');" class="space-y-2">
+                        <input type="email" placeholder="Work email address" required class="w-full px-3 py-2 text-xs rounded-lg bg-gray-900 border border-gray-700 text-white placeholder-gray-500 focus:outline-none focus:border-accent-light" />
+                        <button type="submit" class="w-full py-2 px-3 text-xs font-bold rounded-lg bg-accent-light text-black hover:bg-amber-400 transition">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="py-8 text-center text-gray-500 text-xs">
+                &copy; 2026 FundRise Grant &amp; Fundraising Consultancy. All rights reserved. • Empowering Nonprofits, One Grant at a Time.
+            </div>
+        </div>
+    </footer>
+
+    <!-- ============ MOBILE DRAWER ============ -->
+    <div id="mobile-menu-drawer" class="fixed inset-0 z-50 pointer-events-none">
+        <div id="drawer-backdrop" class="absolute inset-0 bg-black opacity-0 pointer-events-none transition-opacity duration-300"></div>
         <div id="drawer-content" class="absolute top-0 left-0 right-0 bg-background rounded-b-2xl shadow-2xl p-6 xl:hidden max-h-[85vh] overflow-y-auto transform translate-y-[-100%] transition-transform duration-300 ease-out">
             <div class="flex justify-between items-center pb-4 border-b border-border">
                 <a href="index.html" class="text-2xl font-serif font-semibold tracking-tight flex-shrink-0">
@@ -882,157 +885,79 @@
                         <span class="text-accent-light">FundRise</span>
                     </div>
                 </a>
-                <button id="mobile-menu-close" class="text-primary-text hover:text-accent-light p-1.5 rounded-full transition duration-200" aria-label="Close menu">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                <button id="mobile-menu-close" class="text-primary-text hover:text-accent-light p-2 rounded-full transition duration-200" aria-label="Close menu">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
                 </button>
             </div>
 
-            <nav class="flex flex-col space-y-1 py-4">
-                <div>
-                    <button class="block text-accent-light font-medium text-lg py-2 w-full text-left flex justify-between items-center" id="mobile-homes-toggle">
-                        Home <svg class="w-4 h-4 transform transition-transform duration-200 text-primary-text" id="homes-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+            <div class="py-4 space-y-3">
+                <div class="border-b border-border pb-2">
+                    <button id="mobile-homes-toggle" class="flex justify-between items-center w-full text-primary-text font-medium text-base py-2">
+                        <span>Home Versions</span>
+                        <svg id="homes-icon" class="w-4 h-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                     </button>
-                    <div id="mobile-homes-menu" class="hidden pl-4 flex flex-col space-y-1 mt-1 border-l-2 border-border rtl:pl-0 rtl:pr-4 rtl:border-l-0 rtl:border-r-2">
-                        <a href="index.html" class="block text-secondary-text hover:text-accent-light transition duration-200 text-base py-1 px-2">Home 1</a>
-                        <a href="home2.html" class="block text-accent hover:text-accent-light transition duration-200 text-base py-1 px-2">Home 2</a>
+                    <div id="mobile-homes-menu" class="hidden pl-4 flex flex-col space-y-2 mt-1 border-l-2 border-border">
+                        <a href="index.html" class="block text-accent-light font-bold text-sm py-1">Home 1 (Consultancy)</a>
+                        <a href="home2.html" class="block text-secondary-text hover:text-accent-light text-sm py-1">Home 2 (Growth Platform)</a>
                     </div>
                 </div>
 
-                <a href="about.html" class="block text-primary-text font-medium text-lg hover:text-accent-light transition duration-200 py-2">About</a>
-                <a href="services.html" class="block text-primary-text font-medium text-lg hover:text-accent-light transition duration-200 py-2">Services</a>
-                <a href="fundraising.html" class="block text-primary-text font-medium text-lg hover:text-accent-light transition duration-200 py-2">Fundraising</a>
-                <a href="case-studies.html" class="block text-primary-text font-medium text-lg hover:text-accent-light transition duration-200 py-2">Case Studies</a>
-                <a href="resources.html" class="block text-primary-text font-medium text-lg hover:text-accent-light transition duration-200 py-2">Resources</a>
-                <a href="contact.html" class="block text-primary-text font-medium text-lg hover:text-accent-light transition duration-200 py-2">Contact</a>
+                <a href="about.html" class="block text-primary-text font-medium text-base py-2 hover:text-accent-light transition">About</a>
+                <a href="services.html" class="block text-primary-text font-medium text-base py-2 hover:text-accent-light transition">Services</a>
+                <a href="fundraising.html" class="block text-primary-text font-medium text-base py-2 hover:text-accent-light transition">Fundraising</a>
+                <a href="case-studies.html" class="block text-primary-text font-medium text-base py-2 hover:text-accent-light transition">Case Studies</a>
+                <a href="resources.html" class="block text-primary-text font-medium text-base py-2 hover:text-accent-light transition">Resources</a>
+                <a href="contact.html" class="block text-primary-text font-medium text-base py-2 hover:text-accent-light transition">Contact</a>
 
-                <div>
-                    <button class="block text-primary-text font-medium text-lg py-2 w-full text-left flex justify-between items-center" id="mobile-dashboard-toggle">
-                        Dashboard
-                        <svg class="w-4 h-4 transform transition-transform duration-200 text-primary-text" id="dashboard-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                    </button>
-                    <div id="mobile-dashboard-menu" class="hidden pl-4 flex flex-col space-y-1 mt-1 border-l-2 border-border rtl:pl-0 rtl:pr-4 rtl:border-l-0 rtl:border-r-2">
-                        <a href="admin.html" class="block text-secondary-text hover:text-accent-light transition duration-200 text-base py-1 px-2">Admin Dashboard</a>
-                        <a href="customer-dashboard.html" class="block text-secondary-text hover:text-accent-light transition duration-200 text-base py-1 px-2">Customer Dashboard</a>
+                <div class="border-t border-border pt-4 flex items-center justify-between">
+                    <div class="flex items-center space-x-2">
+                        <button id="drawer-theme-toggle" class="p-2 border border-border rounded-lg text-primary-text hover:text-accent-light">
+                            <i class="fas fa-moon"></i>
+                        </button>
+                        <button id="mobile-lang-icon-drawer" class="p-2 border border-border rounded-lg text-primary-text hover:text-accent-light">
+                            <i class="fas fa-globe"></i>
+                        </button>
                     </div>
+                    <a href="login.html" class="book-btn px-6 py-2.5 rounded-full font-bold text-sm shadow">Login</a>
                 </div>
-            </nav>
-
-            <div class="pt-4 border-t border-border mt-4 flex justify-around items-center">
-                <button id="mobile-lang-icon-drawer" class="flex flex-col items-center text-primary-text hover:text-accent-light p-2 transition duration-200">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7.5 21 3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5" /></svg>
-                    <span class="text-xs mt-1 text-secondary-text">RTL</span>
-                </button>
-
-                <button id="drawer-theme-toggle" class="flex flex-col items-center text-primary-text hover:text-accent-light p-2 transition duration-200">
-                    <svg class="w-6 h-6 light-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
-                    <svg class="w-6 h-6 dark-icon hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
-                    <span class="text-xs mt-1 text-secondary-text">Theme</span>
-                </button>
-            </div>
-            <div class="flex mt-5 w-full px-2">
-                <a href="login.html" class="w-full book-btn text-center py-3 rounded-xl font-bold text-sm shadow-md">Login</a>
             </div>
         </div>
     </div>
 
-    <!-- FOOTER -->
-    <footer id="main-footer" class="pt-20 transition-colors duration-300">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 pb-16 border-b border-gray-800">
-                  <div class="lg:col-span-2">
-                      <a href="index.html" class="flex items-center gap-2 inline-flex hover:opacity-80 transition-opacity">
-                        <svg class="w-8 h-8 text-accent-light" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
-                            <path d="M2 17l10 5 10-5"></path>
-                            <path d="M2 12l10 5 10-5"></path>
-                        </svg>
-                        <h1 class="text-2xl font-serif font-semibold tracking-tight flex-shrink-0"><span class="text-accent-light">FundRise</span></h1>
-                      </a>
-                      <p class="text-lg leading-relaxed max-w-sm !text-gray-300">
-                        Empowering nonprofits with expert grant writing and fundraising strategy ï¿½ so every mission gets the funding it deserves.
-                    </p>
-                    <div class="flex space-x-6 mt-10">
-                        <a href="#" class="text-white hover:text-accent-light transition text-xl"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="text-white hover:text-accent-light transition text-xl"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="#" class="text-white hover:text-accent-light transition text-xl"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="text-white hover:text-accent-light transition text-xl"><i class="fab fa-whatsapp"></i></a>
-                    </div>
-                </div>
-                <div>
-                    <h4 class="footer-heading font-medium text-xl mb-6">Services</h4>
-                    <ul class="space-y-4">
-                        <li><a href="services.html#grant-writing" class="footer-link">Grant Writing</a></li>
-                        <li><a href="services.html#fundraising-strategy" class="footer-link">Fundraising Strategy</a></li>
-                        <li><a href="services.html#donor-research" class="footer-link">Donor Research</a></li>
-                        <li><a href="services.html#proposal-review" class="footer-link">Proposal Review</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="footer-heading font-medium text-xl mb-6">Quick Links</h4>
-                    <ul class="space-y-4">
-                        <li><a href="index.html" class="footer-link">Home 1</a></li>
-                        <li><a href="home2.html" class="footer-link">Home 2</a></li>
-                        <li><a href="about.html" class="footer-link">About</a></li>
-                        <li><a href="contact.html" class="footer-link">Contact</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="footer-heading font-medium text-xl mb-6">Contact Us</h4>
-                    <ul class="space-y-4 !text-gray-300">
-                        <li class="flex items-start gap-3">
-                            <i class="fas fa-map-marker-alt mt-1 text-accent-light"></i>
-                            <span class="text-sm">456 Impact Way, Suite 200<br>Washington, DC 20001</span>
-                        </li>
-                        <li class="flex items-center gap-3">
-                            <i class="fas fa-phone text-accent-light"></i>
-                            <span class="text-sm">+1 (555) 789-0123</span>
-                        </li>
-                        <li class="flex items-center gap-3">
-                            <i class="fas fa-envelope text-accent-light"></i>
-                            <span class="text-sm">hello@fundrise.org</span>
-                        </li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="footer-heading font-medium text-xl mb-6">Newsletter</h4>
-                    <p class="text-sm mb-6 !text-gray-300">Subscribe for grant deadlines, funder insights, and fundraising tips ï¿½ straight to your inbox.</p>
-                    <div class="flex flex-col space-y-4">
-                        <input type="email" placeholder="Your email address" class="p-4 text-sm rounded-xl bg-gray-900 border border-gray-800 focus:ring-1 focus:ring-accent-light focus:outline-none text-white" />
-                        <button class="bg-gold-gradient text-black font-bold py-3 rounded-xl transition hover:opacity-90">Subscribe</button>
-                    </div>
-                </div>
-            </div>
-            <div class="py-10 text-center text-gray-500 text-sm">ï¿½ 2026 FundRise. All rights reserved. ï¿½ Empowering Nonprofits, One Grant at a Time.</div>
-        </div>
-    </footer>
-
+    <!-- ============ SCRIPTS ============ -->
     <script>
     document.addEventListener('DOMContentLoaded', () => {
         const html = document.documentElement;
 
-        const savedLang = localStorage.getItem('language') || 'en';
-        html.setAttribute('dir', savedLang === 'ar' ? 'rtl' : 'ltr');
-
-        const savedTheme = localStorage.getItem('theme') || 'light';
-        applyTheme(savedTheme);
-
-        const themeToggles = [
-            document.getElementById('theme-toggle'),
-            document.getElementById('mobile-theme-toggle'),
-            document.getElementById('drawer-theme-toggle')
-        ].filter(Boolean);
+        // Theme Setup
+        const currentTheme = localStorage.getItem('theme') || 'light';
+        applyTheme(currentTheme);
 
         function applyTheme(theme) {
             html.setAttribute('data-theme', theme);
+            if (theme === 'dark') {
+                html.classList.add('dark');
+            } else {
+                html.classList.remove('dark');
+            }
             document.querySelectorAll('.light-icon').forEach(i => i.classList.toggle('hidden', theme === 'dark'));
             document.querySelectorAll('.dark-icon').forEach(i => i.classList.toggle('hidden', theme === 'light'));
         }
 
-        themeToggles.forEach(btn => { if (btn) btn.addEventListener('click', () => {
-            const next = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
-            localStorage.setItem('theme', next);
-            applyTheme(next); }); });
+        const themeToggles = [
+            document.getElementById('theme-toggle'),
+            document.getElementById('drawer-theme-toggle')
+        ].filter(Boolean);
 
+        themeToggles.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const next = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+                localStorage.setItem('theme', next);
+                applyTheme(next);
+            });
+        });
+
+        // Mobile Menu Drawer
         const menuDrawer = document.getElementById('mobile-menu-drawer');
         const menuContent = document.getElementById('drawer-content');
         const menuBackdrop = document.getElementById('drawer-backdrop');
@@ -1057,71 +982,46 @@
         document.getElementById('mobile-menu-close')?.addEventListener('click', closeDrawer);
         menuBackdrop?.addEventListener('click', closeDrawer);
 
-        const setupAccordion = (toggleId, menuId, iconId) => {
-            const toggle = document.getElementById(toggleId);
-            toggle?.addEventListener('click', () => {
-                document.getElementById(menuId)?.classList.toggle('hidden');
-                document.getElementById(iconId)?.classList.toggle('rotate-180');
-            });
-        };
+        // Mobile Submenu Accordion
+        const mobileHomesToggle = document.getElementById('mobile-homes-toggle');
+        mobileHomesToggle?.addEventListener('click', () => {
+            document.getElementById('mobile-homes-menu')?.classList.toggle('hidden');
+            document.getElementById('homes-icon')?.classList.toggle('rotate-180');
+        });
 
-        setupAccordion('mobile-homes-toggle', 'mobile-homes-menu', 'homes-icon');
-        setupAccordion('mobile-dashboard-toggle', 'mobile-dashboard-menu', 'dashboard-icon');
+        // RTL Toggle
+        const currentLang = localStorage.getItem('language') || 'en';
+        html.setAttribute('dir', currentLang === 'ar' ? 'rtl' : 'ltr');
 
         const toggleRTL = () => {
-            const current = localStorage.getItem('language') === 'ar' ? 'en' : 'ar';
-            localStorage.setItem('language', current);
-            html.setAttribute('dir', current === 'ar' ? 'rtl' : 'ltr');
+            const nextLang = html.getAttribute('dir') === 'rtl' ? 'ltr' : 'rtl';
+            localStorage.setItem('language', nextLang === 'rtl' ? 'ar' : 'en');
+            html.setAttribute('dir', nextLang);
         };
 
         document.getElementById('lang-icon')?.addEventListener('click', toggleRTL);
         document.getElementById('mobile-lang-icon-drawer')?.addEventListener('click', toggleRTL);
-
-        // ===== PROCESS VERTICAL TABS =====
-        const processTabs = document.querySelectorAll('.process-tab');
-        const processPanels = document.querySelectorAll('.process-panel');
-
-        processTabs.forEach(tab => {
-            tab.addEventListener('click', () => {
-                const step = tab.getAttribute('data-step');
-
-                // Update tabs
-                processTabs.forEach(t => {
-                    t.classList.remove('border-accent-light');
-                    t.classList.add('border-border');
-                    const chev = t.querySelector('.fa-chevron-right');
-                    if (chev) chev.classList.remove('text-accent-light');
-                });
-                tab.classList.remove('border-border');
-                tab.classList.add('border-accent-light');
-                const activeChev = tab.querySelector('.fa-chevron-right');
-                if (activeChev) activeChev.classList.add('text-accent-light');
-
-                // Update panels
-                processPanels.forEach(p => {
-                    if (p.getAttribute('data-panel') === step) {
-                        p.classList.remove('hidden');
-                    } else {
-                        p.classList.add('hidden');
-                    }
-                });
-            });
-        });
-
-        // ===== VIDEO PLAY BADGE (demo) =====
-        document.querySelector('.play-badge')?.addEventListener('click', () => {
-            // In production, open a modal with the embedded video.
-            alert('?? Video introduction coming soon ï¿½ meet the FundRise team!');
-        });
     });
+
+    // FAQ Accordion Handler
+    function toggleFaq(item) {
+        const answer = item.querySelector('.faq-answer');
+        const icon = item.querySelector('.fa-chevron-down');
+        const isOpen = !answer.classList.contains('hidden');
+
+        document.querySelectorAll('.faq-item').forEach(el => {
+            el.classList.remove('active');
+            el.querySelector('.faq-answer')?.classList.add('hidden');
+            const ic = el.querySelector('.fa-chevron-down');
+            if (ic) ic.style.transform = 'rotate(0deg)';
+        });
+
+        if (!isOpen) {
+            item.classList.add('active');
+            answer.classList.remove('hidden');
+            if (icon) icon.style.transform = 'rotate(180deg)';
+        }
+    }
     </script>
 </body>
 </html>
-
-
-
-
-
-
-
-

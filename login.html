@@ -31,7 +31,8 @@
             }
           },
           fontFamily: {
-            display: ['"Playfair Display"', 'Georgia', 'serif'],
+            serif: ['ui-serif', 'Georgia', 'Cambria', '"Times New Roman"', 'Times', 'serif'],
+            display: ['ui-serif', 'Georgia', 'Cambria', '"Times New Roman"', 'Times', 'serif'],
             body: ['"Inter"', 'system-ui', 'sans-serif'],
           },
           animation: {
@@ -48,11 +49,11 @@
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
   <style>
-    /* Full viewport � no scroll */
+    /* Full viewport - no scroll */
     html, body {
       min-height: 100%;
       margin: 0;
@@ -279,66 +280,48 @@
       justify-content: center;
       margin-bottom: 1.5rem;
     }
-    .logo-wrapper {
-      display: flex;
+    .logo-brand {
+      display: inline-flex;
       align-items: center;
-      gap: 0.75rem;
+      gap: 0.5rem;
       text-decoration: none;
-    }
-    .logo-icon-box {
-      background: #0F5C4E;
-      width: 50px;
-      height: 50px;
-      border-radius: 14px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 6px 16px rgba(15,92,78,0.25);
-      border: 1px solid rgba(212,162,46,0.25);
-      flex-shrink: 0;
-    }
-    .logo-icon-box svg {
+      font-family: ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif;
+      font-size: 1.75rem;
+      font-weight: 600;
+      letter-spacing: -0.025em;
       color: #D4A22E;
-      width: 26px;
-      height: 26px;
+      transition: opacity 0.2s ease;
+    }
+    .dark .logo-brand {
+      color: #E0B848;
+    }
+    .logo-brand:hover {
+      opacity: 0.85;
+    }
+    .logo-brand svg {
+      width: 2rem;
+      height: 2rem;
+      color: #D4A22E;
+      flex-shrink: 0;
       transition: transform 0.3s ease;
     }
-    .logo-wrapper:hover .logo-icon-box svg { transform: scale(1.1) rotate(-4deg); }
-    .logo-text-group {
-      display: flex;
-      flex-direction: column;
-      line-height: 1.1;
+    .dark .logo-brand svg {
+      color: #E0B848;
     }
-    .logo-text {
-      font-size: 1.55rem;
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      font-family: 'Playfair Display', Georgia, serif;
+    .logo-brand:hover svg {
+      transform: scale(1.05);
     }
-    .logo-text .fund { color: #0F2E2A; }
-    .dark .logo-text .fund { color: #F0F7F4; }
-    .logo-text .rise { color: #0F5C4E; }
-    .dark .logo-text .rise { color: #D4A22E; }
-    .logo-sub {
-      font-size: 0.58rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: #7C8F88;
-      font-weight: 600;
-      margin-top: 1px;
-      display: block;
-    }
-    .dark .logo-sub { color: #A8C0B8; }
 
     .welcome-title {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-size: 1.7rem;
-      font-weight: 700;
-      color: #0F2E2A;
-      margin-top: 0.5rem;
+      font-family: ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif;
+      font-size: 1.85rem;
+      font-weight: 600;
+      color: #0F5C4E;
+      margin-top: 0.75rem;
       margin-bottom: 0.25rem;
       text-align: center;
-      line-height: 1.2;
+      line-height: 1.25;
+      letter-spacing: -0.01em;
     }
     .dark .welcome-title { color: #F0F7F4; }
     .welcome-subtitle {
@@ -346,7 +329,7 @@
       color: #4B6560;
       text-align: center;
       margin-bottom: 0.5rem;
-      font-family: 'Inter', sans-serif;
+      font-family: 'Inter', system-ui, sans-serif;
     }
     .dark .welcome-subtitle { color: #A8C0B8; }
 
@@ -358,7 +341,7 @@
     @media (max-height: 700px) {
       .login-card { padding: 1.4rem 1.6rem; }
       .logo-center { margin-bottom: 0.75rem; }
-      .welcome-title { font-size: 1.4rem; margin-top: 0; }
+      .welcome-title { font-size: 1.4rem; margin-top: 0.25rem; }
       .welcome-subtitle { font-size: 0.8rem; margin-bottom: 0.5rem; }
       .login-input { padding: 0.65rem 1rem 0.65rem 2.6rem; font-size: 0.9rem; }
       .password-wrapper .login-input { padding-right: 2.6rem; }
@@ -369,16 +352,15 @@
     }
     @media (max-height: 620px) {
       .login-card { padding: 1rem 1.2rem; border-radius: 24px; }
-      .logo-icon-box { width: 42px; height: 42px; border-radius: 12px; }
-      .logo-icon-box svg { width: 22px; height: 22px; }
-      .logo-text { font-size: 1.3rem; }
-      .logo-sub { display: none; }
+      .logo-brand { font-size: 1.4rem; }
+      .logo-brand svg { width: 1.5rem; height: 1.5rem; }
       .welcome-title { font-size: 1.2rem; }
       .welcome-subtitle { display: none; }
       form.space-y-4 > * + * { margin-top: 0.55rem !important; }
     }
     @media (max-width: 380px) {
       .login-card { padding: 1.5rem 1.2rem; border-radius: 24px; }
+      .logo-brand { font-size: 1.4rem; }
       .welcome-title { font-size: 1.35rem; }
       .login-input { padding: 0.7rem 1rem 0.7rem 2.6rem; font-size: 0.85rem; }
       .social-btn span { font-size: 0.8rem; }
@@ -408,22 +390,15 @@
 
       <!-- LOGO -->
       <div class="logo-center mb-6">
-        <a href="index.html" class="logo-wrapper">
-          <div class="logo-icon-box">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
-              <path d="M2 17l10 5 10-5"></path>
-              <path d="M2 12l10 5 10-5"></path>
-            </svg>
-          </div>
-          <div class="logo-text-group">
-            <span class="logo-text">
-              <span class="fund">Fund</span><span class="rise">Rise</span>
-            </span>
-            <span class="logo-sub">Grant &amp; Fundraising</span>
-          </div>
+        <a href="index.html" class="logo-brand" aria-label="FundRise Home">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+            <path d="M2 17l10 5 10-5"></path>
+            <path d="M2 12l10 5 10-5"></path>
+          </svg>
+          <span>FundRise</span>
         </a>
-        <h1 class="welcome-title mt-4">Welcome Back</h1>
+        <h1 class="welcome-title">Welcome Back</h1>
         <p class="welcome-subtitle">Sign in to manage your grants &amp; fundraising</p>
       </div>
 
@@ -650,7 +625,7 @@
         }
 
         // Simulate successful login
-        showToast('Welcome back to FundRise! Redirecting�', 'success');
+        showToast('Welcome back to FundRise! Redirecting...', 'success');
         // Uncomment to redirect:
         // setTimeout(() => { window.location.href = 'customer-dashboard.html'; }, 900);
       });

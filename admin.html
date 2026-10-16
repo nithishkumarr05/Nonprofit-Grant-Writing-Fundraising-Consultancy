@@ -238,148 +238,403 @@
     <!-- Content wrapper -->
     <div class="p-4 md:p-8 max-w-7xl mx-auto w-full min-w-0 flex-grow">
 
-      <!-- ===== PANEL: LIVE PIPELINE ===== -->
+      <!-- ===== PANEL: LIVE PIPELINE (Executive Operations Dashboard) ===== -->
       <section id="panel-dispatch" class="space-y-8">
-        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
-          <div class="bg-white/60 dark:bg-[#0E231C]/60 p-5 rounded-3xl shadow-sm border border-[#E2EBE8] dark:border-white/10 text-center">
-            <i class="fa-solid fa-file-signature text-[#0F5C4E] dark:text-[#D4A22E] text-xl mb-1"></i>
-            <h5 class="text-[10px] text-dark/50 dark:text-white/50 uppercase font-black">Active Applications</h5>
-            <p class="text-xl font-bold">24</p>
-          </div>
-          <div class="bg-white/60 dark:bg-[#0E231C]/60 p-5 rounded-3xl shadow-sm border border-[#E2EBE8] dark:border-white/10 text-center">
-            <i class="fa-solid fa-file-lines text-[#0F5C4E] dark:text-[#D4A22E] text-xl mb-1"></i>
-            <h5 class="text-[10px] text-dark/50 dark:text-white/50 uppercase font-black">Drafts in Progress</h5>
-            <p class="text-xl font-bold">11</p>
-          </div>
-          <div class="bg-white/60 dark:bg-[#0E231C]/60 p-5 rounded-3xl shadow-sm border border-[#E2EBE8] dark:border-white/10 text-center">
-            <i class="fa-solid fa-users text-[#0F5C4E] dark:text-[#D4A22E] text-xl mb-1"></i>
-            <h5 class="text-[10px] text-dark/50 dark:text-white/50 uppercase font-black">Active Clients</h5>
-            <p class="text-xl font-bold">87</p>
-          </div>
-          <div class="bg-white/60 dark:bg-[#0E231C]/60 p-5 rounded-3xl shadow-sm border border-[#E2EBE8] dark:border-white/10 text-center">
-            <i class="fa-solid fa-dollar-sign text-[#0F5C4E] dark:text-[#D4A22E] text-xl mb-1"></i>
-            <h5 class="text-[10px] text-dark/50 dark:text-white/50 uppercase font-black">Secured (YTD)</h5>
-            <p class="text-xl font-bold">$8.2M</p>
-          </div>
-        </div>
 
-        <div class="bg-white/30 dark:bg-[#0E231C]/40 p-4 sm:p-6 md:p-8 rounded-[2.5rem] border border-[#E2EBE8] dark:border-white/10 shadow-sm">
-          <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
-            <div>
-              <span class="text-[#0F5C4E] dark:text-[#D4A22E] font-bold text-xs uppercase tracking-widest">Live Pipeline</span>
-              <h3 class="font-display font-bold text-2xl text-dark dark:text-white">Grant Application Flow</h3>
+        <!-- 1. Executive Welcome Message & Operations Briefing -->
+        <div class="bg-gradient-to-r from-[#0F5C4E] via-[#147A67] to-[#0A2E28] rounded-[2rem] p-6 sm:p-8 text-white shadow-xl border border-emerald-500/30 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 relative overflow-hidden">
+          <div class="relative z-10 max-w-2xl">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/15 backdrop-blur-md text-[11px] font-bold text-[#F0C95A] mb-3">
+              <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+              Fiscal Year 2026 Practice Operations Briefing
             </div>
-            <button onclick="simulatePipeline()" class="bg-[#0F5C4E] hover:bg-[#0A4A3E] dark:bg-[#D4A22E] dark:hover:bg-[#F0C95A] text-white dark:text-[#0F2E2A] px-4 py-2.5 rounded-xl font-bold text-xs transition shadow-sm">
-              <i class="fa-solid fa-rotate mr-1"></i> Refresh
+            <h1 class="text-2xl sm:text-3xl font-serif font-bold text-white mb-2">
+              Welcome back, Sarah Chen
+            </h1>
+            <p class="text-white/85 text-xs sm:text-sm leading-relaxed">
+              All 87 client workspaces are active with 24 grant proposals in active development. You have 3 priority compliance reviews requiring Super Admin sign-off before Friday.
+            </p>
+            <div class="flex flex-wrap gap-4 sm:gap-6 mt-4 text-xs font-semibold text-white/90">
+              <span class="flex items-center gap-1.5"><i class="fa-solid fa-trophy text-[#D4A22E]"></i> 92% Win Rate YTD</span>
+              <span class="flex items-center gap-1.5"><i class="fa-solid fa-vault text-[#D4A22E]"></i> $8.2M Secured</span>
+              <span class="flex items-center gap-1.5"><i class="fa-solid fa-chart-line text-[#D4A22E]"></i> $18.6M Pipeline</span>
+              <span class="flex items-center gap-1.5"><i class="fa-solid fa-user-check text-[#D4A22E]"></i> 4 Senior Writers Active</span>
+            </div>
+          </div>
+          <div class="relative z-10 flex flex-wrap sm:flex-nowrap gap-2.5 shrink-0 w-full md:w-auto">
+            <button onclick="showToast('New Grant', 'NOFO intake wizard initialized.', 'fa-plus')" class="flex-1 sm:flex-initial bg-[#D4A22E] hover:bg-[#F0C95A] text-[#0F2E2A] px-5 py-3 rounded-xl font-bold text-xs transition shadow-md flex items-center justify-center gap-2">
+              <i class="fa-solid fa-plus"></i> Log New Grant
+            </button>
+            <button onclick="showToast('Exporting Report', 'Generating monthly executive compliance audit...', 'fa-file-arrow-down')" class="flex-1 sm:flex-initial bg-white/15 hover:bg-white/25 text-white border border-white/20 px-4 py-3 rounded-xl font-bold text-xs transition flex items-center justify-center gap-2">
+              <i class="fa-solid fa-file-export"></i> Export Brief
             </button>
           </div>
+        </div>
 
-          <div class="grid lg:grid-cols-3 gap-6">
-            <div class="lg:col-span-2 relative">
-              <div class="w-full h-[360px] md:h-[400px] rounded-3xl overflow-hidden border border-[#E2EBE8] dark:border-white/10 bg-neutral-950 shadow-inner relative">
-                <svg viewBox="0 0 800 480" class="w-full h-full object-cover">
-                  <rect width="100%" height="100%" fill="url(#gridMap)" />
-                  <defs>
-                    <pattern id="gridMap" width="40" height="40" patternUnits="userSpaceOnUse">
-                      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
-                    </pattern>
-                  </defs>
+        <!-- 2. KPI Metrics Grid -->
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+          <div class="bg-white dark:bg-[#0E231C] p-6 rounded-3xl shadow-sm border border-[#E2EBE8] dark:border-white/10 flex flex-col justify-between">
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-[11px] text-dark/60 dark:text-white/60 uppercase font-black tracking-wider">Active Pipeline</span>
+              <div class="w-9 h-9 rounded-xl bg-emerald-50 dark:bg-emerald-950/60 text-[#0F5C4E] dark:text-[#D4A22E] flex items-center justify-center text-sm">
+                <i class="fa-solid fa-file-signature"></i>
+              </div>
+            </div>
+            <p class="text-2xl sm:text-3xl font-serif font-bold text-[#0F2E2A] dark:text-white">24</p>
+            <p class="text-[11px] text-[#0F5C4E] dark:text-[#D4A22E] font-semibold mt-2 flex items-center gap-1">
+              <i class="fa-solid fa-arrow-trend-up"></i> $18.6M Total Tracked Value
+            </p>
+          </div>
 
-                  <path d="M 40,120 Q 240,80 420,180 T 780,160" fill="none" stroke="rgba(15,92,78,0.15)" stroke-width="70" />
-                  <path d="M 100,440 Q 320,320 500,460" fill="none" stroke="rgba(212,162,46,0.10)" stroke-width="100" />
+          <div class="bg-white dark:bg-[#0E231C] p-6 rounded-3xl shadow-sm border border-[#E2EBE8] dark:border-white/10 flex flex-col justify-between">
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-[11px] text-dark/60 dark:text-white/60 uppercase font-black tracking-wider">Drafts In Progress</span>
+              <div class="w-9 h-9 rounded-xl bg-amber-50 dark:bg-amber-950/60 text-[#D4A22E] flex items-center justify-center text-sm">
+                <i class="fa-solid fa-pen-ruler"></i>
+              </div>
+            </div>
+            <p class="text-2xl sm:text-3xl font-serif font-bold text-[#0F2E2A] dark:text-white">11</p>
+            <p class="text-[11px] text-amber-600 dark:text-amber-400 font-semibold mt-2 flex items-center gap-1">
+              <i class="fa-solid fa-clock"></i> 3 Due Within 7 Days
+            </p>
+          </div>
 
-                  <text x="80" y="230" fill="rgba(255,255,255,0.35)" font-family="Inter" font-size="10" font-weight="bold">PROSPECTING</text>
-                  <text x="340" y="130" fill="rgba(255,255,255,0.35)" font-family="Inter" font-size="10" font-weight="bold">WRITING</text>
-                  <text x="620" y="200" fill="rgba(255,255,255,0.35)" font-family="Inter" font-size="10" font-weight="bold">SUBMITTED</text>
-                  <text x="380" y="400" fill="rgba(255,255,255,0.35)" font-family="Inter" font-size="10" font-weight="bold">IN REVIEW</text>
-                  <text x="660" y="400" fill="rgba(255,255,255,0.35)" font-family="Inter" font-size="10" font-weight="bold">AWARDED</text>
+          <div class="bg-white dark:bg-[#0E231C] p-6 rounded-3xl shadow-sm border border-[#E2EBE8] dark:border-white/10 flex flex-col justify-between">
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-[11px] text-dark/60 dark:text-white/60 uppercase font-black tracking-wider">Client Nonprofits</span>
+              <div class="w-9 h-9 rounded-xl bg-emerald-50 dark:bg-emerald-950/60 text-[#0F5C4E] dark:text-[#D4A22E] flex items-center justify-center text-sm">
+                <i class="fa-solid fa-users"></i>
+              </div>
+            </div>
+            <p class="text-2xl sm:text-3xl font-serif font-bold text-[#0F2E2A] dark:text-white">87</p>
+            <p class="text-[11px] text-[#0F5C4E] dark:text-[#D4A22E] font-semibold mt-2 flex items-center gap-1">
+              <i class="fa-solid fa-shield-check"></i> 98.4% Retainer Retention
+            </p>
+          </div>
 
-                  <!-- Stage 1 -->
-                  <circle cx="200" cy="240" r="12" fill="rgba(15,92,78,0.25)" class="animate-ping" />
-                  <circle cx="200" cy="240" r="5" fill="#0F5C4E" />
-                  <g transform="translate(200, 240) translate(-12, -32)" onclick="selectStage(1)" style="cursor:pointer">
-                    <path d="M12 0 C5.37 0 0 5.37 0 12 C0 21 12 32 12 32 C12 32 24 21 24 12 C24 5.37 18.63 0 12 0 Z" fill="#0F5C4E" filter="drop-shadow(0px 3px 5px rgba(0,0,0,0.5))" />
-                    <circle cx="12" cy="12" r="5" fill="#D4A22E" />
-                    <rect x="-6" y="-12" width="36" height="11" rx="3" fill="#1e1e1e" stroke="#0F5C4E" stroke-width="0.5" />
-                    <text x="12" y="-4" fill="#fff" font-family="Inter" font-size="7" font-weight="bold" text-anchor="middle">STAGE 1</text>
-                  </g>
+          <div class="bg-white dark:bg-[#0E231C] p-6 rounded-3xl shadow-sm border border-[#E2EBE8] dark:border-white/10 flex flex-col justify-between">
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-[11px] text-dark/60 dark:text-white/60 uppercase font-black tracking-wider">Secured (YTD)</span>
+              <div class="w-9 h-9 rounded-xl bg-gold-gradient text-[#0F2E2A] flex items-center justify-center text-sm">
+                <i class="fa-solid fa-dollar-sign"></i>
+              </div>
+            </div>
+            <p class="text-2xl sm:text-3xl font-serif font-bold text-[#0F5C4E] dark:text-[#D4A22E]">$8.24M</p>
+            <p class="text-[11px] text-emerald-600 dark:text-emerald-400 font-semibold mt-2 flex items-center gap-1">
+              <i class="fa-solid fa-arrow-up"></i> +24% vs Target Pace
+            </p>
+          </div>
+        </div>
 
-                  <!-- Stage 2 -->
-                  <circle cx="420" cy="180" r="12" fill="rgba(212,162,46,0.25)" class="animate-ping" />
-                  <circle cx="420" cy="180" r="5" fill="#D4A22E" />
-                  <g transform="translate(420, 180) translate(-12, -32)" onclick="selectStage(2)" style="cursor:pointer">
-                    <path d="M12 0 C5.37 0 0 5.37 0 12 C0 21 12 32 12 32 C12 32 24 21 24 12 C24 5.37 18.63 0 12 0 Z" fill="#D4A22E" filter="drop-shadow(0px 3px 5px rgba(0,0,0,0.5))" />
-                    <circle cx="12" cy="12" r="5" fill="#0F2E2A" />
-                    <rect x="-6" y="-12" width="36" height="11" rx="3" fill="#1e1e1e" stroke="#D4A22E" stroke-width="0.5" />
-                    <text x="12" y="-4" fill="#fff" font-family="Inter" font-size="7" font-weight="bold" text-anchor="middle">STAGE 2</text>
-                  </g>
-
-                  <!-- Stage 3 -->
-                  <circle cx="680" cy="200" r="12" fill="rgba(26,122,103,0.25)" class="animate-ping" />
-                  <circle cx="680" cy="200" r="5" fill="#1A7A67" />
-                  <g transform="translate(680, 200) translate(-12, -32)" onclick="selectStage(3)" style="cursor:pointer">
-                    <path d="M12 0 C5.37 0 0 5.37 0 12 C0 21 12 32 12 32 C12 32 24 21 24 12 C24 5.37 18.63 0 12 0 Z" fill="#1A7A67" filter="drop-shadow(0px 3px 5px rgba(0,0,0,0.5))" />
-                    <circle cx="12" cy="12" r="5" fill="#D4A22E" />
-                    <rect x="-6" y="-12" width="36" height="11" rx="3" fill="#1e1e1e" stroke="#1A7A67" stroke-width="0.5" />
-                    <text x="12" y="-4" fill="#fff" font-family="Inter" font-size="7" font-weight="bold" text-anchor="middle">STAGE 3</text>
-                  </g>
-
-                  <!-- Stage 4 -->
-                  <circle cx="500" cy="380" r="12" fill="rgba(212,162,46,0.25)" class="animate-ping" />
-                  <circle cx="500" cy="380" r="5" fill="#F0C95A" />
-                  <g transform="translate(500, 380) translate(-12, -32)" onclick="selectStage(4)" style="cursor:pointer">
-                    <path d="M12 0 C5.37 0 0 5.37 0 12 C0 21 12 32 12 32 C12 32 24 21 24 12 C24 5.37 18.63 0 12 0 Z" fill="#F0C95A" filter="drop-shadow(0px 3px 5px rgba(0,0,0,0.5))" />
-                    <circle cx="12" cy="12" r="5" fill="#0F2E2A" />
-                    <rect x="-6" y="-12" width="36" height="11" rx="3" fill="#1e1e1e" stroke="#F0C95A" stroke-width="0.5" />
-                    <text x="12" y="-4" fill="#fff" font-family="Inter" font-size="7" font-weight="bold" text-anchor="middle">STAGE 4</text>
-                  </g>
-
-                  <!-- Stage 5 -->
-                  <circle cx="680" cy="380" r="12" fill="rgba(15,139,111,0.25)" class="animate-ping" />
-                  <circle cx="680" cy="380" r="5" fill="#0F8B6F" />
-                  <g transform="translate(680, 380) translate(-12, -32)" onclick="selectStage(5)" style="cursor:pointer">
-                    <path d="M12 0 C5.37 0 0 5.37 0 12 C0 21 12 32 12 32 C12 32 24 21 24 12 C24 5.37 18.63 0 12 0 Z" fill="#0F8B6F" filter="drop-shadow(0px 3px 5px rgba(0,0,0,0.5))" />
-                    <circle cx="12" cy="12" r="5" fill="#fff" />
-                    <rect x="-6" y="-12" width="36" height="11" rx="3" fill="#1e1e1e" stroke="#0F8B6F" stroke-width="0.5" />
-                    <text x="12" y="-4" fill="#fff" font-family="Inter" font-size="7" font-weight="bold" text-anchor="middle">AWARDED</text>
-                  </g>
-                </svg>
-
-                <div class="absolute bottom-4 left-4 right-4 bg-black/60 backdrop-blur border border-white/10 px-4 py-3 rounded-2xl flex flex-wrap gap-3 justify-between items-center text-[10px] text-white/90">
-                  <div class="flex flex-wrap gap-4">
-                    <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-[#0F5C4E]"></span> Prospecting</span>
-                    <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-[#D4A22E]"></span> Writing</span>
-                    <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-[#1A7A67]"></span> Submitted</span>
-                    <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-[#F0C95A]"></span> Review</span>
-                    <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-[#0F8B6F]"></span> Awarded</span>
-                  </div>
+        <!-- 3. Immediate Approvals & Compliance Queue Strip -->
+        <div class="bg-amber-50/60 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800/40 rounded-3xl p-5 sm:p-6 shadow-sm">
+          <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 mb-4">
+            <div class="flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-amber-500 animate-ping"></span>
+              <h3 class="font-serif font-bold text-base text-[#0F2E2A] dark:text-white">Priority Approvals &amp; Compliance Queue</h3>
+            </div>
+            <span class="text-xs font-bold text-amber-700 dark:text-amber-400">3 Submissions Requiring Immediate Review</span>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div class="bg-white dark:bg-[#0E231C] p-4 rounded-2xl border border-amber-200/80 dark:border-white/10 flex flex-col justify-between shadow-xs">
+              <div>
+                <div class="flex justify-between items-start mb-2">
+                  <span class="text-[10px] font-bold uppercase tracking-wider text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-950/40 px-2 py-0.5 rounded-full">Due in 4 Days</span>
+                  <span class="font-bold text-xs text-[#0F5C4E] dark:text-[#D4A22E]">$1.25M</span>
                 </div>
+                <h4 class="font-bold text-sm text-[#0F2E2A] dark:text-white">HealthForward Alliance</h4>
+                <p class="text-xs text-secondary-text mt-1">SAMHSA Rural Mental Health Innovation</p>
+              </div>
+              <div class="mt-4 pt-3 border-t border-border flex justify-between items-center text-xs">
+                <span class="text-secondary-text">Lead: Marcus Rivera</span>
+                <button onclick="showToast('Reviewing Draft', 'SAMHSA Proposal Rubric Loaded for HealthForward.', 'fa-clipboard-check')" class="px-3 py-1.5 bg-[#0F5C4E] hover:bg-[#147A67] text-white rounded-lg font-bold text-xs transition">Audit</button>
               </div>
             </div>
 
-            <div class="flex flex-col justify-between">
-              <div class="bg-white dark:bg-[#0E231C] border border-[#E2EBE8] dark:border-white/10 rounded-3xl p-5 shadow-sm space-y-4">
-                <div class="flex items-center gap-3 pb-3 border-b border-[#E2EBE8] dark:border-white/10">
-                  <div class="w-10 h-10 rounded-xl bg-[#0F5C4E]/15 text-[#0F5C4E] dark:text-[#D4A22E] flex items-center justify-center"><i class="fa-solid fa-file-signature"></i></div>
-                  <div>
-                    <h4 id="stageName" class="font-bold text-sm">Prospecting</h4>
-                    <span id="stageStatus" class="text-[9px] badge-review px-2 py-0.5 rounded font-black">12 applications</span>
-                  </div>
+            <div class="bg-white dark:bg-[#0E231C] p-4 rounded-2xl border border-amber-200/80 dark:border-white/10 flex flex-col justify-between shadow-xs">
+              <div>
+                <div class="flex justify-between items-start mb-2">
+                  <span class="text-[10px] font-bold uppercase tracking-wider text-amber-600 dark:text-amber-400 bg-amber-50 dark:bg-amber-950/40 px-2 py-0.5 rounded-full">Due in 9 Days</span>
+                  <span class="font-bold text-xs text-[#0F5C4E] dark:text-[#D4A22E]">$450K</span>
                 </div>
-                <div class="space-y-3 text-xs">
-                  <div class="flex justify-between"><span class="text-dark/50 dark:text-white/50">Avg. Time</span><span id="stageTime" class="font-bold">14 days</span></div>
-                  <div class="flex justify-between"><span class="text-dark/50 dark:text-white/50">Consultant</span><span id="stageConsultant" class="font-bold">Marcus Chen</span></div>
-                  <div class="flex justify-between"><span class="text-dark/50 dark:text-white/50">Next Deadline</span><span id="stageDeadline" class="font-mono font-bold">Jun 10</span></div>
-                  <div class="flex justify-between"><span class="text-dark/50 dark:text-white/50">Total Value</span><span id="stageValue" class="font-bold">$3.4M</span></div>
-                </div>
+                <h4 class="font-bold text-sm text-[#0F2E2A] dark:text-white">GreenRoots Coalition</h4>
+                <p class="text-xs text-secondary-text mt-1">NFWF Community Climate Resilience</p>
               </div>
-              <div class="mt-4 flex flex-col gap-2 text-xs">
-                <button onclick="showToast('Client notified', 'Client has been notified about the next step.', 'fa-message')" class="w-full bg-[#0F5C4E] hover:bg-[#0A4A3E] dark:bg-[#D4A22E] dark:hover:bg-[#F0C95A] text-white dark:text-[#0F2E2A] py-3 rounded-xl font-bold transition flex items-center justify-center gap-2"><i class="fa-solid fa-message"></i> Notify Client</button>
-                <button onclick="showToast('Reassign', 'Reassignment form opened.', 'fa-user-plus')" class="w-full border border-[#E2EBE8] dark:border-white/10 hover:bg-[#F0F7F4] dark:hover:bg-[#143026] py-3 rounded-xl font-bold transition flex items-center justify-center gap-2"><i class="fa-solid fa-user-plus"></i> Reassign Consultant</button>
+              <div class="mt-4 pt-3 border-t border-border flex justify-between items-center text-xs">
+                <span class="text-secondary-text">Lead: Priya Nair</span>
+                <button onclick="showToast('Budget Review', 'Itemized budget spreadsheet opened for GreenRoots.', 'fa-calculator')" class="px-3 py-1.5 bg-[#0F5C4E] hover:bg-[#147A67] text-white rounded-lg font-bold text-xs transition">Verify</button>
+              </div>
+            </div>
+
+            <div class="bg-white dark:bg-[#0E231C] p-4 rounded-2xl border border-amber-200/80 dark:border-white/10 flex flex-col justify-between shadow-xs">
+              <div>
+                <div class="flex justify-between items-start mb-2">
+                  <span class="text-[10px] font-bold uppercase tracking-wider text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/40 px-2 py-0.5 rounded-full">Due in 15 Days</span>
+                  <span class="font-bold text-xs text-[#0F5C4E] dark:text-[#D4A22E]">$800K</span>
+                </div>
+                <h4 class="font-bold text-sm text-[#0F2E2A] dark:text-white">BrightPath Learning</h4>
+                <p class="text-xs text-secondary-text mt-1">U.S. Dept of Ed STEM Innovation Initiative</p>
+              </div>
+              <div class="mt-4 pt-3 border-t border-border flex justify-between items-center text-xs">
+                <span class="text-secondary-text">Lead: David Okafor</span>
+                <button onclick="showToast('LOI Signoff', 'Executive concept note ready for signature.', 'fa-signature')" class="px-3 py-1.5 bg-[#0F5C4E] hover:bg-[#147A67] text-white rounded-lg font-bold text-xs transition">Sign Off</button>
               </div>
             </div>
           </div>
         </div>
+
+        <!-- 4. Master Live Grant Applications Operational Table -->
+        <div class="bg-white dark:bg-[#0E231C] p-6 sm:p-8 rounded-[2rem] border border-[#E2EBE8] dark:border-white/10 shadow-sm">
+          <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
+            <div>
+              <span class="text-[#0F5C4E] dark:text-[#D4A22E] font-bold text-xs uppercase tracking-widest">Active Engagements</span>
+              <h3 class="font-serif font-bold text-2xl text-dark dark:text-white">Master Grant Application Pipeline</h3>
+            </div>
+            <div class="flex flex-wrap items-center gap-2">
+              <span class="text-xs text-secondary-text mr-2 font-medium">Filter by Stage:</span>
+              <button onclick="showToast('Filter Applied', 'Showing all 24 active proposals.', 'fa-filter')" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-[#0F5C4E] text-white">All (24)</button>
+              <button onclick="showToast('Filter Applied', 'Filtered to 11 drafting proposals.', 'fa-filter')" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-[#F0F7F4] dark:bg-white/10 text-dark/70 dark:text-white/70 hover:bg-[#E2EBE8]">Drafting (11)</button>
+              <button onclick="showToast('Filter Applied', 'Filtered to 5 review queue items.', 'fa-filter')" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-[#F0F7F4] dark:bg-white/10 text-dark/70 dark:text-white/70 hover:bg-[#E2EBE8]">Review (5)</button>
+              <button onclick="showToast('Filter Applied', 'Filtered to 8 submitted grants.', 'fa-filter')" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-[#F0F7F4] dark:bg-white/10 text-dark/70 dark:text-white/70 hover:bg-[#E2EBE8]">Submitted (8)</button>
+            </div>
+          </div>
+
+          <div class="overflow-x-auto scrollbar-none">
+            <table class="w-full text-left text-xs font-semibold min-w-[760px]">
+              <thead>
+                <tr class="border-b border-[#E2EBE8] dark:border-white/10 text-dark/50 dark:text-white/50 text-[11px] uppercase tracking-wider">
+                  <th class="py-3 px-3 text-start">Organization &amp; Sector</th>
+                  <th class="py-3 px-3 text-start">Opportunity &amp; Agency</th>
+                  <th class="py-3 px-3 text-start">Amount</th>
+                  <th class="py-3 px-3 text-start">Lead Writer</th>
+                  <th class="py-3 px-3 text-start">Pipeline Stage</th>
+                  <th class="py-3 px-3 text-start">Deadline</th>
+                  <th class="py-3 px-3 text-end">Actions</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-[#E2EBE8] dark:divide-white/5 text-dark/80 dark:text-white/80">
+                <tr class="hover:bg-[#F0F7F4]/60 dark:hover:bg-white/5 transition">
+                  <td class="py-3.5 px-3">
+                    <span class="font-bold text-sm text-[#0F2E2A] dark:text-white block">HealthForward Alliance</span>
+                    <span class="text-[10px] text-secondary-text">Healthcare &amp; Mental Health</span>
+                  </td>
+                  <td class="py-3.5 px-3">
+                    <span class="font-semibold block">SAMHSA Rural Mental Health</span>
+                    <span class="text-[10px] text-secondary-text">Federal Discretionary NOFO</span>
+                  </td>
+                  <td class="py-3.5 px-3 font-mono font-bold text-accent dark:text-accent-light">$1,250,000</td>
+                  <td class="py-3.5 px-3">Marcus Rivera</td>
+                  <td class="py-3.5 px-3"><span class="px-2.5 py-1 rounded-full text-[10px] font-bold bg-amber-100 text-amber-800 dark:bg-amber-950/60 dark:text-amber-300">Red-Team Audit</span></td>
+                  <td class="py-3.5 px-3 font-semibold text-red-600 dark:text-red-400">May 28 (4d)</td>
+                  <td class="py-3.5 px-3 text-end">
+                    <button onclick="showToast('Audit Modal', 'Rubric evaluation opened for SAMHSA grant.', 'fa-clipboard')" class="px-2.5 py-1 text-xs font-bold text-[#0F5C4E] dark:text-[#D4A22E] hover:underline">Review</button>
+                  </td>
+                </tr>
+
+                <tr class="hover:bg-[#F0F7F4]/60 dark:hover:bg-white/5 transition">
+                  <td class="py-3.5 px-3">
+                    <span class="font-bold text-sm text-[#0F2E2A] dark:text-white block">GreenRoots Coalition</span>
+                    <span class="text-[10px] text-secondary-text">Climate &amp; Environmental Justice</span>
+                  </td>
+                  <td class="py-3.5 px-3">
+                    <span class="font-semibold block">NFWF Community Resilience</span>
+                    <span class="text-[10px] text-secondary-text">National Foundation Program</span>
+                  </td>
+                  <td class="py-3.5 px-3 font-mono font-bold text-accent dark:text-accent-light">$450,000</td>
+                  <td class="py-3.5 px-3">Priya Nair</td>
+                  <td class="py-3.5 px-3"><span class="px-2.5 py-1 rounded-full text-[10px] font-bold bg-blue-100 text-blue-800 dark:bg-blue-950/60 dark:text-blue-300">Drafting</span></td>
+                  <td class="py-3.5 px-3 font-semibold">Jun 02 (9d)</td>
+                  <td class="py-3.5 px-3 text-end">
+                    <button onclick="showToast('Editor Opened', 'Draft workspace opened for GreenRoots.', 'fa-file-lines')" class="px-2.5 py-1 text-xs font-bold text-[#0F5C4E] dark:text-[#D4A22E] hover:underline">Edit</button>
+                  </td>
+                </tr>
+
+                <tr class="hover:bg-[#F0F7F4]/60 dark:hover:bg-white/5 transition">
+                  <td class="py-3.5 px-3">
+                    <span class="font-bold text-sm text-[#0F2E2A] dark:text-white block">BrightPath Learning</span>
+                    <span class="text-[10px] text-secondary-text">K-12 Education Equity</span>
+                  </td>
+                  <td class="py-3.5 px-3">
+                    <span class="font-semibold block">U.S. Dept of Ed STEM Expansion</span>
+                    <span class="text-[10px] text-secondary-text">Federal Agency Grant</span>
+                  </td>
+                  <td class="py-3.5 px-3 font-mono font-bold text-accent dark:text-accent-light">$800,000</td>
+                  <td class="py-3.5 px-3">David Okafor</td>
+                  <td class="py-3.5 px-3"><span class="px-2.5 py-1 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-800 dark:bg-emerald-950/60 dark:text-emerald-300">Ready to Submit</span></td>
+                  <td class="py-3.5 px-3 font-semibold">Jun 08 (15d)</td>
+                  <td class="py-3.5 px-3 text-end">
+                    <button onclick="showToast('File Portal', 'Grants.gov package verified and ready.', 'fa-paper-plane')" class="px-2.5 py-1 text-xs font-bold text-[#0F5C4E] dark:text-[#D4A22E] hover:underline">Submit</button>
+                  </td>
+                </tr>
+
+                <tr class="hover:bg-[#F0F7F4]/60 dark:hover:bg-white/5 transition">
+                  <td class="py-3.5 px-3">
+                    <span class="font-bold text-sm text-[#0F2E2A] dark:text-white block">Hope Shelter Network</span>
+                    <span class="text-[10px] text-secondary-text">Housing &amp; Homeless Services</span>
+                  </td>
+                  <td class="py-3.5 px-3">
+                    <span class="font-semibold block">HUD Continuum of Care Support</span>
+                    <span class="text-[10px] text-secondary-text">Federal Multi-Year Block</span>
+                  </td>
+                  <td class="py-3.5 px-3 font-mono font-bold text-accent dark:text-accent-light">$2,400,000</td>
+                  <td class="py-3.5 px-3">Marcus Rivera</td>
+                  <td class="py-3.5 px-3"><span class="px-2.5 py-1 rounded-full text-[10px] font-bold bg-purple-100 text-purple-800 dark:bg-purple-950/60 dark:text-purple-300">Prospecting</span></td>
+                  <td class="py-3.5 px-3 font-semibold">Jun 18 (25d)</td>
+                  <td class="py-3.5 px-3 text-end">
+                    <button onclick="showToast('Needs Intake', 'Community demographics dossier loaded.', 'fa-folder')" class="px-2.5 py-1 text-xs font-bold text-[#0F5C4E] dark:text-[#D4A22E] hover:underline">Dossier</button>
+                  </td>
+                </tr>
+
+                <tr class="hover:bg-[#F0F7F4]/60 dark:hover:bg-white/5 transition">
+                  <td class="py-3.5 px-3">
+                    <span class="font-bold text-sm text-[#0F2E2A] dark:text-white block">Riverside Arts Center</span>
+                    <span class="text-[10px] text-secondary-text">Arts &amp; Cultural Placemaking</span>
+                  </td>
+                  <td class="py-3.5 px-3">
+                    <span class="font-semibold block">NEA Our Town Creative Economy</span>
+                    <span class="text-[10px] text-secondary-text">National Endowment Program</span>
+                  </td>
+                  <td class="py-3.5 px-3 font-mono font-bold text-accent dark:text-accent-light">$150,000</td>
+                  <td class="py-3.5 px-3">Sarah Chen</td>
+                  <td class="py-3.5 px-3"><span class="px-2.5 py-1 rounded-full text-[10px] font-bold bg-green-100 text-green-800 dark:bg-green-950/60 dark:text-green-300">Awarded (Won)</span></td>
+                  <td class="py-3.5 px-3 font-semibold text-emerald-600">Won Apr 20</td>
+                  <td class="py-3.5 px-3 text-end">
+                    <button onclick="showToast('Post-Award', 'Post-award compliance report initialized.', 'fa-award')" class="px-2.5 py-1 text-xs font-bold text-[#0F5C4E] dark:text-[#D4A22E] hover:underline">View Award</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- 5. Consultant Capacity & Workload Allocation -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 sm:gap-6">
+          <div class="bg-white dark:bg-[#0E231C] p-5 rounded-3xl border border-[#E2EBE8] dark:border-white/10 shadow-sm flex flex-col justify-between">
+            <div>
+              <div class="flex items-center gap-3 mb-3">
+                <div class="w-10 h-10 rounded-xl bg-emerald-100 dark:bg-emerald-950/60 text-[#0F5C4E] dark:text-[#D4A22E] font-bold flex items-center justify-center">MR</div>
+                <div>
+                  <h4 class="font-bold text-sm text-dark dark:text-white">Marcus Rivera</h4>
+                  <p class="text-[10px] text-secondary-text">Federal Grant Specialist</p>
+                </div>
+              </div>
+              <div class="space-y-1.5 text-xs text-secondary-text">
+                <div class="flex justify-between"><span>Active Grants:</span><span class="font-bold text-dark dark:text-white">4 Proposals</span></div>
+                <div class="flex justify-between"><span>Managed Value:</span><span class="font-bold text-accent dark:text-accent-light">$6.2M</span></div>
+                <div class="w-full bg-[#E2EBE8] dark:bg-white/10 h-2 rounded-full overflow-hidden mt-2">
+                  <div class="bg-[#0F5C4E] h-full rounded-full" style="width: 80%"></div>
+                </div>
+                <p class="text-[10px] text-end font-semibold text-accent">80% Utilization</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-white dark:bg-[#0E231C] p-5 rounded-3xl border border-[#E2EBE8] dark:border-white/10 shadow-sm flex flex-col justify-between">
+            <div>
+              <div class="flex items-center gap-3 mb-3">
+                <div class="w-10 h-10 rounded-xl bg-amber-100 dark:bg-amber-950/60 text-amber-700 dark:text-amber-400 font-bold flex items-center justify-center">PN</div>
+                <div>
+                  <h4 class="font-bold text-sm text-dark dark:text-white">Priya Nair</h4>
+                  <p class="text-[10px] text-secondary-text">Foundation &amp; Major Gifts</p>
+                </div>
+              </div>
+              <div class="space-y-1.5 text-xs text-secondary-text">
+                <div class="flex justify-between"><span>Active Grants:</span><span class="font-bold text-dark dark:text-white">3 Proposals</span></div>
+                <div class="flex justify-between"><span>Managed Value:</span><span class="font-bold text-accent dark:text-accent-light">$3.8M</span></div>
+                <div class="w-full bg-[#E2EBE8] dark:bg-white/10 h-2 rounded-full overflow-hidden mt-2">
+                  <div class="bg-amber-500 h-full rounded-full" style="width: 60%"></div>
+                </div>
+                <p class="text-[10px] text-end font-semibold text-amber-600">60% Utilization</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-white dark:bg-[#0E231C] p-5 rounded-3xl border border-[#E2EBE8] dark:border-white/10 shadow-sm flex flex-col justify-between">
+            <div>
+              <div class="flex items-center gap-3 mb-3">
+                <div class="w-10 h-10 rounded-xl bg-emerald-100 dark:bg-emerald-950/60 text-[#0F5C4E] dark:text-[#D4A22E] font-bold flex items-center justify-center">DO</div>
+                <div>
+                  <h4 class="font-bold text-sm text-dark dark:text-white">David Okafor</h4>
+                  <p class="text-[10px] text-secondary-text">Research &amp; Prospect Data</p>
+                </div>
+              </div>
+              <div class="space-y-1.5 text-xs text-secondary-text">
+                <div class="flex justify-between"><span>Active Grants:</span><span class="font-bold text-dark dark:text-white">5 Proposals</span></div>
+                <div class="flex justify-between"><span>Managed Value:</span><span class="font-bold text-accent dark:text-accent-light">$4.5M</span></div>
+                <div class="w-full bg-[#E2EBE8] dark:bg-white/10 h-2 rounded-full overflow-hidden mt-2">
+                  <div class="bg-red-500 h-full rounded-full" style="width: 95%"></div>
+                </div>
+                <p class="text-[10px] text-end font-semibold text-red-500">95% (Near Capacity)</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-white dark:bg-[#0E231C] p-5 rounded-3xl border border-[#E2EBE8] dark:border-white/10 shadow-sm flex flex-col justify-between">
+            <div>
+              <div class="flex items-center gap-3 mb-3">
+                <div class="w-10 h-10 rounded-xl bg-gold-gradient text-[#0F2E2A] font-bold flex items-center justify-center">SC</div>
+                <div>
+                  <h4 class="font-bold text-sm text-dark dark:text-white">Sarah Chen</h4>
+                  <p class="text-[10px] text-secondary-text">Practice Principal</p>
+                </div>
+              </div>
+              <div class="space-y-1.5 text-xs text-secondary-text">
+                <div class="flex justify-between"><span>Strategic NOFOs:</span><span class="font-bold text-dark dark:text-white">2 Proposals</span></div>
+                <div class="flex justify-between"><span>Executive Review:</span><span class="font-bold text-accent dark:text-accent-light">$4.1M</span></div>
+                <div class="w-full bg-[#E2EBE8] dark:bg-white/10 h-2 rounded-full overflow-hidden mt-2">
+                  <div class="bg-[#0F5C4E] h-full rounded-full" style="width: 40%"></div>
+                </div>
+                <p class="text-[10px] text-end font-semibold text-accent">40% Utilization</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 6. Interactive Pipeline Stage Inspector (Preserving Interactive Hooks) -->
+        <div class="bg-white dark:bg-[#0E231C] p-6 sm:p-8 rounded-[2rem] border border-[#E2EBE8] dark:border-white/10 shadow-sm">
+          <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
+            <div>
+              <span class="text-[#0F5C4E] dark:text-[#D4A22E] font-bold text-xs uppercase tracking-widest">Stage Detail Inspector</span>
+              <h3 class="font-serif font-bold text-xl text-dark dark:text-white">Application Flow Status</h3>
+            </div>
+            <div class="flex flex-wrap gap-2 text-xs">
+              <button onclick="selectStage(1)" class="px-3 py-1.5 rounded-lg bg-[#F0F7F4] dark:bg-white/10 font-bold hover:bg-[#0F5C4E] hover:text-white transition">1. Prospecting</button>
+              <button onclick="selectStage(2)" class="px-3 py-1.5 rounded-lg bg-[#F0F7F4] dark:bg-white/10 font-bold hover:bg-[#0F5C4E] hover:text-white transition">2. Writing</button>
+              <button onclick="selectStage(3)" class="px-3 py-1.5 rounded-lg bg-[#F0F7F4] dark:bg-white/10 font-bold hover:bg-[#0F5C4E] hover:text-white transition">3. Submitted</button>
+              <button onclick="selectStage(4)" class="px-3 py-1.5 rounded-lg bg-[#F0F7F4] dark:bg-white/10 font-bold hover:bg-[#0F5C4E] hover:text-white transition">4. In Review</button>
+              <button onclick="selectStage(5)" class="px-3 py-1.5 rounded-lg bg-[#F0F7F4] dark:bg-white/10 font-bold hover:bg-[#0F5C4E] hover:text-white transition">5. Awarded</button>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-4 gap-6 items-center bg-[#F0F7F4] dark:bg-white/5 p-5 rounded-2xl border border-border">
+            <div class="flex items-center gap-3">
+              <div class="w-12 h-12 rounded-xl bg-[#0F5C4E] text-white flex items-center justify-center text-lg shrink-0">
+                <i class="fa-solid fa-layer-group"></i>
+              </div>
+              <div>
+                <h4 id="stageName" class="font-bold text-base text-dark dark:text-white">Prospecting</h4>
+                <span id="stageStatus" class="text-xs font-semibold text-accent dark:text-accent-light">12 active applications</span>
+              </div>
+            </div>
+            <div>
+              <span class="text-[10px] uppercase font-bold text-secondary-text block">Cycle Time</span>
+              <span id="stageTime" class="text-sm font-bold text-dark dark:text-white">14 business days</span>
+            </div>
+            <div>
+              <span class="text-[10px] uppercase font-bold text-secondary-text block">Assigned Lead</span>
+              <span id="stageConsultant" class="text-sm font-bold text-dark dark:text-white">Marcus Rivera</span>
+            </div>
+            <div class="flex flex-col sm:flex-row gap-2">
+              <button onclick="showToast('Client Notified', 'Notification dispatched to client primary contact.', 'fa-paper-plane')" class="px-4 py-2 bg-[#0F5C4E] hover:bg-[#147A67] text-white rounded-xl font-bold text-xs transition">
+                Notify Client
+              </button>
+              <button onclick="showToast('Consultant Reassigned', 'Workload rebalance opened.', 'fa-user-pen')" class="px-4 py-2 border border-border bg-white dark:bg-[#0E231C] text-dark dark:text-white rounded-xl font-bold text-xs hover:bg-[#F0F7F4] transition">
+                Reassign
+              </button>
+            </div>
+          </div>
+        </div>
+
       </section>
 
       <!-- ===== PANEL: FUNDER CALENDAR ===== -->
@@ -765,15 +1020,15 @@
     }
 
     const deadlines = {
-      5:  [{ time: '09:00', student: 'HRSA', lesson: 'Final submission' }],
-      12: [{ time: '14:30', student: 'RWJF', lesson: 'LOI due' }],
-      18: [{ time: '10:15', student: 'Kresge', lesson: 'Full proposal' }],
+      5:  [{ time: '17:00 EST', agency: 'HRSA', title: 'Health Center Facility Expansion — Grants.gov Final Package' }],
+      12: [{ time: '15:00 EST', agency: 'RWJF', title: 'Health Equity Leadership — Letter of Intent (LOI)' }],
+      18: [{ time: '12:00 EST', agency: 'Kresge', title: 'Arts & Culture Community Revitalization Full Proposal' }],
       25: [
-        { time: '10:00', student: 'HRSA', lesson: 'Rural Health deadline' },
-        { time: '11:45', student: 'CDC', lesson: 'Draft review' },
-        { time: '13:15', student: 'RWJF', lesson: 'Evaluation plan' }
+        { time: '16:00 EST', agency: 'SAMHSA', title: 'Rural Opioid Response Plan — Final Narrative & Evaluation' },
+        { time: '17:00 EST', agency: 'CDC', title: 'Chronic Disease Prevention — Red-Team Compliance Audit' },
+        { time: '20:00 EST', agency: 'Ford Fdn', title: 'Social Justice Infrastructure — Multi-Year Budget Justification' }
       ],
-      28: [{ time: '11:30', student: 'Kresge', lesson: 'Budget narrative' }]
+      28: [{ time: '17:00 EST', agency: 'HUD', title: 'Continuum of Care Housing Support — Board Authorization Letter' }]
     };
 
     for (let d = 1; d <= 31; d++) {
@@ -805,13 +1060,13 @@
     if (!container) return;
     container.innerHTML = '';
     if (!list || list.length === 0) {
-      container.innerHTML = '<div class="py-12 text-center text-dark/40 dark:text-white/40"><i class="fa-regular fa-calendar-xmark text-3xl"></i><p class="text-[10px] font-bold mt-2">No Deadlines</p></div>';
+      container.innerHTML = '<div class="py-12 text-center text-dark/40 dark:text-white/40"><i class="fa-regular fa-calendar-xmark text-3xl"></i><p class="text-[10px] font-bold mt-2">No Funder Deadlines on this Date</p></div>';
       return;
     }
     list.forEach(s => {
       const el = document.createElement('div');
-      el.className = 'p-3 bg-[#F0F7F4] dark:bg-[#143026]/40 rounded-2xl border border-[#E2EBE8] dark:border-white/5 space-y-1 text-start';
-      el.innerHTML = `<div class="flex justify-between text-[10px]"><span class="font-bold text-[#0F5C4E] dark:text-[#D4A22E]">${s.time}</span><span class="bg-[#0F5C4E]/10 dark:bg-[#D4A22E]/15 text-[#0F5C4E] dark:text-[#D4A22E] px-2 py-0.5 rounded text-[8px] font-black">${s.student}</span></div><h5 class="text-xs font-bold">${s.lesson}</h5>`;
+      el.className = 'p-3.5 bg-[#F0F7F4] dark:bg-[#143026]/40 rounded-2xl border border-[#E2EBE8] dark:border-white/5 space-y-1.5 text-start';
+      el.innerHTML = `<div class="flex justify-between items-center text-[10px]"><span class="font-bold text-[#0F5C4E] dark:text-[#D4A22E]"><i class="fa-regular fa-clock mr-1"></i>${s.time}</span><span class="bg-[#0F5C4E]/10 dark:bg-[#D4A22E]/15 text-[#0F5C4E] dark:text-[#D4A22E] px-2 py-0.5 rounded font-black">${s.agency}</span></div><h5 class="text-xs font-bold text-[#0F2E2A] dark:text-white">${s.title}</h5>`;
       container.appendChild(el);
     });
   }

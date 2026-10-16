@@ -9,6 +9,29 @@
 
     
 <script src="tailwind.js"></script>
+    <script>
+        tailwind.config = {
+            darkMode: ['class', '[data-theme="dark"]'],
+            theme: {
+                extend: {
+                    colors: {
+                        accent: '#0F5C4E',
+                        'accent-dark': '#0A4A3E',
+                        'accent-light': '#D4A22E',
+                        'accent-lighter': '#F0C95A',
+                        'primary-text': '#0F2E2A',
+                        'secondary-text': '#475569',
+                        border: '#E2EBE8',
+                        hover: '#F0F7F4',
+                    },
+                    fontFamily: {
+                        serif: ['ui-serif', 'Georgia', 'Cambria', '"Times New Roman"', 'Times', 'serif'],
+                        sans: ['ui-sans-serif', 'system-ui', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', '"Helvetica Neue"', 'Arial', 'sans-serif'],
+                    }
+                }
+            }
+        };
+    </script>
     <style>
         /* --- FundRise Emerald & Gold Palette --- */
         :root, html[data-theme='light'] {
@@ -277,44 +300,68 @@
 
         <!-- ============ OUR MISSION ============ -->
         <section class="py-20 sm:py-24 bg-hover transition-colors duration-300">
-            <div class="container mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+            <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <div class="text-center mb-14 sm:mb-16">
-                    <span class="text-accent-light font-bold tracking-widest uppercase text-sm">Our Mission</span>
-                    <h2 class="font-serif text-3xl sm:text-4xl md:text-5xl font-semibold text-accent mt-4 mb-4">Why We Do What We Do</h2>
+                    <span class="text-accent-light font-bold tracking-widest uppercase text-xs">Our Mission &amp; Purpose</span>
+                    <h2 class="font-serif text-3xl sm:text-4xl md:text-5xl font-semibold text-accent mt-3 mb-4">Why We Do What We Do</h2>
                     <p class="text-secondary-text max-w-2xl mx-auto text-base sm:text-lg">
-                        To democratize access to funding for nonprofits of every size � so that the best ideas, not the biggest budgets, win.
+                        To democratize access to institutional funding for nonprofits of every size — so that the most impactful community missions, not just the largest budgets, win.
                     </p>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
-                    <div class="bg-background border border-border rounded-2xl p-6 sm:p-8 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-                        <div class="w-14 h-14 rounded-2xl bg-emerald-gradient flex items-center justify-center text-white mb-5">
-                            <i class="fas fa-bullseye text-xl"></i>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Mission Card 1 -->
+                    <div class="bg-background border border-border rounded-2xl overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col h-full group">
+                        <div class="h-48 overflow-hidden relative">
+                            <img src="assets/images/capacity-building.jpg" alt="Equity in Funding" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                            <span class="absolute bottom-3 left-4 text-xs font-bold text-white bg-black/40 backdrop-blur-md px-3 py-1 rounded-full">Accessibility</span>
                         </div>
-                        <h3 class="font-serif text-xl sm:text-2xl font-medium text-primary-text mb-3 min-h-[3.5rem] md:min-h-[4rem]">Equity in Funding</h3>
-                        <p class="text-secondary-text text-sm sm:text-base leading-relaxed">
-                            We believe small and mid-sized nonprofits deserve the same access to grants as large institutions. Our tiered pricing and capacity-building programs make that possible.
-                        </p>
+                        <div class="p-6 sm:p-7 flex flex-col flex-grow">
+                            <h3 class="font-serif text-xl sm:text-2xl font-semibold text-primary-text mb-3">Equity in Funding</h3>
+                            <p class="text-secondary-text text-sm sm:text-base leading-relaxed mb-4">
+                                Small and mid-sized nonprofits deliver essential front-line impact but are routinely out-spent on grant infrastructure. We level the playing field through accessible embedded teams and capacity-building programs.
+                            </p>
+                            <div class="mt-auto pt-4 border-t border-border flex items-center gap-2 text-xs font-bold text-accent">
+                                <i class="fas fa-check-circle text-accent-light"></i> 600+ Grassroots &amp; Mid-Sized Groups Served
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="bg-background border border-border rounded-2xl p-6 sm:p-8 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-                        <div class="w-14 h-14 rounded-2xl bg-gold-gradient flex items-center justify-center text-[#0F2E2A] mb-5">
-                            <i class="fas fa-lightbulb text-xl"></i>
+                    <!-- Mission Card 2 -->
+                    <div class="bg-background border border-border rounded-2xl overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col h-full group">
+                        <div class="h-48 overflow-hidden relative">
+                            <img src="assets/images/custom-strategy.jpg" alt="Strategy Over Templates" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                            <span class="absolute bottom-3 left-4 text-xs font-bold text-white bg-black/40 backdrop-blur-md px-3 py-1 rounded-full">Authenticity</span>
                         </div>
-                        <h3 class="font-serif text-xl sm:text-2xl font-medium text-primary-text mb-3 min-h-[3.5rem] md:min-h-[4rem]">Strategy Over Templates</h3>
-                        <p class="text-secondary-text text-sm sm:text-base leading-relaxed">
-                            No copy-paste proposals. Every grant we write is rooted in research, tailored to the funder, and built on your unique story and data.
-                        </p>
+                        <div class="p-6 sm:p-7 flex flex-col flex-grow">
+                            <h3 class="font-serif text-xl sm:text-2xl font-semibold text-primary-text mb-3">Strategy Over Templates</h3>
+                            <p class="text-secondary-text text-sm sm:text-base leading-relaxed mb-4">
+                                Grant reviewers discard boilerplates in minutes. Every application we architect is built from local community data, customized logic models, and rigorous programmatic alignment with each funder's stated priorities.
+                            </p>
+                            <div class="mt-auto pt-4 border-t border-border flex items-center gap-2 text-xs font-bold text-accent">
+                                <i class="fas fa-check-circle text-accent-light"></i> 100% Bespoke Logic Models &amp; Narratives
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="bg-background border border-border rounded-2xl p-6 sm:p-8 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-                        <div class="w-14 h-14 rounded-2xl bg-emerald-gradient flex items-center justify-center text-white mb-5">
-                            <i class="fas fa-handshake text-xl"></i>
+                    <!-- Mission Card 3 -->
+                    <div class="bg-background border border-border rounded-2xl overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col h-full group">
+                        <div class="h-48 overflow-hidden relative">
+                            <img src="assets/images/measurable-results.jpg" alt="Long-Term Partnership" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                            <span class="absolute bottom-3 left-4 text-xs font-bold text-white bg-black/40 backdrop-blur-md px-3 py-1 rounded-full">Longevity</span>
                         </div>
-                        <h3 class="font-serif text-xl sm:text-2xl font-medium text-primary-text mb-3 min-h-[3.5rem] md:min-h-[4rem]">Long-Term Partnership</h3>
-                        <p class="text-secondary-text text-sm sm:text-base leading-relaxed">
-                            We don't disappear after submission. From award management to renewal strategy, we stay with you to build sustainable funding streams.
-                        </p>
+                        <div class="p-6 sm:p-7 flex flex-col flex-grow">
+                            <h3 class="font-serif text-xl sm:text-2xl font-semibold text-primary-text mb-3">Long-Term Partnership</h3>
+                            <p class="text-secondary-text text-sm sm:text-base leading-relaxed mb-4">
+                                One-off grant submissions create unstable financial spikes. We build permanent pipeline architecture, post-award compliance systems, and funder renewal protocols that sustain our partners for years to come.
+                            </p>
+                            <div class="mt-auto pt-4 border-t border-border flex items-center gap-2 text-xs font-bold text-accent">
+                                <i class="fas fa-check-circle text-accent-light"></i> 92% Average Multi-Year Win Rate
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -528,76 +575,199 @@
             </div>
         </section>
 
-        <!-- ============ WHY CHOOSE US ============ -->
+        <!-- ============ GOVERNMENT & INSTITUTIONAL GRANTS EXPERTISE ============ -->
         <section class="py-20 sm:py-24 bg-background transition-colors duration-300">
             <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <div class="text-center mb-14 sm:mb-16">
-                    <span class="text-accent-light font-bold tracking-widest uppercase text-sm">Why Choose Us</span>
-                    <h2 class="font-serif text-3xl sm:text-4xl md:text-5xl font-semibold text-accent mt-4 mb-4">What Sets FundRise Apart</h2>
-                    <p class="text-secondary-text max-w-2xl mx-auto text-base sm:text-lg">
-                        We're not the only grant consultancy out there. Here's why nonprofits keep coming back � and referring their peers.
+                    <span class="text-accent-light font-bold tracking-widest uppercase text-xs">Public &amp; Institutional Funding</span>
+                    <h2 class="font-serif text-3xl sm:text-4xl md:text-5xl font-semibold text-accent mt-3 mb-4">
+                        Government Grants &amp; Public Agency Leadership
+                    </h2>
+                    <p class="text-secondary-text max-w-3xl mx-auto text-base sm:text-lg">
+                        Navigating public funding requires deep technical mastery of complex scoring matrices, strict compliance protocols, and persuasive evidentiary narratives. We take nonprofits from eligibility assessment to full audit compliance.
                     </p>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-                    <div class="group bg-hover border border-border rounded-2xl p-6 sm:p-8 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-                        <div class="w-12 h-12 rounded-xl bg-emerald-gradient flex items-center justify-center text-white mb-5">
-                            <i class="fas fa-search-dollar text-lg"></i>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+                    <!-- Gov Card 1: Federal NOFOs -->
+                    <div class="bg-hover border border-border rounded-2xl overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col group">
+                        <div class="h-48 overflow-hidden relative">
+                            <img src="assets/images/grant-writing.jpg" alt="Federal Grants Mastery" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+                            <span class="absolute bottom-3 left-4 text-xs font-bold text-white bg-emerald-900/80 backdrop-blur-md px-3 py-1 rounded-full border border-emerald-500/30">Federal NOFOs</span>
                         </div>
-                        <h3 class="font-serif text-xl font-medium text-primary-text mb-3 min-h-[3.5rem] md:min-h-[4rem]">Research-Driven Matching</h3>
-                        <p class="text-secondary-text text-sm sm:text-base leading-relaxed">
-                            We don't spray-and-pray. Our prospect research identifies funders whose priorities, geography, and funding ranges genuinely align with your work.
-                        </p>
+                        <div class="p-6 flex flex-col flex-grow">
+                            <h3 class="font-serif text-lg sm:text-xl font-semibold text-primary-text mb-2">Federal Agency Mastery</h3>
+                            <p class="text-secondary-text text-sm leading-relaxed mb-4">
+                                Rigorous proposal development for NIH, SAMHSA, HRSA, NSF, HUD, and USDA. We handle Grants.gov, eRA Commons, and Assist portal submittals with 100% technical compliance.
+                            </p>
+                            <div class="mt-auto pt-3 border-t border-border flex items-center justify-between text-xs">
+                                <span class="font-bold text-accent">Peer Review Score</span>
+                                <span class="font-bold text-accent-light">94–98 / 100</span>
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="group bg-hover border border-border rounded-2xl p-6 sm:p-8 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-                        <div class="w-12 h-12 rounded-xl bg-gold-gradient flex items-center justify-center text-[#0F2E2A] mb-5">
-                            <i class="fas fa-pen-fancy text-lg"></i>
+                    <!-- Gov Card 2: State & Municipal Allocations -->
+                    <div class="bg-hover border border-border rounded-2xl overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col group">
+                        <div class="h-48 overflow-hidden relative">
+                            <img src="assets/images/methodology.jpg" alt="State and Municipal Grants" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+                            <span class="absolute bottom-3 left-4 text-xs font-bold text-white bg-amber-900/80 backdrop-blur-md px-3 py-1 rounded-full border border-amber-500/30">State &amp; Local</span>
                         </div>
-                        <h3 class="font-serif text-xl font-medium text-primary-text mb-3 min-h-[3.5rem] md:min-h-[4rem]">Writers Who've Been There</h3>
-                        <p class="text-secondary-text text-sm sm:text-base leading-relaxed">
-                            Every writer on our team has worked inside a nonprofit development office. We understand your constraints, your board, and your deadlines.
-                        </p>
+                        <div class="p-6 flex flex-col flex-grow">
+                            <h3 class="font-serif text-lg sm:text-xl font-semibold text-primary-text mb-2">State &amp; Municipal Funding</h3>
+                            <p class="text-secondary-text text-sm leading-relaxed mb-4">
+                                Winning formula and discretionary funding across state departments of health, education, and economic development, matching local community priorities to regional policy initiatives.
+                            </p>
+                            <div class="mt-auto pt-3 border-t border-border flex items-center justify-between text-xs">
+                                <span class="font-bold text-accent">Turnaround Time</span>
+                                <span class="font-bold text-accent-light">14 Business Days</span>
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="group bg-hover border border-border rounded-2xl p-6 sm:p-8 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-                        <div class="w-12 h-12 rounded-xl bg-emerald-gradient flex items-center justify-center text-white mb-5">
-                            <i class="fas fa-chart-line text-lg"></i>
+                    <!-- Gov Card 3: Foundation Endowments -->
+                    <div class="bg-hover border border-border rounded-2xl overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col group">
+                        <div class="h-48 overflow-hidden relative">
+                            <img src="assets/images/fundraising-strategy.jpg" alt="Foundation Grants" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+                            <span class="absolute bottom-3 left-4 text-xs font-bold text-white bg-emerald-900/80 backdrop-blur-md px-3 py-1 rounded-full border border-emerald-500/30">Philanthropic</span>
                         </div>
-                        <h3 class="font-serif text-xl font-medium text-primary-text mb-3 min-h-[3.5rem] md:min-h-[4rem]">Transparent Reporting</h3>
-                        <p class="text-secondary-text text-sm sm:text-base leading-relaxed">
-                            Every client gets access to a dashboard tracking submissions, wins, and dollars secured. No black boxes, no mystery invoices.
-                        </p>
+                        <div class="p-6 flex flex-col flex-grow">
+                            <h3 class="font-serif text-lg sm:text-xl font-semibold text-primary-text mb-2">National Foundations</h3>
+                            <p class="text-secondary-text text-sm leading-relaxed mb-4">
+                                High-alignment Letters of Inquiry (LOIs) and multi-year investment cases tailored for Ford, MacArthur, Kresge, Gates, and premier regional community trusts.
+                            </p>
+                            <div class="mt-auto pt-3 border-t border-border flex items-center justify-between text-xs">
+                                <span class="font-bold text-accent">Funder Alignment</span>
+                                <span class="font-bold text-accent-light">Top 5% Placement</span>
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="group bg-hover border border-border rounded-2xl p-6 sm:p-8 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-                        <div class="w-12 h-12 rounded-xl bg-gold-gradient flex items-center justify-center text-[#0F2E2A] mb-5">
-                            <i class="fas fa-scale-balanced text-lg"></i>
+                    <!-- Gov Card 4: Corporate CSR Partnerships -->
+                    <div class="bg-hover border border-border rounded-2xl overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col group">
+                        <div class="h-48 overflow-hidden relative">
+                            <img src="assets/images/campaign-planning.jpg" alt="Corporate Partnerships" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+                            <span class="absolute bottom-3 left-4 text-xs font-bold text-white bg-amber-900/80 backdrop-blur-md px-3 py-1 rounded-full border border-amber-500/30">Corporate CSR</span>
                         </div>
-                        <h3 class="font-serif text-xl font-medium text-primary-text mb-3 min-h-[3.5rem] md:min-h-[4rem]">Tiered Pricing for Every Size</h3>
-                        <p class="text-secondary-text text-sm sm:text-base leading-relaxed">
-                            From single-grant projects to full-service retainers, we offer pricing that works for grassroots groups and national institutions alike.
-                        </p>
+                        <div class="p-6 flex flex-col flex-grow">
+                            <h3 class="font-serif text-lg sm:text-xl font-semibold text-primary-text mb-2">Corporate Giving Programs</h3>
+                            <p class="text-secondary-text text-sm leading-relaxed mb-4">
+                                Strategic public-private sponsorships, employee matching campaigns, and corporate foundation investments structured to generate sustainable unrestricted operating capital.
+                            </p>
+                            <div class="mt-auto pt-3 border-t border-border flex items-center justify-between text-xs">
+                                <span class="font-bold text-accent">Success Ratio</span>
+                                <span class="font-bold text-accent-light">88% Renewal</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ WHY CHOOSE US ============ -->
+        <section class="py-20 sm:py-24 bg-hover transition-colors duration-300">
+            <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-14 sm:mb-16">
+                    <span class="text-accent-light font-bold tracking-widest uppercase text-xs">Our Differentiators</span>
+                    <h2 class="font-serif text-3xl sm:text-4xl md:text-5xl font-semibold text-accent mt-3 mb-4">What Sets FundRise Apart</h2>
+                    <p class="text-secondary-text max-w-2xl mx-auto text-base sm:text-lg">
+                        We are not an automated software portal or an unverified freelance marketplace. We are seasoned development practitioners committed to measurable results.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Diff 1 -->
+                    <div class="bg-background border border-border rounded-2xl overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col group">
+                        <div class="h-44 overflow-hidden relative">
+                            <img src="assets/images/donor-research.jpg" alt="Research-Driven Matching" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                            <span class="absolute bottom-3 left-4 text-xs font-bold text-white bg-black/40 backdrop-blur-md px-3 py-1 rounded-full">Precision</span>
+                        </div>
+                        <div class="p-6 flex flex-col flex-grow">
+                            <h3 class="font-serif text-xl font-semibold text-primary-text mb-2">Research-Driven Matching</h3>
+                            <p class="text-secondary-text text-sm leading-relaxed mb-4">
+                                We avoid spray-and-pray applications. Our proprietary 990 tax intelligence analyzes giving history, median grant awards, and trustee connections to pinpoint high-probability funders.
+                            </p>
+                        </div>
                     </div>
 
-                    <div class="group bg-hover border border-border rounded-2xl p-6 sm:p-8 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-                        <div class="w-12 h-12 rounded-xl bg-emerald-gradient flex items-center justify-center text-white mb-5">
-                            <i class="fas fa-people-group text-lg"></i>
+                    <!-- Diff 2 -->
+                    <div class="bg-background border border-border rounded-2xl overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col group">
+                        <div class="h-44 overflow-hidden relative">
+                            <img src="assets/images/expert-writers.jpg" alt="Former Grant Reviewers" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                            <span class="absolute bottom-3 left-4 text-xs font-bold text-white bg-black/40 backdrop-blur-md px-3 py-1 rounded-full">Practitioners</span>
                         </div>
-                        <h3 class="font-serif text-xl font-medium text-primary-text mb-3 min-h-[3.5rem] md:min-h-[4rem]">Capacity, Not Dependency</h3>
-                        <p class="text-secondary-text text-sm sm:text-base leading-relaxed">
-                            Our goal is to make ourselves unnecessary. We train your team, build your systems, and leave you stronger than we found you.
-                        </p>
+                        <div class="p-6 flex flex-col flex-grow">
+                            <h3 class="font-serif text-xl font-semibold text-primary-text mb-2">Writers Who've Evaluated Grants</h3>
+                            <p class="text-secondary-text text-sm leading-relaxed mb-4">
+                                Our consultants have evaluated federal proposals and directed in-house nonprofit development teams. We understand institutional scoring rubrics from the inside out.
+                            </p>
+                        </div>
                     </div>
 
-                    <div class="group bg-hover border border-border rounded-2xl p-6 sm:p-8 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-                        <div class="w-12 h-12 rounded-xl bg-gold-gradient flex items-center justify-center text-[#0F2E2A] mb-5">
-                            <i class="fas fa-hand-holding-heart text-lg"></i>
+                    <!-- Diff 3 -->
+                    <div class="bg-background border border-border rounded-2xl overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col group">
+                        <div class="h-44 overflow-hidden relative">
+                            <img src="assets/images/measurable-results.jpg" alt="Transparent Reporting" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                            <span class="absolute bottom-3 left-4 text-xs font-bold text-white bg-black/40 backdrop-blur-md px-3 py-1 rounded-full">Transparency</span>
                         </div>
-                        <h3 class="font-serif text-xl font-medium text-primary-text mb-3 min-h-[3.5rem] md:min-h-[4rem]">Mission-Aligned Partners</h3>
-                        <p class="text-secondary-text text-sm sm:text-base leading-relaxed">
-                            We only take on clients whose missions we believe in. That's why our win rate is high � and why our team stays motivated.
-                        </p>
+                        <div class="p-6 flex flex-col flex-grow">
+                            <h3 class="font-serif text-xl font-semibold text-primary-text mb-2">Live Pipeline Tracking</h3>
+                            <p class="text-secondary-text text-sm leading-relaxed mb-4">
+                                Every client receives direct portal access to track submission progress, active reviewer feedback, grant calendar deadlines, and secured dollars in real-time.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Diff 4 -->
+                    <div class="bg-background border border-border rounded-2xl overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col group">
+                        <div class="h-44 overflow-hidden relative">
+                            <img src="assets/images/learning-track-guides.jpg" alt="Tiered Pricing for Every Size" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                            <span class="absolute bottom-3 left-4 text-xs font-bold text-white bg-black/40 backdrop-blur-md px-3 py-1 rounded-full">Predictable</span>
+                        </div>
+                        <div class="p-6 flex flex-col flex-grow">
+                            <h3 class="font-serif text-xl font-semibold text-primary-text mb-2">Predictable Fixed Pricing</h3>
+                            <p class="text-secondary-text text-sm leading-relaxed mb-4">
+                                Transparent fixed-fee engagement models without unethical commissions. Designed to suit grassroots non-profits, established community clinics, and national networks.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Diff 5 -->
+                    <div class="bg-background border border-border rounded-2xl overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col group">
+                        <div class="h-44 overflow-hidden relative">
+                            <img src="assets/images/campaign-planning.jpg" alt="Capacity Building" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                            <span class="absolute bottom-3 left-4 text-xs font-bold text-white bg-black/40 backdrop-blur-md px-3 py-1 rounded-full">Empowerment</span>
+                        </div>
+                        <div class="p-6 flex flex-col flex-grow">
+                            <h3 class="font-serif text-xl font-semibold text-primary-text mb-2">Capacity, Not Dependency</h3>
+                            <p class="text-secondary-text text-sm leading-relaxed mb-4">
+                                We train your executive leadership and internal staff, implement permanent proposal repositories, and leave your fundraising engine stronger after every cycle.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Diff 6 -->
+                    <div class="bg-background border border-border rounded-2xl overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col group">
+                        <div class="h-44 overflow-hidden relative">
+                            <img src="assets/images/a.jpg" alt="Mission-Aligned Partners" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                            <span class="absolute bottom-3 left-4 text-xs font-bold text-white bg-black/40 backdrop-blur-md px-3 py-1 rounded-full">Dedication</span>
+                        </div>
+                        <div class="p-6 flex flex-col flex-grow">
+                            <h3 class="font-serif text-xl font-semibold text-primary-text mb-2">Mission-Aligned Partnership</h3>
+                            <p class="text-secondary-text text-sm leading-relaxed mb-4">
+                                We take on organizations whose cause we believe in. That alignment fuels our writing, protects our 92% win rate, and delivers authentic partnerships that last.
+                            </p>
+                        </div>
                     </div>
                 </div>
 
@@ -702,7 +872,7 @@
                         <h1 class="text-2xl font-serif font-semibold tracking-tight flex-shrink-0"><span class="text-accent-light">FundRise</span></h1>
                       </a>
                       <p class="text-lg leading-relaxed max-w-sm !text-gray-300">
-                        Empowering nonprofits with expert grant writing and fundraising strategy � so every mission gets the funding it deserves.
+                        Empowering nonprofits with expert grant writing and fundraising strategy — so every mission gets the funding it deserves.
                     </p>
                     <div class="flex space-x-6 mt-10">
                         <a href="#" class="text-white hover:text-accent-light transition text-xl"><i class="fab fa-facebook-f"></i></a>
@@ -748,14 +918,14 @@
                 </div>
                 <div>
                     <h4 class="footer-heading font-medium text-xl mb-6">Newsletter</h4>
-                    <p class="text-sm mb-6 !text-gray-300">Subscribe for grant deadlines, funder insights, and fundraising tips � straight to your inbox.</p>
+                    <p class="text-sm mb-6 !text-gray-300">Subscribe for grant deadlines, funder insights, and fundraising tips — straight to your inbox.</p>
                     <div class="flex flex-col space-y-4">
                         <input type="email" placeholder="Your email address" class="p-4 text-sm rounded-xl bg-gray-900 border border-gray-800 focus:ring-1 focus:ring-accent-light focus:outline-none text-white" />
                         <button class="bg-gold-gradient text-black font-bold py-3 rounded-xl transition hover:opacity-90">Subscribe</button>
                     </div>
                 </div>
             </div>
-            <div class="py-10 text-center text-gray-500 text-sm">� 2026 FundRise. All rights reserved. � Empowering Nonprofits, One Grant at a Time.</div>
+            <div class="py-10 text-center text-gray-500 text-sm">© 2026 FundRise. All rights reserved. • Empowering Nonprofits, One Grant at a Time.</div>
         </div>
     </footer>
 

@@ -9,6 +9,29 @@
 
     
 <script src="tailwind.js"></script>
+    <script>
+        tailwind.config = {
+            darkMode: ['class', '[data-theme="dark"]'],
+            theme: {
+                extend: {
+                    colors: {
+                        accent: '#0F5C4E',
+                        'accent-dark': '#0A4A3E',
+                        'accent-light': '#D4A22E',
+                        'accent-lighter': '#F0C95A',
+                        'primary-text': '#0F2E2A',
+                        'secondary-text': '#475569',
+                        border: '#E2EBE8',
+                        hover: '#F0F7F4',
+                    },
+                    fontFamily: {
+                        serif: ['ui-serif', 'Georgia', 'Cambria', '"Times New Roman"', 'Times', 'serif'],
+                        sans: ['ui-sans-serif', 'system-ui', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', '"Helvetica Neue"', 'Arial', 'sans-serif'],
+                    }
+                }
+            }
+        };
+    </script>
     <style>
         /* --- FundRise Emerald & Gold Palette --- */
         :root, html[data-theme='light'] {
@@ -90,6 +113,41 @@
         .book-btn { background-color: var(--color-accent); color: white; transition: all 0.3s ease; }
         html[data-theme='dark'] .book-btn { background-color: var(--color-accent-light); color: #08150F; }
         .book-btn:hover { opacity: 0.9; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(15, 92, 78, 0.3); }
+
+        /* High-Contrast Interactive CTA Buttons */
+        .btn-resources-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.85rem 2rem;
+            border: 2px solid #0F5C4E !important;
+            color: #0F5C4E !important;
+            background-color: #FFFFFF;
+            border-radius: 9999px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-decoration: none;
+            transition: all 0.25s ease;
+            box-shadow: 0 4px 12px rgba(15, 92, 78, 0.1);
+        }
+        .btn-resources-cta:hover {
+            background-color: #0F5C4E !important;
+            border-color: #0F5C4E !important;
+            color: #FFFFFF !important;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 22px rgba(15, 92, 78, 0.35);
+        }
+        html[data-theme='dark'] .btn-resources-cta {
+            border-color: #D4A22E !important;
+            color: #D4A22E !important;
+            background-color: #0E231C;
+        }
+        html[data-theme='dark'] .btn-resources-cta:hover {
+            background-color: #D4A22E !important;
+            border-color: #D4A22E !important;
+            color: #0F2E2A !important;
+            box-shadow: 0 8px 22px rgba(212, 162, 46, 0.3);
+        }
 
         @media (max-width: 1024px) {
             .dropdown-menu { position: static; display: none; opacity: 1; visibility: visible; transform: none; box-shadow: none; }
@@ -313,7 +371,7 @@
 
             <div class="relative z-10 text-center px-6 max-w-4xl">
                 <p class="text-[#D4A22E] uppercase tracking-[4px] text-xs mb-4 font-semibold">
-                    Free Knowledge � Real Tools
+                    Free Knowledge • Real Tools
                 </p>
                 <h1 class="font-serif text-4xl md:text-6xl lg:text-7xl font-semibold text-white leading-tight mb-6">
                     Resources to
@@ -323,7 +381,7 @@
                     </span>
                 </h1>
                 <p class="text-gray-300 text-base md:text-xl max-w-2xl mx-auto leading-relaxed mb-8">
-                    Grant guides, fundraising tips, ready-to-use templates, and practical articles � everything your team needs to grow revenue and win more grants.
+                    Grant guides, fundraising tips, ready-to-use templates, and practical articles — everything your team needs to grow revenue and win more grants.
                 </p>
                 <div class="flex flex-col sm:flex-row gap-4 justify-center">
                     <a href="#grant-guides" class="px-8 py-3 bg-[#D4A22E] text-black font-bold rounded-full hover:scale-105 hover:brightness-95 transition duration-300 shadow-lg">
@@ -396,7 +454,7 @@
                         <span class="text-accent-light font-bold tracking-widest uppercase text-sm">Learning Track</span>
                         <h2 class="font-serif text-3xl sm:text-4xl md:text-5xl font-semibold text-accent mt-3 mb-6">Grant Guides</h2>
                         <p class="text-secondary-text text-base sm:text-lg leading-relaxed mb-6">
-                            Deep-dive, step-by-step guides that walk you through every stage of the grant lifecycle � from prospect research and letter of inquiry to final reporting and renewal strategy.
+                            Deep-dive, step-by-step guides that walk you through every stage of the grant lifecycle — from prospect research and letter of inquiry to final reporting and renewal strategy.
                         </p>
 
                         <!-- Guide list -->
@@ -407,7 +465,7 @@
                                 </div>
                                 <div class="flex-1 min-w-0">
                                     <p class="font-semibold text-primary-text text-sm sm:text-base group-hover:text-accent-light transition">The Complete Grant Prospect Research Guide</p>
-                                    <p class="text-xs sm:text-sm text-secondary-text mt-0.5">38 pages � PDF � Updated 2026</p>
+                                    <p class="text-xs sm:text-sm text-secondary-text mt-0.5">38 pages • PDF • Updated 2026</p>
                                 </div>
                                 <i class="fas fa-arrow-down text-accent-light mt-2 flex-shrink-0"></i>
                             </a>
@@ -417,7 +475,7 @@
                                 </div>
                                 <div class="flex-1 min-w-0">
                                     <p class="font-semibold text-primary-text text-sm sm:text-base group-hover:text-accent-light transition">Writing Winning Federal Grant Proposals</p>
-                                    <p class="text-xs sm:text-sm text-secondary-text mt-0.5">52 pages � PDF � Includes rubric breakdown</p>
+                                    <p class="text-xs sm:text-sm text-secondary-text mt-0.5">52 pages • PDF • Includes rubric breakdown</p>
                                 </div>
                                 <i class="fas fa-arrow-down text-accent-light mt-2 flex-shrink-0"></i>
                             </a>
@@ -427,7 +485,7 @@
                                 </div>
                                 <div class="flex-1 min-w-0">
                                     <p class="font-semibold text-primary-text text-sm sm:text-base group-hover:text-accent-light transition">Budget Narratives That Funders Trust</p>
-                                    <p class="text-xs sm:text-sm text-secondary-text mt-0.5">24 pages � PDF � With worked examples</p>
+                                    <p class="text-xs sm:text-sm text-secondary-text mt-0.5">24 pages • PDF • With worked examples</p>
                                 </div>
                                 <i class="fas fa-arrow-down text-accent-light mt-2 flex-shrink-0"></i>
                             </a>
@@ -437,7 +495,7 @@
                                 </div>
                                 <div class="flex-1 min-w-0">
                                     <p class="font-semibold text-primary-text text-sm sm:text-base group-hover:text-accent-light transition">Post-Award Reporting &amp; Renewal Playbook</p>
-                                    <p class="text-xs sm:text-sm text-secondary-text mt-0.5">30 pages � PDF � Templates included</p>
+                                    <p class="text-xs sm:text-sm text-secondary-text mt-0.5">30 pages • PDF • Templates included</p>
                                 </div>
                                 <i class="fas fa-arrow-down text-accent-light mt-2 flex-shrink-0"></i>
                             </a>
@@ -461,7 +519,7 @@
                     <span class="text-accent-light font-bold tracking-widest uppercase text-sm">Practical Track</span>
                     <h2 class="font-serif text-3xl sm:text-4xl md:text-5xl font-semibold text-accent mt-4 mb-4">Fundraising Tips</h2>
                     <p class="text-secondary-text max-w-2xl mx-auto text-base sm:text-lg">
-                        Short, actionable tips you can apply this week. No fluff, no filler � just what works in the field.
+                        Short, actionable tips you can apply this week. No fluff, no filler — just what works in the field.
                     </p>
                 </div>
 
@@ -564,7 +622,7 @@
                 </div>
 
                 <div class="text-center mt-10">
-                    <a href="#" class="inline-flex items-center gap-2 px-6 py-3 btn-outline-ocean border border-accent text-accent rounded-full font-bold text-sm hover:bg-accent hover:text-white transition">
+                    <a href="#" class="btn-resources-cta">
                         <i class="fas fa-lightbulb"></i> Browse All 120 Tips
                     </a>
                 </div>
@@ -624,7 +682,7 @@
                         <p class="text-[10px] uppercase tracking-widest text-accent-light font-bold mb-2">Slide Deck</p>
                         <h3 class="font-serif text-lg sm:text-xl font-medium text-primary-text mb-3 min-h-[56px] sm:min-h-[60px]">Board Fundraising Update Deck</h3>
                         <p class="text-secondary-text text-sm leading-relaxed mb-5">
-                            A 12-slide template for reporting fundraising progress to your board � with KPI placeholders and talking points.
+                            A 12-slide template for reporting fundraising progress to your board — with KPI placeholders and talking points.
                         </p>
                         <a href="#" class="inline-flex items-center gap-2 text-accent-light text-sm font-bold hover:gap-3 transition-all mt-auto">
                             <i class="fas fa-download"></i> Download Free
@@ -710,7 +768,7 @@
                         <span class="inline-block bg-gold-gradient text-[#0F2E2A] text-[10px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-full mb-4 self-start">
                             Editor's Pick
                         </span>
-                        <p class="text-[10px] sm:text-xs uppercase tracking-widest text-accent-light font-bold mb-2">Trends � 8 min read</p>
+                        <p class="text-[10px] sm:text-xs uppercase tracking-widest text-accent-light font-bold mb-2">Trends • 8 min read</p>
                         <h3 class="font-serif text-xl sm:text-2xl lg:text-3xl font-medium text-primary-text mb-4 leading-tight">
                             The 2026 Fundraising Landscape: 7 Shifts Every Nonprofit Should Know
                         </h3>
@@ -743,12 +801,12 @@
                                  class="w-full h-full object-cover">
                         </div>
                         <div class="p-5 sm:p-6 flex flex-col flex-grow">
-                            <p class="text-[10px] uppercase tracking-widest text-accent-light font-bold mb-2">Research � 6 min read</p>
+                            <p class="text-[10px] uppercase tracking-widest text-accent-light font-bold mb-2">Research • 6 min read</p>
                             <h3 class="font-serif text-base sm:text-lg font-medium text-primary-text mb-3 leading-snug min-h-[72px] sm:min-h-[84px]">
                                 How to Score a Prospect in Under 10 Minutes
                             </h3>
                             <p class="text-secondary-text text-sm leading-relaxed line-clamp-3 mb-4">
-                                A simple 3-signal framework for deciding who's worth a phone call � and who isn't.
+                                A simple 3-signal framework for deciding who's worth a phone call — and who isn't.
                             </p>
                             <a href="#" class="inline-flex items-center gap-1.5 text-accent-light text-xs font-bold hover:gap-2.5 transition-all mt-auto">
                                 Read More <i class="fas fa-arrow-right text-[10px]"></i>
@@ -764,12 +822,12 @@
                                  class="w-full h-full object-cover">
                         </div>
                         <div class="p-5 sm:p-6 flex flex-col flex-grow">
-                            <p class="text-[10px] uppercase tracking-widest text-accent-light font-bold mb-2">Grants � 9 min read</p>
+                            <p class="text-[10px] uppercase tracking-widest text-accent-light font-bold mb-2">Grants • 9 min read</p>
                             <h3 class="font-serif text-base sm:text-lg font-medium text-primary-text mb-3 leading-snug min-h-[72px] sm:min-h-[84px]">
                                 Why Most Federal Proposals Get Rejected (And How Yours Won't)
                             </h3>
                             <p class="text-secondary-text text-sm leading-relaxed line-clamp-3 mb-4">
-                                The 5 most common scoring gaps we see in reviewed proposals � and how to fix each one.
+                                The 5 most common scoring gaps we see in reviewed proposals — and how to fix each one.
                             </p>
                             <a href="#" class="inline-flex items-center gap-1.5 text-accent-light text-xs font-bold hover:gap-2.5 transition-all mt-auto">
                                 Read More <i class="fas fa-arrow-right text-[10px]"></i>
@@ -785,12 +843,12 @@
                                  class="w-full h-full object-cover">
                         </div>
                         <div class="p-5 sm:p-6 flex flex-col flex-grow">
-                            <p class="text-[10px] uppercase tracking-widest text-accent-light font-bold mb-2">Major Gifts � 7 min read</p>
+                            <p class="text-[10px] uppercase tracking-widest text-accent-light font-bold mb-2">Major Gifts • 7 min read</p>
                             <h3 class="font-serif text-base sm:text-lg font-medium text-primary-text mb-3 leading-snug min-h-[72px] sm:min-h-[84px]">
                                 The Quiet Phase Playbook: Getting to 70% Before You Launch
                             </h3>
                             <p class="text-secondary-text text-sm leading-relaxed line-clamp-3 mb-4">
-                                Why campaigns that skip the quiet phase almost always stall � and the exact structure we use.
+                                Why campaigns that skip the quiet phase almost always stall — and the exact structure we use.
                             </p>
                             <a href="#" class="inline-flex items-center gap-1.5 text-accent-light text-xs font-bold hover:gap-2.5 transition-all mt-auto">
                                 Read More <i class="fas fa-arrow-right text-[10px]"></i>
@@ -806,7 +864,7 @@
                                  class="w-full h-full object-cover">
                         </div>
                         <div class="p-5 sm:p-6 flex flex-col flex-grow">
-                            <p class="text-[10px] uppercase tracking-widest text-accent-light font-bold mb-2">Governance � 5 min read</p>
+                            <p class="text-[10px] uppercase tracking-widest text-accent-light font-bold mb-2">Governance • 5 min read</p>
                             <h3 class="font-serif text-base sm:text-lg font-medium text-primary-text mb-3 leading-snug min-h-[72px] sm:min-h-[84px]">
                                 Getting Your Board to Actually Fundraise: A 90-Day Plan
                             </h3>
@@ -827,7 +885,7 @@
                                  class="w-full h-full object-cover">
                         </div>
                         <div class="p-5 sm:p-6 flex flex-col flex-grow">
-                            <p class="text-[10px] uppercase tracking-widest text-accent-light font-bold mb-2">Donor Retention � 6 min read</p>
+                            <p class="text-[10px] uppercase tracking-widest text-accent-light font-bold mb-2">Donor Retention • 6 min read</p>
                             <h3 class="font-serif text-base sm:text-lg font-medium text-primary-text mb-3 leading-snug min-h-[72px] sm:min-h-[84px]">
                                 The 5 Metrics That Predict Whether a Donor Will Give Again
                             </h3>
@@ -848,7 +906,7 @@
                                  class="w-full h-full object-cover">
                         </div>
                         <div class="p-5 sm:p-6 flex flex-col flex-grow">
-                            <p class="text-[10px] uppercase tracking-widest text-accent-light font-bold mb-2">Storytelling � 8 min read</p>
+                            <p class="text-[10px] uppercase tracking-widest text-accent-light font-bold mb-2">Storytelling • 8 min read</p>
                             <h3 class="font-serif text-base sm:text-lg font-medium text-primary-text mb-3 leading-snug min-h-[72px] sm:min-h-[84px]">
                                 Storytelling That Funds Programs: A Framework for Nonprofits
                             </h3>
@@ -863,7 +921,7 @@
                 </div>
 
                 <div class="text-center mt-10">
-                    <a href="#" class="inline-flex items-center gap-2 px-6 py-3 border border-accent text-accent rounded-full font-bold text-sm hover:bg-accent hover:text-white transition">
+                    <a href="#" class="btn-resources-cta">
                         <i class="fas fa-book"></i> View All Articles
                     </a>
                 </div>
@@ -893,7 +951,7 @@
                         </button>
                         <div class="faq-panel">
                             <div class="faq-panel-inner">
-                                A full-time development director costs $90K�$140K plus benefits, takes 3�6 months to hire, and may not have the specialized grant-writing or prospect-research skills you need at every stage. With FundRise, you get a senior team on demand � often at a fraction of the cost � with expertise across grant writing, major gifts, campaigns, and donor research. Most clients start with a project sprint, then move to a fractional retainer once they see the value.
+                                A full-time development director costs $90K–$140K plus benefits, takes 3–6 months to hire, and may not have the specialized grant-writing or prospect-research skills you need at every stage. With FundRise, you get a senior team on demand — often at a fraction of the cost — with expertise across grant writing, major gifts, campaigns, and donor research. Most clients start with a project sprint, then move to a fractional retainer once they see the value.
                             </div>
                         </div>
                     </div>
@@ -905,7 +963,7 @@
                         </button>
                         <div class="faq-panel">
                             <div class="faq-panel-inner">
-                                Both � and we pride ourselves on it. Roughly 40% of our clients have annual budgets under $1M. We offer tiered pricing, project-based engagements, and pro-bono support through our Nonprofit Relief Initiative. If we're not the right financial fit, we'll tell you honestly and point you toward resources you can use on your own.
+                                Both — and we pride ourselves on it. Roughly 40% of our clients have annual budgets under $1M. We offer tiered pricing, project-based engagements, and pro-bono support through our Nonprofit Relief Initiative. If we're not the right financial fit, we'll tell you honestly and point you toward resources you can use on your own.
                             </div>
                         </div>
                     </div>
@@ -917,7 +975,7 @@
                         </button>
                         <div class="faq-panel">
                             <div class="faq-panel-inner">
-                                Grant cycles vary widely. Foundation grants typically see results in 3�6 months; federal grants can take 9�15 months from submission to award. What we can promise: within the first 30 days, you'll have a prioritized funder list, a clear submission calendar, and at least one proposal in development. For faster results, our fundraising strategy and donor outreach services often show impact within 60�90 days.
+                                Grant cycles vary widely. Foundation grants typically see results in 3–6 months; federal grants can take 9–15 months from submission to award. What we can promise: within the first 30 days, you'll have a prioritized funder list, a clear submission calendar, and at least one proposal in development. For faster results, our fundraising strategy and donor outreach services often show impact within 60–90 days.
                             </div>
                         </div>
                     </div>
@@ -929,7 +987,7 @@
                         </button>
                         <div class="faq-panel">
                             <div class="faq-panel-inner">
-                                Either way works. Many clients use us to augment their in-house team during peak seasons, or to handle specialized proposals (like federal grants) that their staff isn't trained for. We're happy to collaborate, co-write, or take the lead � whatever fits your team best. Our goal is to leave you stronger, not dependent on us.
+                                Either way works. Many clients use us to augment their in-house team during peak seasons, or to handle specialized proposals (like federal grants) that their staff isn't trained for. We're happy to collaborate, co-write, or take the lead — whatever fits your team best. Our goal is to leave you stronger, not dependent on us.
                             </div>
                         </div>
                     </div>
@@ -941,7 +999,7 @@
                         </button>
                         <div class="faq-panel">
                             <div class="faq-panel-inner">
-                                Pricing depends on scope. A single grant proposal project typically ranges from $4,500 to $12,000 depending on complexity. Retainer engagements start at $3,500/month for fractional development support. Grant research projects start at $2,500. We provide a fixed quote after a free 30-minute consultation � no hourly surprises, no hidden fees.
+                                Pricing depends on scope. A single grant proposal project typically ranges from $4,500 to $12,000 depending on complexity. Retainer engagements start at $3,500/month for fractional development support. Grant research projects start at $2,500. We provide a fixed quote after a free 30-minute consultation — no hourly surprises, no hidden fees.
                             </div>
                         </div>
                     </div>
@@ -953,7 +1011,7 @@
                         </button>
                         <div class="faq-panel">
                             <div class="faq-panel-inner">
-                                Absolutely � first-time applicants are one of our favorite client types. We'll start by assessing your readiness (501c3 status, financials, program data, evaluation capacity), then build the infrastructure you need: a grants calendar, boilerplate language, budget templates, and a funder prospect list. From there, we'll co-write your first few proposals and coach your team through the process so you can eventually run it in-house.
+                                Absolutely — first-time applicants are one of our favorite client types. We'll start by assessing your readiness (501c3 status, financials, program data, evaluation capacity), then build the infrastructure you need: a grants calendar, boilerplate language, budget templates, and a funder prospect list. From there, we'll co-write your first few proposals and coach your team through the process so you can eventually run it in-house.
                             </div>
                         </div>
                     </div>
@@ -965,7 +1023,7 @@
                         </button>
                         <div class="faq-panel">
                             <div class="faq-panel-inner">
-                                Yes � our Capacity Building program includes workshops, 1:1 coaching, and custom playbooks for your development team. Popular topics include prospect research, grant writing fundamentals, major gift conversations, and board fundraising engagement. We can deliver training virtually or on-site, and we tailor every session to your sector and experience level.
+                                Yes — our Capacity Building program includes workshops, 1:1 coaching, and custom playbooks for your development team. Popular topics include prospect research, grant writing fundamentals, major gift conversations, and board fundraising engagement. We can deliver training virtually or on-site, and we tailor every session to your sector and experience level.
                             </div>
                         </div>
                     </div>
@@ -1005,7 +1063,7 @@
                             Free Resources, Real Results
                         </h2>
                         <p class="text-white/90 text-base sm:text-lg md:text-xl max-w-2xl mx-auto mb-10 font-light">
-                            Download the guides, use the templates, and when you're ready � let's talk about your specific goals.
+                            Download the guides, use the templates, and when you're ready — let's talk about your specific goals.
                         </p>
                         <div class="flex flex-col sm:flex-row gap-4 justify-center">
                             <a href="contact.html" class="whitespace-nowrap text-center px-6 sm:px-10 py-4 bg-white text-[#0F5C4E] rounded-full font-bold text-base sm:text-lg hover:bg-[#D4A22E] hover:text-[#0F2E2A] transition-all duration-300 transform hover:scale-105 shadow-xl">
@@ -1105,7 +1163,7 @@
                         <h1 class="text-2xl font-serif font-semibold tracking-tight flex-shrink-0"><span class="text-accent-light">FundRise</span></h1>
                       </a>
                       <p class="text-lg leading-relaxed max-w-sm !text-gray-300">
-                        Empowering nonprofits with expert grant writing and fundraising strategy � so every mission gets the funding it deserves.
+                        Empowering nonprofits with expert grant writing and fundraising strategy — so every mission gets the funding it deserves.
                     </p>
                     <div class="flex space-x-6 mt-10">
                         <a href="#" class="text-white hover:text-accent-light transition text-xl"><i class="fab fa-facebook-f"></i></a>
@@ -1151,14 +1209,14 @@
                 </div>
                 <div>
                     <h4 class="footer-heading font-medium text-xl mb-6">Newsletter</h4>
-                    <p class="text-sm mb-6 !text-gray-300">Subscribe for grant deadlines, funder insights, and fundraising tips � straight to your inbox.</p>
+                    <p class="text-sm mb-6 !text-gray-300">Subscribe for grant deadlines, funder insights, and fundraising tips — straight to your inbox.</p>
                     <div class="flex flex-col space-y-4">
                         <input type="email" placeholder="Your email address" class="p-4 text-sm rounded-xl bg-gray-900 border border-gray-800 focus:ring-1 focus:ring-accent-light focus:outline-none text-white" />
                         <button class="bg-gold-gradient text-black font-bold py-3 rounded-xl transition hover:opacity-90">Subscribe</button>
                     </div>
                 </div>
             </div>
-            <div class="py-10 text-center text-gray-500 text-sm">� 2026 FundRise. All rights reserved. � Empowering Nonprofits, One Grant at a Time.</div>
+            <div class="py-10 text-center text-gray-500 text-sm">© 2026 FundRise. All rights reserved. • Empowering Nonprofits, One Grant at a Time.</div>
         </div>
     </footer>
 
